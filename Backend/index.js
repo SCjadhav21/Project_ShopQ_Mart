@@ -14,9 +14,10 @@ app.use("/users", UserRoutes, (req, res) => {
 
 app.listen(process.env.port, async () => {
   try {
-    connection;
-    console.log(`running on port ${process.env.port}`);
+    await connection;
+    console.log(`Connected to DataBase`);
   } catch (err) {
     console.log("Error: cant connect to mongodb");
   }
+  console.log(`running on port ${process.env.port}`);
 });
