@@ -1,5 +1,14 @@
+import './App.css';
+import Cart from './page/Cart';
+
+
+
 function App() {
-  return <div>React-app</div>;
+  return (
+    <div className="App">
+      <Cart />
+    </div>
+  );
 }
 
 export default App;
