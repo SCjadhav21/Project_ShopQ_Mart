@@ -15,23 +15,23 @@ const tvSchema = new mongoose.Schema(
     product_specs: {
       key_features: {
         brand: { type: String, required: true },
-        tv_specifications: {
-          type: { ptype: String, required: true },
-          display_size: { type: String, required: true },
-          screen_size_range: { type: String, required: true },
-          functionality: { type: String, required: true },
-        },
-        general_feature: {
-          display_resolution: { type: String, required: true },
-        },
-        connectivity: {
-          usb_port: { type: String, required: true },
-          hdmi_ports: { type: String, required: true },
-        },
-        electronic_warranty: {
-          warranty_available: { type: String, required: true },
-          duration: { type: String, required: true },
-        },
+      },
+      tv_specifications: {
+        ptype: { type: String, required: true },
+        display_size: { type: String, required: true },
+        screen_size_range: { type: String, required: true },
+        functionality: { type: String, required: true },
+      },
+      general_feature: {
+        display_resolution: { type: String, required: true },
+      },
+      connectivity: {
+        usb_port: { type: String, required: true },
+        hdmi_ports: { type: String, required: true },
+      },
+      electronic_warranty: {
+        warranty_available: { type: String, required: true },
+        duration: { type: String, required: true },
       },
     },
     cod: { type: String, required: true },
