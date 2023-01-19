@@ -4,8 +4,8 @@ import ProductShirt from './ProductShirt'
 
 const Shirt = () => {
   return (
-    <div>
-    <h1>product page</h1>
+    <div style={{display:"flex",gap:"5px"}}>
+  
     <Filter/>
     <ProductShirt/>
       

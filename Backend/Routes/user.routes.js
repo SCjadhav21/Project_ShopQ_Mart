@@ -8,7 +8,7 @@ app.use(express.json());
 const UserRoutes = express.Router();
 
 UserRoutes.post("/register", async (req, res) => {
-  let { name, email, gender, password } = req.body;
+  let { name, email, mobile, password } = req.body;
   try {
     const users = await UserModel.find({ email });
     if (users.length > 0) {
