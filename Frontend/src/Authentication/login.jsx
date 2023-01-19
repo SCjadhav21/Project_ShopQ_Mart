@@ -12,7 +12,6 @@ import {
   Box,
   Text,
   Img,
-  FormControl,
   FormLabel,
   Input,
   InputRightElement,
@@ -43,7 +42,7 @@ const Login = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      axios("https://odd-plum-vulture-hat.cyclic.app/login", {
+      axios("http://localhost:4500/users/login", {
         method: "POST",
         data: data,
         headers: {

@@ -22,7 +22,7 @@ import { useEffect } from "react";
 const Signup = () => {
   const [data, setData] = useState({
     name: "",
-    mobile: null,
+    mobile: "",
     password: "",
     email: "",
   });
@@ -40,7 +40,7 @@ const Signup = () => {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-
+    console.log(data);
     if (data.name && data.password && data.email && data.mobile) {
       if (data.password.length < 6) {
         alert("password is too stort");
@@ -54,7 +54,7 @@ const Signup = () => {
         })
           .then((res) => {
             console.log(res);
-            alert(res.data);
+            alert(res.data.msg);
             if (res.data == "user Registered") {
               setNavigate(true);
             }
