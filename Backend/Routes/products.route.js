@@ -15,10 +15,32 @@ productsRouter.get("/tv", async (req, res) => {
   }
 });
 
+productsRouter.get("/tv/:id", async (req, res) => {
+  try {
+    const tv = await TV.findById(req.params.id).lean().exec();
+    if (tv) return res.status(200).send(tv);
+    else return res.status(404).send("Product Not Found!");
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+});
+
 productsRouter.get("/refrigerator", async (req, res) => {
   try {
     const refrigerators = await Refrigerator.find().lean().exec();
     res.status(200).send(refrigerators);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+});
+
+productsRouter.get("/refrigerator/:id", async (req, res) => {
+  try {
+    const refrigerator = await Refrigerator.findById(req.params.id)
+      .lean()
+      .exec();
+    if (refrigerator) return res.status(200).send(refrigerator);
+    else return res.status(404).send("Product Not Found!");
   } catch (e) {
     return res.status(500).send(e.message);
   }
@@ -33,10 +55,32 @@ productsRouter.get("/washingmachine", async (req, res) => {
   }
 });
 
+productsRouter.get("/washingmachine/:id", async (req, res) => {
+  try {
+    const washingmachine = await WashingMachine.findById(req.params.id)
+      .lean()
+      .exec();
+    if (washingmachine) return res.status(200).send(washingmachine);
+    else return res.status(404).send("Product Not Found!");
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+});
+
 productsRouter.get("/laptop", async (req, res) => {
   try {
     const laptops = await Laptop.find().lean().exec();
     res.status(200).send(laptops);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+});
+
+productsRouter.get("/laptop/:id", async (req, res) => {
+  try {
+    const laptop = await Laptop.findById(req.params.id).lean().exec();
+    if (laptop) return res.status(200).send(laptop);
+    else return res.status(404).send("Product Not Found!");
   } catch (e) {
     return res.status(500).send(e.message);
   }
