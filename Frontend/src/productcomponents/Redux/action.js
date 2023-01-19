@@ -33,9 +33,9 @@ import {
  
      const getShirt=()=>(dispatch)=>{
               dispatch(getShirtRequest())
-                    return axios.get("https://mock-server-app-pzg9.onrender.com/clothing").then((res)=>{
-                    dispatch(getShirtSuccess(res))
-             console.log(res)
+                    return axios.get("https://fakestoreapi.com/products").then((res)=>{
+                    dispatch(getShirtSuccess(res.data))
+                   console.log(res.data)
      }).catch((err)=>dispatch(getShirtError()))
  }
  
