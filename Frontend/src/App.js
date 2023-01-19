@@ -1,12 +1,5 @@
-import Signup from "./Authentication/signup";
-
 function App() {
-  // return <div>React-app</div>;
-  return (
-    <div>
-      <Signup />
-    </div>
-  );
+  return <div className="App">React App</div>;
 }
 
 export default App;
