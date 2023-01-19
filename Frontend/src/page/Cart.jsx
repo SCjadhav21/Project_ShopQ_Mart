@@ -2,13 +2,29 @@ import React from 'react';
 import {
     Box,
     Image,
-    Text
-    
+    Text  
   } from "@chakra-ui/react";
   import logo from '../Resources/ShopQ.jpeg'
+  import axios from 'axios';
   import cart from '../Resources/empty.gif'
+  import { useEffect } from 'react';
+
+  const getData=()=>{
+
+   return axios.get('https://fakestoreapi.com/carts')
+  }
 
 const Cart = () => {
+
+  useEffect(
+    ()=>{
+      getData().then((el)=>{
+        console.log(el)
+      }).catch((err)=>{console.log(err);})
+    },[]
+    
+  )
+
 
   return (
     <Box h={'650px'} bg={'#eff7fa'}>
