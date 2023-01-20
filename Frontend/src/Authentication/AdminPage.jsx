@@ -28,6 +28,8 @@ import {
   Popover,
   Input,
   FormLabel,
+  FormControl,
+  FormHelperText,
 } from "@chakra-ui/react";
 
 import {
@@ -46,6 +48,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const AdminPage = () => {
+  const [userAddData, setUserAddData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    password: "",
+    // address: "",
+    // pincode: "",
+    // city: "",
+    // state: "",
+  });
   const [page, setPage] = useState("main");
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
@@ -73,20 +85,23 @@ const AdminPage = () => {
 
   const handelUserEdit = (id) => {
     let edit = { [editKey]: editValue };
-
-    axios(`http://localhost:4500/users/${id}`, {
-      method: "PATCH",
-      data: edit,
-      headers: {
-        "content-type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-    })
-      .then((res) => {
-        alert(res.data.alert);
-        getuserdata();
+    if (editKey == "mobile" && editValue.length !== 10) {
+      alert("mobile length must be 10");
+    } else {
+      axios(`http://localhost:4500/users/${id}`, {
+        method: "PATCH",
+        data: edit,
+        headers: {
+          "content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
       })
-      .catch((err) => console.error(err));
+        .then((res) => {
+          alert(res.data.alert);
+          getuserdata();
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const handelUserDelete = (id) => {
@@ -103,6 +118,39 @@ const AdminPage = () => {
         getuserdata();
       })
       .catch((err) => console.error(err));
+  };
+
+  const handelUserAddChange = (e) => {
+    let { name, value } = e.target;
+    // if (name == "pincode") {
+    //   value = +value;
+    // }
+    setUserAddData({ ...userAddData, [name]: value });
+  };
+
+  const handelUserAddSubmit = (e) => {
+    e.preventDefault();
+    if (userAddData.password.length < 6) {
+      alert("password must be at least 6 characters");
+    } else if (userAddData.mobile.length !== 10) {
+      alert("mobile must be 10 characters");
+    } else {
+      axios("http://localhost:4500/users/register", {
+        method: "POST",
+        data: userAddData,
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          alert(res.data.msg);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.message);
+        });
+    }
   };
   return (
     <>
@@ -154,7 +202,12 @@ const AdminPage = () => {
                 Users
               </MenuButton>
               <MenuList border="2px solid red" bgColor="#fff">
-                <MenuItem icon={<AddIcon />}>Add Users</MenuItem>
+                <MenuItem
+                  onClick={() => handelClick("addlUsers")}
+                  icon={<AddIcon />}
+                >
+                  Add Users
+                </MenuItem>
                 <MenuItem
                   onClick={() => handelClick("allUsers")}
                   icon={<EditIcon />}
@@ -186,7 +239,7 @@ const AdminPage = () => {
       </Drawer>
       {page == "allUsers" ? (
         <Box p="0px 20px">
-          <SimpleGrid columns={[2, null, 3]} spacing="40px">
+          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
             {userData?.map((user, index) => {
               return (
                 <Box
@@ -197,9 +250,10 @@ const AdminPage = () => {
                   <Text>name : {user.name}</Text>
                   <Text>mobile : {user.mobile}</Text>
                   <Text>email : {user.email}</Text>
+
                   <Popover>
                     <PopoverTrigger>
-                      <Button>Edit</Button>
+                      <Button mt="8px">Edit</Button>
                     </PopoverTrigger>
                     <PopoverContent>
                       <PopoverArrow />
@@ -234,13 +288,117 @@ const AdminPage = () => {
                       </PopoverBody>
                     </PopoverContent>
                   </Popover>
-                  <Button onClick={() => handelUserDelete(user._id)} ml="5px">
+                  <Button
+                    mt="8px"
+                    onClick={() => handelUserDelete(user._id)}
+                    ml="5px"
+                  >
                     Remove
                   </Button>
                 </Box>
               );
             })}
           </SimpleGrid>
+        </Box>
+      ) : (
+        ""
+      )}
+      {page == "addlUsers" ? (
+        <Box display="flex" justifyContent="center">
+          <Box w={["100%", "70%", "50%"]} p="10%" border="2px solid red">
+            <form onSubmit={handelUserAddSubmit}>
+              <FormControl
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+              >
+                <FormLabel>Name</FormLabel>
+                <Input
+                  name="name"
+                  value={userAddData.name}
+                  onChange={handelUserAddChange}
+                  isRequired
+                  placeholder="enter full name"
+                  type="text"
+                />
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  name="email"
+                  value={userAddData.email}
+                  onChange={handelUserAddChange}
+                  isRequired
+                  placeholder="enter email"
+                  type="email"
+                />
+
+                <FormLabel>Password</FormLabel>
+                <Input
+                  name="password"
+                  value={userAddData.password}
+                  onChange={handelUserAddChange}
+                  isRequired
+                  placeholder="enter password"
+                  type="password"
+                />
+
+                <FormLabel>Mobile</FormLabel>
+                <Input
+                  name="mobile"
+                  value={userAddData.mobile}
+                  onChange={handelUserAddChange}
+                  isRequired
+                  type="number"
+                  placeholder="enter mobile"
+                />
+
+                {/* <FormLabel>Enter address</FormLabel>
+                <Input
+                  name="address"
+                  value={userAddData.address}
+                  onChange={handelUserAddChange}
+                  isRequired
+                  type="text"
+                  placeholder="enter address"
+                />
+
+                <FormLabel>Pincode</FormLabel>
+                <Input
+                  name="pincode"
+                  value={userAddData.pincode}
+                  onChange={handelUserAddChange}
+                  type="number"
+                  placeholder="enter pin"
+                  isRequired
+                />
+                <FormLabel>City</FormLabel>
+                <Input
+                  name="city"
+                  value={userAddData.city}
+                  onChange={handelUserAddChange}
+                  type="text"
+                  placeholder="enter city"
+                  isRequired
+                />
+                <FormLabel>State</FormLabel>
+                <Input
+                  name="state"
+                  value={userAddData.state}
+                  onChange={handelUserAddChange}
+                  type="text"
+                  placeholder="enter state"
+                  isRequired
+                /> */}
+                <Input
+                  alignSelf="center"
+                  w="90%"
+                  type="submit"
+                  mt="10px"
+                  borderRadius="20px"
+                  bgGradient="linear(0deg,#ff934b 0%,#ff5e62 100%)"
+                />
+              </FormControl>
+            </form>
+          </Box>
         </Box>
       ) : (
         ""
