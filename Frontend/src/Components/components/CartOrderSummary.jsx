@@ -30,7 +30,7 @@ export const CartOrderSummary = () => (<Stack spacing="6" width="full" maxW="sm"
         </Flex>
       </Stack>
     </Stack>
-    <Button colorScheme="blue" size="lg" fontSize="md">
+    <Button color="#fff" bgGradient="linear(0deg,#ff934b 0%,#ff5e62 100%)" size="lg" fontSize="md">
       Checkout
     </Button>
   </Stack>);
