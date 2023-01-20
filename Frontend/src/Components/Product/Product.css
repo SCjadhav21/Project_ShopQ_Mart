@@ -1,0 +1,18 @@
+.individualproduct{
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+  /* border-radius: 20px; */
+  padding: 10px;
+  transition: transform .5s;
+  margin: auto;
+  /* margin-left: 5px; */
+}
+.individualproduct:hover{
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  /* border-radius: 20px; */
+  transform: scale(1.05);
+  border: 0.5px solid teal;
+  /* border-color: teal; */
+  /* padding: 10px; */
+  /* margin: 10px; */
+}
