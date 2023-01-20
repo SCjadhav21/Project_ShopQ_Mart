@@ -7,8 +7,10 @@ const Laptop = require("../Models/laptop.model");
 const productsRouter = express.Router();
 
 productsRouter.get("/tv", async (req, res) => {
+  const order = req.query.order || "asc";
+
   try {
-    const tvs = await TV.find().lean().exec();
+    const tvs = await TV.find({}).sort({ price: order }).lean().exec();
     res.status(200).send(tvs);
   } catch (e) {
     return res.status(500).send(e.message);
@@ -26,8 +28,12 @@ productsRouter.get("/tv/:id", async (req, res) => {
 });
 
 productsRouter.get("/refrigerator", async (req, res) => {
+  const order = req.query.order || "asc";
   try {
-    const refrigerators = await Refrigerator.find().lean().exec();
+    const refrigerators = await Refrigerator.find({})
+      .sort({ price: order })
+      .lean()
+      .exec();
     res.status(200).send(refrigerators);
   } catch (e) {
     return res.status(500).send(e.message);
@@ -47,8 +53,12 @@ productsRouter.get("/refrigerator/:id", async (req, res) => {
 });
 
 productsRouter.get("/washingmachine", async (req, res) => {
+  const order = req.query.order || "asc";
   try {
-    const washingmachines = await WashingMachine.find().lean().exec();
+    const washingmachines = await WashingMachine.find({})
+      .sort({ price: order })
+      .lean()
+      .exec();
     res.status(200).send(washingmachines);
   } catch (e) {
     return res.status(500).send(e.message);
@@ -68,8 +78,9 @@ productsRouter.get("/washingmachine/:id", async (req, res) => {
 });
 
 productsRouter.get("/laptop", async (req, res) => {
+  const order = req.query.order || "asc";
   try {
-    const laptops = await Laptop.find().lean().exec();
+    const laptops = await Laptop.find({}).sort({ price: order }).lean().exec();
     res.status(200).send(laptops);
   } catch (e) {
     return res.status(500).send(e.message);
