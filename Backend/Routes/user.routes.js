@@ -2,6 +2,8 @@ const express = require("express");
 const { UserModel } = require("../Models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { AdminAuthentication } = require("../Middelware/adminauth");
+
 const app = express();
 app.use(express.json());
 
@@ -17,7 +19,7 @@ UserRoutes.post("/register", async (req, res) => {
         alert: "email is already register",
       });
     } else {
-      bcrypt.hash(password, 5, async (err, hash) => {
+      bcrypt.hash(password, 8, async (err, hash) => {
         if (err) {
           console.log(err);
           res.send({ msg: err, alert: "something went wrong" });
@@ -65,6 +67,51 @@ UserRoutes.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.send({ msg: err, alert: "something went wrong" });
+  }
+});
+
+UserRoutes.use(AdminAuthentication);
+
+UserRoutes.get("/", async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.send({ data: users, alert: "user data found" });
+  } catch (err) {
+    console.log(err);
+    res.send({ massage: err.message, alert: "Something went wrong" });
+  }
+});
+
+UserRoutes.patch("/:id", async (req, res) => {
+  const id = req.params.id;
+  const payload = req.body;
+
+  try {
+    await UserModel.findOneAndUpdate({ _id: id }, payload);
+
+    res.send({ massage: "updated", alert: "Status updated successfully" });
+  } catch (err) {
+    console.log(err);
+    res.send({ massage: err.message, alert: "Something went wrong" });
+  }
+});
+
+UserRoutes.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const user = await UserModel.findOne({ _id: id });
+    if (user.email == process.env.adminEmail) {
+      res.send({
+        massage: "Accout Preserved",
+        alert: "You Can't able delete this account",
+      });
+    } else {
+      await UserModel.findOneAndDelete({ _id: id });
+      res.send({ massage: "deleted", alert: "user Removed successfully" });
+    }
+  } catch (err) {
+    res.send({ massage: err, alert: "Something went wrong" });
   }
 });
 
