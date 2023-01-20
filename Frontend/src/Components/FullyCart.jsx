@@ -3,6 +3,7 @@ import * as React from "react";
 import { CartItem } from "./components/CartItem";
 import { CartOrderSummary } from "./components/CartOrderSummary";
 import { cart } from "./components/_data";
+import EmptyCart from "./EmptyCart";
  const FullCart = () => (<Box maxW="7xl" mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
     <Stack spacing={{ base: "8", md: "12" }}>
       {/* <Heading fontSize="2xl" fontWeight="extrabold">
@@ -12,7 +13,11 @@ import { cart } from "./components/_data";
         {cart.map((item) => (<CartItem key={item.id} {...item}/>))}
       </Stack>
       <Flex width="full" flexDirection="row" justifyContent="flex-end">
-        <CartOrderSummary />
+        {/* {cart.length>0?<CartOrderSummary />:<EmptyCart />} */}
+        {
+          cart.length>0 && <CartOrderSummary />
+        }
+        
       </Flex>
     </Stack>
   </Box>);

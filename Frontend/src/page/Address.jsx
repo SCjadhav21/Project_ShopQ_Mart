@@ -6,9 +6,7 @@ import {
     Image,
     Input,
     Text,  
-    useDisclosure
-  } from "@chakra-ui/react";
-  import {
+    useDisclosure,
     Drawer,
     DrawerBody,
     DrawerFooter,
@@ -16,7 +14,8 @@ import {
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
-  } from '@chakra-ui/react'
+  } from "@chakra-ui/react";
+
 
   
 const Address = () => {
@@ -49,7 +48,7 @@ const Address = () => {
     <Box  height={"auto"}  w={"90%"} margin={'auto'} mt={"30px"} bg={'#ffffff'}>
         <Box display={'flex'} justifyContent={'space-between'}>
         <Text textAlign={'left'} lineHeight={'50px'} borderBottom={'0.5px solid lightgray'} ml={'30px'} pt={"20px"} color={'#363636'} fontWeight={'bold'} fontSize={"17px"} fontFamily={'Roboto, Arial, Helvetica, sans-serif;'}> 2 Address to choose from</Text>
-        <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+        <Button ref={btnRef} m={'auto 0px'} bg={'#ffffff'} color='teal' onClick={onOpen}>
               New Address
             </Button>
             <Drawer
