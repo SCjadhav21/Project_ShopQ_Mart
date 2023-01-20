@@ -33,7 +33,7 @@ import {
  
      const getShirt=()=>(dispatch)=>{
               dispatch(getShirtRequest())
-                    return axios.get("https://fakestoreapi.com/products").then((res)=>{
+                    return axios.get("http://localhost:4500/products/tv").then((res)=>{
                     dispatch(getShirtSuccess(res.data))
                    console.log(res.data)
      }).catch((err)=>dispatch(getShirtError()))
