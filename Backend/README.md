@@ -1,4 +1,4 @@
-## Links for product fetching
+# Links for product fetching
 
 (By default all products are sorted by price low to high)
 
