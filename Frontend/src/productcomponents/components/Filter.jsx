@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Filter = () => {
+
   return (
     <div style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
       <div>
@@ -122,7 +123,7 @@ const Filter = () => {
             
             
             />
-            <label>          30%</label>
+            <label> 30%</label>
             
               </div>
 
@@ -132,7 +133,7 @@ const Filter = () => {
             
             
             />
-            <label>         40%</label>
+            <label> 40%</label>
             
               </div>
 
@@ -142,7 +143,7 @@ const Filter = () => {
             
             
             />
-            <label>         50%</label>
+            <label> 50%</label>
             
               </div>
 
@@ -152,7 +153,7 @@ const Filter = () => {
             
             
             />
-            <label>         60%</label>
+            <label> 60%</label>
             
               </div>
 
@@ -163,7 +164,7 @@ const Filter = () => {
             
             
             />
-            <label>{"     "}70%</label>
+            <label> 70%</label>
             
               </div>
 
