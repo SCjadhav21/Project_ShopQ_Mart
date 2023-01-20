@@ -11,7 +11,7 @@
 
 ## Query for Sorting
 
-** keys used for sorting are sort and order **
+keys used for sorting are **sort** and **order**
 
-example: `products/tv?sort=price&order=asc` (Sort by price low to high)
+example: `products/tv?sort=price&order=asc` (Sort by price low to high)  
 example: `products/tv?sort=price&order=desc` (Sort by price high to low)
