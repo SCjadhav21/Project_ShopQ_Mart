@@ -1,0 +1,27 @@
+.ProductCss{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+   
+}
+
+.onlycartcss{
+   
+    text-align: left;
+    padding: 10px;
+}
+
+.onlycartcss:hover{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: 1px solid #24A6BA;
+}
+
+.discountcss{
+    color: #24A6BA ;
+    font-weight: 800px;
+}
+
+.ratingcsss{
+    color: orangered;
+}
