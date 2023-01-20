@@ -1,4 +1,4 @@
-### Links for product fetching
+## Links for product fetching
 
 (By default all products are sorted by price low to high)
 
@@ -9,7 +9,7 @@
 ==> WashingMachine: /products/washingmachine
 ==> Laptop: /products/laptop
 
-# Query for Sorting
+## Query for Sorting
 
 ==> keys used for sorting are sort and order
 
