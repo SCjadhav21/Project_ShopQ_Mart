@@ -44,6 +44,8 @@ const Signup = () => {
     if (data.name && data.password && data.email && data.mobile) {
       if (data.password.length < 6) {
         alert("password is too stort");
+      } else if (data.mobile.length != 10) {
+        alert("mobile number length should be 10");
       } else {
         axios("http://localhost:4500/users/register", {
           method: "POST",

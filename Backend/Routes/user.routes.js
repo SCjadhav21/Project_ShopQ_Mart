@@ -100,10 +100,16 @@ UserRoutes.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const oldtodo = await UserModel.findOne({ _id: id });
-
-    await UserModel.findOneAndDelete({ _id: id });
-    res.send({ massage: "deleted", alert: "user Removed successfully" });
+    const user = await UserModel.findOne({ _id: id });
+    if (user.email == process.env.adminEmail) {
+      res.send({
+        massage: "Accout Preserved",
+        alert: "You Can't able delete this account",
+      });
+    } else {
+      await UserModel.findOneAndDelete({ _id: id });
+      res.send({ massage: "deleted", alert: "user Removed successfully" });
+    }
   } catch (err) {
     res.send({ massage: err, alert: "Something went wrong" });
   }
