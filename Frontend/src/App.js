@@ -1,17 +1,15 @@
-import Address from "./page/Address";
-import Cart from "./page/Cart";
-import {Ass} from './Components/FullyCart'
-import Homepage from './Components/Homepage'
+
+import AllRouter from "./productcomponents/AllPages/AllRouter";
 
 function App() {
-  return (
+
+
+  return(
     <div className="App">
-
-  {/* <Cart /> */}
-  {/* <Homepage/> */}
-
+ 
+   <AllRouter/>
+    
     </div>
-  );
+  )
 }
-
-export default App;
+export default App

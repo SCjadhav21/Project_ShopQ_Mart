@@ -1,513 +1,253 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {useDispatch, useSelector} from "react-redux"
+import { useSearchParams } from 'react-router-dom'
+import { getShirt } from '../Redux/action'
+
+
 
 const Filter = () => {
+
+
+
+
+   const[searchParams,setSearchParams]=useSearchParams()
+
+  const initialCategory=searchParams.getAll("discount")
+  
+  const initialSort=searchParams.getAll("sort")
+
+  const[discount,setDiscount]=useState(initialCategory||[])
+
+  const[sort,setSort]=useState(initialSort[0]||"")
+
+
+
+ 
+
+  const HandleSort=(e)=>{
+
+    setSort(e.target.value)
+  }
+
+
+ const handleFitterDiscount=(e)=>{
+
+  const newCategory=[...discount]
+
+  if(newCategory.includes(e.target.value)){
+    // remove it
+    newCategory.splice(newCategory.indexOf(e.target.value),1)
+
+  }else{
+    newCategory.push(e.target.value)
+
+  }
+
+
+  setDiscount(newCategory)
+
+ }
+
+
+ useEffect(()=>{
+  let obj={}
+  obj.discount=discount
+  sort && (obj.sort=sort);
+  
+  console.log(obj)
+  setSearchParams(obj)
+
+ },[discount,setSearchParams,sort])
+
+ 
+
+
   return (
     <div style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
+<h1>FILTER COMPONENT</h1>
+        <div >
+          
+          
+        
+
+                
+            
+          
+
+
+            
+
+
+            {/* discount */}
+
+
+                <div>
+                  <h1>Discount</h1>
+
+
+                  
+                  <div>
+                              <input 
+                              type="checkbox"
+                              value="4%"
+                              checked={discount.includes("4%")}
+                              onChange={handleFitterDiscount}
+                            
+                            
+                            />
+                            <label> 4%</label>
+                
+                  </div>
+                      <div>
+                            <input 
+                            type="checkbox"
+                            value="20%"
+                            checked={discount.includes("20%")}
+                            onChange={handleFitterDiscount}
+                          
+                        
+                            />
+                            <label> 20%</label>
+                    
+                      </div>
+
+                  <div>
+                          <input 
+                          type="checkbox"
+                          value="22%"
+                          checked={discount.includes("22%")}
+                          onChange={handleFitterDiscount}
+                        
+                        
+                        />
+                        <label> 22%</label>
+                
+                  </div>
+
+                  <div>
+                              <input 
+                              type="checkbox"
+                              value="40%"
+                              checked={discount.includes("40%")}
+                              onChange={handleFitterDiscount}
+                            
+                            
+                            />
+                            <label> 40%</label>
+                
+                  </div>
+
+                  <div>
+                          <input 
+                            type="checkbox"
+                            value="41%"
+                            checked={discount.includes("41%")}
+                            onChange={handleFitterDiscount}
+                          
+                          
+                          />
+                          <label> 41%</label>
+                          
+                  </div>
+
+                
+
+
+
+
+
+
+
+                </div>
+                <br/>
+                <hr/>
+
+
+      {/* rating */}
+
       <div>
-      <h1>FILTER COMPONENT</h1>
-      </div>
+                  <h1>Product Rating</h1>
+                  <div>
+                  <input 
+                  type="checkbox"
+                
+                
+                />
+                <label> 3</label>
+                
+                  </div>
 
-             <div>
-          <h1>Price</h1>
-          <div >
-          <input 
-          type="checkbox"/>
-         <label>Rs. 7000 - Rs. 9999 (10)</label>
+                  <div>
+                  <input 
+                  type="checkbox"
+                
+                
+                />
+                <label> 5</label>
+                
+                  </div>
+
+                  <div>
+                  <input 
+                  type="checkbox"
+                
+                
+                />
+                <label> 4</label>
+                
+                  </div>
+                </div>
+                <br/>
+                <hr/>
+
+
+
+
+
+
+
+
+
+              
+                
+
+                  
+
+
+
+
+
+
+
+
+          
+      
+          
+      
         
-          </div>
-          <div>
-          <input 
-          type="checkbox"
-         
         
-         />
-         <label>Rs. 10000 and Above (17)</label>
-        
-          </div>
-             </div>
+        </div>
+      
+
+           
+        <h1>SORT COMPONENT</h1>
+           <div onClick={HandleSort}>
+              <input type="radio"  value="asc" name="sort"
+                defaultChecked={sort==="asc"}
+              />
+              <label>Ascending</label>
               <br/>
-              <hr/>
-         
+
+              <input type="radio"  value="desc" name="sort"
+                defaultChecked={sort==="desc"}
+              />
+              <label>Descending</label>
+              <br/>
       
-
-
-           <div>
-          <h1>Brand</h1>
-           <div>
-          <input 
-          type="checkbox"
-         
-        
-         />
-         <label>Asus (1)</label>
         
            </div>
-
-           <div>
-          <input 
-          type="checkbox"
-         
-        
-         />
-         <label>Asus</label>
-        
-           </div>
-
-           <div>
-          <input 
-          type="checkbox"
-         
-        
-         />
-         <label>Blackberry (4)</label>
-        
-           </div>
-
-           <div>
-          <input 
-          type="checkbox"
-         
-        
-         />
-         <label>Huawei (1) (4)</label>
-        
-           </div>
-
-           <div>
-          <input 
-          type="checkbox"
-         
-        
-         />
-         <label>I KALL (7) (4)</label>
-        
-           </div>
-
-
-           <div>
-          <input 
-          type="checkbox"
-         
-        
-         />
-         <label>Micromax (4)</label>
-        
-           </div>
-
-
-
-
-
-           </div>
-           <br/>
-            <hr/>
-
-
-
-            <div>
-              <h1>Discount</h1>
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>       20%</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>          30%</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>         40%</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>         50%</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>         60%</label>
-            
-              </div>
-
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>{"     "}70%</label>
-            
-              </div>
-
-
-
-
-
-            </div>
-            <br/>
-            <hr/>
-
-
-
-            <div>
-              <h1>Primary Camera</h1>
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 12MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 13MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 14MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 15MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 16MP</label>
-            
-              </div>
-
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 17MP</label>
-            
-              </div>
-
-
-
-
-
-            </div>
-            <br/>
-            <hr/>
-
-
-
-            <div>
-              <h1>Front Camera</h1>
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 1MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 2MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 3MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 4MP</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 5MP</label>
-            
-              </div>
-
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 6MP</label>
-            
-              </div>
-
-
-
-
-
-            </div>
-            <br/>
-            <hr/>
-
-
-            <div>
-              <h1>RAM</h1>
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 2GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>3GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 4GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 5GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 6GB</label>
-            
-              </div>
-
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 7GB</label>
-            
-              </div>
-
-
-
-
-
-            </div>
-            <br/>
-            <hr/>
-
-
-
-
-             <div>
-              <h1>Internal Memory</h1>
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 256GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>128GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 64GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 32GB</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 16GB</label>
-            
-              </div>
-
-
-              
-
-
-
-
-
-             </div>
-             <br/>
-             <hr/>
-
-
-             <div>
-              <h1>Product Rating</h1>
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 3 & above (1)</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 2 & above (1)</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 1& above (1)</label>
-            
-              </div>
-             </div>
-             <br/>
-             <hr/>
-
-             
-
-              
-
-
-
-
-
-
-
-
-      
-    </div>
+       
+     </div>
   )
 }
 
