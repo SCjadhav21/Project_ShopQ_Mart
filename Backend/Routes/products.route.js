@@ -3,8 +3,22 @@ const TV = require("../Models/tv.model");
 const Refrigerator = require("../Models/refrigerator.model");
 const WashingMachine = require("../Models/washingmachine.model");
 const Laptop = require("../Models/laptop.model");
+const Product = require("../Models/product.model");
 
 const productsRouter = express.Router();
+
+productsRouter.get("", async (req, res) => {
+  const order = req.query.order || "asc";
+  try {
+    const products = await Product.find({})
+      .sort({ price: order })
+      .lean()
+      .exec();
+    res.status(200).send(products);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+});
 
 productsRouter.get("/tv", async (req, res) => {
   const order = req.query.order || "asc";
@@ -92,6 +106,15 @@ productsRouter.get("/laptop/:id", async (req, res) => {
     const laptop = await Laptop.findById(req.params.id).lean().exec();
     if (laptop) return res.status(200).send(laptop);
     else return res.status(404).send("Product Not Found!");
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+});
+
+productsRouter.post("", async (req, res) => {
+  try {
+    const product = await Product.create(req.body);
+    res.status(201).send("Data added successfully");
   } catch (e) {
     return res.status(500).send(e.message);
   }
