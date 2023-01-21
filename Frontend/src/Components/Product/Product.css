@@ -1,11 +1,100 @@
+#trend {
+  width: 95%;
+  height: 252px;
+  overflow: hidden;
+  position: relative;
+  /* padding: 0px 10px; */
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+margin: 15px;
+}
+#trend > section>div>a p+p{
+  /* border: 2px solid red; */
+  color: grey;
+  font-size: 15.5px;
+  margin-top: 5px;
+  
+  }
+  #trend > section>div>a p:first-child{
+    text-align: left;
+  /* font-size: 16px; */
+    margin-top: 5px;
+    color: black;
+    }
+  
+  
+  #trend > section {
+    /* width: 95%; */
+    display: flex;
+    justify-content: left;
+    overflow-x: auto;
+    /* margin-left:6% ; */
+
+  }
+  #trend > section::-webkit-scrollbar {
+    visibility:hidden;
+  }
+  #trend > section > div {
+    min-width: 18.33%;
+    /* height: auto; */
+    position: relative;
+    /* left: 0;
+    right: 0; */
+    /* margin-bottom: 1px; */
+  }
+
+
+ 
+  .slide{
+      text-align: center;
+      /* font-size: 18px; */
+      /* border: 2px solid red; */
+      /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+      /* margin: 10px; */
+      border-radius: 5px;
+      padding: 15px;
+      /* transition: transform .3s; */
+  }
+  .slide:hover{
+    border: 2px solid teal;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+  }
+  
+  .multiimage{
+    justify-content: center;
+  }
+  .multiimage:hover{
+      transform: scale(1.1);
+    transition: transform .3s;
+  }
+
+
+.products{
+  width: 85%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  overflow-x:auto;
+  overflow-inline:auto;
+  border: 2px solid green;
+}
+
+.product_image{
+  width: 250px;
+  height: 150px;
+}
+/* display={'flex'} ml={'20px'} p={'15px'} borderRadius={'5px'} boxShadow={'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px'} */
 .individualproduct{
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
-  /* border-radius: 20px; */
+
+  border: 1px solid red;
   padding: 10px;
   transition: transform .5s;
-  margin: auto;
-  /* margin-left: 5px; */
+  /* margin: auto; */
+  margin: 5px;
 }
+
 .individualproduct:hover{
 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
