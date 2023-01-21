@@ -1,29 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { getData } from './LaptopProduct'
+import React from 'react'
 
-const FilterLaptop = () => {
-  
+const FilterMachine = () => {
   return (
     <div style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
-    <div >
     <div>
     <h1>FILTER COMPONENT</h1>
     </div>
 
-          
+           <div>
+        <h1>Price</h1>
+        <div >
+        <input 
+        type="checkbox"/>
+       <label>Rs. 10000 - Rs. 19000 (10)</label>
+      
+        </div>
+        <div>
+        <input 
+        type="checkbox"
+       
+      
+       />
+       <label>Rs. 19000 and Above (17)</label>
+      
+        </div>
+           </div>
+            <br/>
+            <hr/>
        
     
-   
+
 
          <div>
         <h1>Brand</h1>
          <div>
         <input 
         type="checkbox"
-        
+       
+      
        />
-       <label>Hp</label>
+       <label>Whirlpool</label>
       
          </div>
 
@@ -33,7 +49,7 @@ const FilterLaptop = () => {
        
       
        />
-       <label>Lenovo</label>
+       <label>LG</label>
       
          </div>
 
@@ -43,21 +59,9 @@ const FilterLaptop = () => {
        
       
        />
-       <label>Dell</label>
+       <label>Samsung</label>
       
          </div>
-
-
-         <div>
-        <input 
-        type="checkbox"
-       
-      
-       />
-       <label>Acer</label>
-      
-         </div>
-
 
        
 
@@ -174,30 +178,9 @@ const FilterLaptop = () => {
 
 
     
-     </div>
-
-
-
-     <h1>SORT COMPONENT</h1>
-           <div onClick={HandleSort}>
-              <input type="radio"  value="asc" name="sort"
-                defaultChecked={sort==="asc"}
-              />
-              <label>Ascending</label>
-              <br/>
-
-              <input type="radio"  value="desc" name="sort"
-                defaultChecked={sort==="desc"}
-              />
-              <label>Descending</label>
-              <br/>
-      
-        
-           </div>
-
-   </div>
-
+  </div>
+    
   )
 }
 
-export default FilterLaptop
+export default FilterMachine
