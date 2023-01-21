@@ -9,16 +9,17 @@ import Navlist from "./Trial/Navlist"
 // import {images} from "./components/_data"
 // import {Gallery} from "./components/Gallery"
 import Product from './Product/Product';
+import Ads from './Advertisement/Ads';
 
 const Homepage = () => {
 
   return (
-    <Box>
+    <Box backgroundColor={'rgb(239,247,250)'}>
         <Box display={'flex'} mt="1%" w={'100%'} mb="1%">
             <Box w={'25%'}><Image src={ShopQ} w={'180px'} ml="50px" /></Box>
-            <Box display={'flex'} border={'1px solid grey'} borderRadius={'10px'} w={'50%'}  mt={"10px"}>
-                <Input ml={'3%'}  w={'80%'} style={{border:'red',paddingLeft:'25px'}} placeholder='What is on your mind today?'/>
-                <Button w={'17%'} style={{border:'none',background:'transparent',backgroundColor:'rgb(255,103,93)',borderRadius:'0px 9px 9px 0px'}}>Search</Button>
+            <Box display={'flex'} border={'1px solid grey'} borderRadius={'10px'} w={'48%'}  mt={"13px"}>
+                <Input  w={'80%'} style={{border:'red',paddingLeft:'25px'}} placeholder='What is on your mind today?'/>
+                <Button w={'20%'} style={{border:'none',background:'transparent',backgroundColor:'rgb(255,103,93)',borderRadius:'0px 9px 9px 0px'}}>Search</Button>
             </Box>
             <Box display={'flex'} w="20%"  margin="auto">
                 <Link display={'flex'} href='' ml={'20px'} textDecoration={'none'} color={'teal'}>
@@ -59,9 +60,7 @@ const Homepage = () => {
         </Box> */}
 
         {/* <UncontrolledExample/> */}
-
-       <Product/>
-       <Product/>
+       <Ads/>
        <Product/>
     </Box>
   )
