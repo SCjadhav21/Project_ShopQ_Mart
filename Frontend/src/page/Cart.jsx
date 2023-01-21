@@ -1,6 +1,6 @@
 import React from 'react';
-import Ass from '../Components/FullyCart'
-import EmptyCart from '../Components/EmptyCart';
+import FullyCart from '../Components/Cart/FullyCart'
+import EmptyCart from '../Components/Cart/EmptyCart';
 import {
     Box,
     Image,
@@ -11,25 +11,37 @@ import {
   import cart from '../Resources/empty.gif'
   import { useEffect } from 'react';
 import { useState } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import {getcartSuccess,getcartError,getcartRequest} from "../Cart_REDUX/action"
+// import {getData} from '../Cart_REDUX/action'
 
   const getData=()=>{
+   return axios.get('http://localhost:4500/cart', { headers: {"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NiOWNjNTVmZjQ4NzQ0ZWZmMzdjMzAiLCJpYXQiOjE2NzQyODgzNjZ9.AyPui0HUid4sDEoUyZ_qfNzPVxd-5QQc_Cpd4ZHptZQ" }} )
+  
 
-   return axios.get('https://fakestoreapi.com/carts')
   }
 
 const Cart = () => {
   const [data, setData]= useState(0)
+ const cart=useSelector(store=>store.cart.data)
 
-  useEffect(
-    ()=>{
+console.log(cart)
+
+const dispatch=useDispatch()
+
+  useEffect(()=>{
+    dispatch(getcartRequest())
       getData().then((el)=>{
         setData(el.data)
-        
-        // console.log(data)
-      }).catch((err)=>{console.log(err);})
+        dispatch(getcartSuccess(el))
+    
+       
+      }).catch((err)=>{
+        dispatch(getcartError())
+        console.log(err);})
     },[])
 
-    // console.log(data.length)
+   
   return (
     <Box h={'650px'} bg={'#eff7fa'}>
         <Box height={'80px'} bg={'#ffffff'}>
@@ -47,7 +59,7 @@ const Cart = () => {
       {/* <Box>
         <Text p={'20px'} textAlign={'center'} borderBottom={'0.5px solid lightgray'} fontSize={'15px'} color={'#777777'}>Congrats! You are eligible for Extra 10 Per Off on Prepaid orders with minimum cart value of Rs 299 and Maximum discount of Rs 100. Use coupon code RUPAY10. Limit one coupon at a time..</Text>
       </Box> */}
-      {data?.length>0?<Ass /> : <EmptyCart />}
+      {data?.length>0? <FullyCart/> : <EmptyCart />}
 
       
 

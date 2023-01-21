@@ -1,5 +1,5 @@
+import AllRouter from "./productcomponents/AllPages/AllRouter"
 
-import AllRouter from "./productcomponents/AllPages/AllRouter";
 
 function App() {
 

@@ -1,14 +1,13 @@
 import {
-    GET_SHIRT_REQUEST,
-    GET_SHIRT_SUCCESS,
-    GET_SHIRT_ERROR,
+    GET_CART_REQUEST,
+    GET_CART_SUCCESS,
+    GET_CART_ERROR,
   
-} from "./actionType";
+} from "./actionTypes";
   
 
  const initailState={
-    shirt:[],
-  
+    cart:[],
     isLoading:false,
     isError:false
  }
@@ -16,17 +15,16 @@ import {
 
  const reducer=(oldstate=initailState,action)=>{
         const {type,payload}=action
-
         switch (type) {
-            case GET_SHIRT_REQUEST:
+            case GET_CART_REQUEST:
                 return{...oldstate,isLoading:true}
             
             
-            case  GET_SHIRT_SUCCESS:  
-                return{...oldstate,isLoading:false,shirt:payload}
+            case  GET_CART_SUCCESS:  
+                return{...oldstate,isLoading:false,cart:payload}
                 
              
-            case  GET_SHIRT_ERROR:  
+            case  GET_CART_ERROR:  
                 return{...oldstate,isLoading:false,isError:true}
 
                   
