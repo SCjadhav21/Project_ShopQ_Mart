@@ -1,10 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import "./machine.css"
 
-import "./washing.css"
+const WasgingMachine = () => {
 
-const WashingMachine = () => {
     const navigate=useNavigate()
 
     const[data,setData]=useState([])
@@ -17,18 +17,14 @@ const WashingMachine = () => {
          
            
       },[])
-     
-
   return (
    
-    
-
     <div className='ProductCss'>
      {
         data.length>0 && data.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`washing/${elem._id}`)}>
+         <div onClick={()=>navigate(`machine/${elem._id}`)}>
          <img src={elem.image}  alt="shirt" />
        
          </div>
@@ -48,9 +44,10 @@ const WashingMachine = () => {
      }
        
    </div>
-   
-  
   )
 }
 
-export default WashingMachine
+export default WasgingMachine
+
+
+

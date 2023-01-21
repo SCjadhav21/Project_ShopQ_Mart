@@ -11,8 +11,9 @@ import SinglePageRator from '../Refrigerator/SinglePageRator';
 
 import SinglePageLaptop from '../Laptop/SinglePageLaptop';
 import CombineLap from '../Laptop/CombineLap';
-import CombineWashing from '../WashingMachine/CombineWashing';
-import SingleWashingmachine from '../WashingMachine/SingleWashingmachine';
+import SinglepageMachine from '../WashingMachine/SinglepageMachine';
+import CombineMachine from '../WashingMachine/CombineMachine';
+
 
 
 const AllRouter = () => {
@@ -30,9 +31,9 @@ const AllRouter = () => {
             <Route path="/laptop/laptop/:id" element={<SinglePageLaptop/>} />
 
             
-            <Route path="/washing" element={<CombineWashing/>} />
+            <Route path="/washing" element={<CombineMachine/>} />
             <Route path="/washing/washing/:id" element= 
-             {<SingleWashingmachine/>} />
+             {<SinglepageMachine/>} />
 
 
 

@@ -2,13 +2,14 @@ import AllRouter from "./productcomponents/AllPages/AllRouter"
 
 
 function App() {
-  return (
+
+
+  return(
     <div className="App">
-
-  <AllRouter />
-
+ 
+   <AllRouter/>
+    
     </div>
-  );
+  )
 }
-
-export default App;
+export default App

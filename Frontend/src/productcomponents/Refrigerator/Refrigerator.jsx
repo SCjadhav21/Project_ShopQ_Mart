@@ -1,23 +1,45 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import "./refrigerator.css"
+
+const  getData= (sortdata)=>{
+  
+  return axios.get(`http://localhost:4500/products/refrigerator`,sortdata)
+
+}
 
 const Refrigerator = () => {
     
     const navigate=useNavigate()
 
     const[data,setData]=useState([])
+    const[searchParams]=useSearchParams()
 
-      useEffect(()=>{
-        axios.get("http://localhost:4500/products/refrigerator").then((res)=>{
-            setData(res.data)
-            console.log(res.data)
-        })
+
+    const sort=searchParams.get("sort")
+    useEffect(()=>{
+     
+      const getTVparams={
+            params:{
+              discount:searchParams.getAll("discount"),
+              sort:sort &&"price",
+              order:sort
+            }
+      }
+    
+    
+      getData(getTVparams).then((res)=>{
+        setData(res.data)
+        console.log(res.data)
+      })
+      
+     
          
-           
-      },[])
+    },[sort])
+
+
      
 
   return (

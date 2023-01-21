@@ -1,10 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 const FiltterRefri = () => {
+
+  const[searchParams,setSearchParams]=useSearchParams()
+
+  
+  const initialSort=searchParams.getAll("sort")
+
+ 
+
+  const[sort,setSort]=useState(initialSort[0]||"")
+
+
+
+ 
+
+ const HandleSort=(e)=>{
+
+  setSort(e.target.value)
+}
+   
+
+
+useEffect(()=>{
+  let obj={}
+  
+  sort && (obj.sort=sort);
+ 
+  
+  setSearchParams(obj)
+
+ },[setSearchParams,sort])
+
+
   return (
     
-    
-    <div style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
+    <div  style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
+    <div >
       <div>
       <h1>FILTER COMPONENT</h1>
       </div>
@@ -181,6 +214,25 @@ const FiltterRefri = () => {
 
       
     </div>
+
+     <h1>SORT COMPONENT</h1>
+           <div onClick={HandleSort}>
+              <input type="radio"  value="asc" name="sort"
+                defaultChecked={sort==="asc"}
+              />
+              <label>Ascending</label>
+              <br/>
+
+              <input type="radio"  value="desc" name="sort"
+                defaultChecked={sort==="desc"}
+              />
+              <label>Descending</label>
+              <br/>
+      
+        
+           </div>
+
+           </div>
       
     
   )

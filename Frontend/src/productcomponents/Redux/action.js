@@ -31,12 +31,14 @@ import {
     }
  } 
  
-     const getShirt=()=>(dispatch)=>{
-              dispatch(getShirtRequest())
-                    return axios.get("http://localhost:4500/products/tv").then((res)=>{
-                    dispatch(getShirtSuccess(res.data))
-                   console.log(res.data)
-     }).catch((err)=>dispatch(getShirtError()))
+     const getShirt=(params)=>(dispatch)=>{
+    
+      
+          dispatch(getShirtRequest())
+          return axios.get("http://localhost:4500/products/tv",params)
+          .then((res)=>{dispatch(getShirtSuccess(res.data))
+      
+           }).catch((err)=>dispatch(getShirtError()))
  }
  
 
