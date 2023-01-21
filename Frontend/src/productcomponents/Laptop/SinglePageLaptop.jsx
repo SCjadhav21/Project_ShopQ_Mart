@@ -62,7 +62,7 @@ import {
               fit={'center'}
               align={'center'}
               w={'auto'}
-              // h={{ base: '100%', sm: '300px', lg: '300px' }}
+              h={{ base: '100%', sm: '300px', lg: '300px' }}
             />
           </Flex>
           <Stack spacing={{ base: 6, md: 10 }}>
@@ -117,14 +117,16 @@ import {
                     <ListItem>MRP</ListItem>
                     <ListItem>Discount</ListItem>{' '}
                     <ListItem>Price</ListItem>
+                    <ListItem>Product-Type</ListItem>
                   
                   </List>
                   <List spacing={2}>
-                  <ListItem>{data.mrp}</ListItem>
+                  <ListItem>{data.mrp || 703212}</ListItem>
               
-                    <ListItem>{data.discount}</ListItem>
+                    <ListItem>{data.discount||"25%"}</ListItem>
 
                     <ListItem>{data.price}</ListItem>
+                    <ListItem>{data.prod_type}</ListItem>
                    
                   </List>
                 </SimpleGrid>

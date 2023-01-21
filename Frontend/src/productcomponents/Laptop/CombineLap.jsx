@@ -4,7 +4,7 @@ import LaptopProduct from './LaptopProduct'
 
 const CombineLap = () => {
   return (
-    <div  style={{display:"flex",gap:"5px"}} >
+    <div  style={{display:"flex"}} >
     <FilterLaptop/>
     <LaptopProduct/>
       

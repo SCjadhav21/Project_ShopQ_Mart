@@ -1,7 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import "./laptop.css"
+ 
+export const  getData= (sortdata)=>{
+  
+  return axios.get(`http://localhost:4500/products/laptop`,sortdata)
+
+}
 
 const LaptopProduct = () => {
 
@@ -9,14 +15,33 @@ const LaptopProduct = () => {
 
     const[data,setData]=useState([])
 
+    const[searchParams]=useSearchParams()
+
+   
+    const sort=searchParams.get("sort")
       useEffect(()=>{
-        axios.get("http://localhost:4500/products/laptop").then((res)=>{
-            setData(res.data)
-            console.log(res.data)
+       
+        const getTVparams={
+              params:{
+                discount:searchParams.getAll("discount"),
+                sort:sort &&"price",
+                order:sort
+              }
+        }
+      
+      
+        getData(getTVparams).then((res)=>{
+          setData(res.data)
+          console.log(res.data)
         })
-         
+        
+       
            
-      },[])
+      },[sort])
+
+
+
+
   return (
    
     <div className='ProductCss'>
@@ -24,7 +49,7 @@ const LaptopProduct = () => {
         data.length>0 && data.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`refrigerator/${elem._id}`)}>
+         <div onClick={()=>navigate(`laptop/${elem._id}`)}>
          <img src={elem.image}  alt="shirt" />
        
          </div>
