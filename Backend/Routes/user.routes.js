@@ -3,6 +3,7 @@ const { UserModel } = require("../Models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { AdminAuthentication } = require("../Middelware/adminauth");
+const { Authentication } = require("../Middelware/authentication");
 
 const app = express();
 app.use(express.json());
@@ -10,7 +11,7 @@ app.use(express.json());
 const UserRoutes = express.Router();
 
 UserRoutes.post("/register", async (req, res) => {
-  let { name, email, mobile, password } = req.body;
+  let { name, email, mobile, password, address } = req.body;
   try {
     const users = await UserModel.find({ email });
     if (users.length > 0) {
@@ -24,7 +25,13 @@ UserRoutes.post("/register", async (req, res) => {
           console.log(err);
           res.send({ msg: err, alert: "something went wrong" });
         } else {
-          const user = new UserModel({ name, email, mobile, password: hash });
+          const user = new UserModel({
+            name,
+            address,
+            email,
+            mobile,
+            password: hash,
+          });
           await user.save();
           res.send({
             msg: "user Registered",
@@ -69,7 +76,17 @@ UserRoutes.post("/login", async (req, res) => {
     res.send({ msg: err, alert: "something went wrong" });
   }
 });
-
+UserRoutes.use(Authentication);
+UserRoutes.get("/personalDetail", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const user = await UserModel.findOne({ _id: userId });
+    res.send({ data: user, alert: "user data found" });
+  } catch (err) {
+    console.log(err);
+    res.send({ massage: err.message, alert: "Something went wrong" });
+  }
+});
 UserRoutes.use(AdminAuthentication);
 
 UserRoutes.get("/", async (req, res) => {
@@ -84,15 +101,31 @@ UserRoutes.get("/", async (req, res) => {
 
 UserRoutes.patch("/:id", async (req, res) => {
   const id = req.params.id;
-  const payload = req.body;
-
+  let payload = req.body;
+  console.log(payload);
   try {
-    await UserModel.findOneAndUpdate({ _id: id }, payload);
+    if (payload.pincode || payload.city || payload.state) {
+      const dt = await UserModel.findOne({ _id: id });
+      let changeddata;
+      if (payload.state) {
+        changeddata = { ...dt.address, state: payload.state };
+      } else if (payload.pincode) {
+        changeddata = { ...dt.address, pincode: payload.pincode };
+      } else {
+        changeddata = { ...dt.address, city: payload.city };
+      }
 
-    res.send({ massage: "updated", alert: "Status updated successfully" });
+      await UserModel.findOneAndUpdate({ _id: id }, { address: changeddata });
+
+      res.send({ massage: "updated", alert: "Status updated successfully" });
+    } else {
+      await UserModel.findOneAndUpdate({ _id: id }, payload);
+
+      res.send({ massage: "updated", alert: "Status updated successfully" });
+    }
   } catch (err) {
     console.log(err);
-    res.send({ massage: err.message, alert: "Something went wrong" });
+    res.send({ massage: "err.message", alert: "Something went wrong" });
   }
 });
 

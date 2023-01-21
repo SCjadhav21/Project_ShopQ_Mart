@@ -84,7 +84,13 @@ const AdminPage = () => {
   };
 
   const handelUserEdit = (id) => {
+    // let edit;
+    // if (editKey == "city" || editKey == "pincode" || editKey == "state") {
+    //   edit = { address: { [editKey]: editValue } };
+    // } else {
     let edit = { [editKey]: editValue };
+    // }
+
     if (editKey == "mobile" && editValue.length !== 10) {
       alert("mobile length must be 10");
     } else {
@@ -250,6 +256,9 @@ const AdminPage = () => {
                   <Text>name : {user.name}</Text>
                   <Text>mobile : {user.mobile}</Text>
                   <Text>email : {user.email}</Text>
+                  <Text>city : {user.address.city}</Text>
+                  <Text>pincode : {user.address.pincode}</Text>
+                  <Text>state : {user.address.state}</Text>
 
                   <Popover>
                     <PopoverTrigger>
