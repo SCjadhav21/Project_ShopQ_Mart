@@ -53,15 +53,17 @@ const AdminPage = () => {
     email: "",
     mobile: "",
     password: "",
-    // address: "",
-    // pincode: "",
-    // city: "",
-    // state: "",
+    address: {
+      pincode: "",
+      city: "",
+      state: "",
+    },
   });
   const [page, setPage] = useState("main");
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
-  const [userData, setUserData] = useState([]);
+  const [data, setData] = useState([]);
+  const [userData, setuserData] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -73,23 +75,145 @@ const AdminPage = () => {
         Authorization: localStorage.getItem("token"),
       },
     })
-      .then((res) => setUserData(res.data.data))
+      .then((res) => setuserData(res.data.data))
+
+      .catch((err) => console.error(err));
+  };
+
+  const getTvData = () => {
+    axios(`http://localhost:4500/products/tv`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => setData(res.data))
+      .catch((err) => console.error(err));
+  };
+
+  const getRefrigeratorData = () => {
+    axios(`http://localhost:4500/products/refrigerator`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => setData(res.data))
+      .catch((err) => console.error(err));
+  };
+  const getWashingmachineData = () => {
+    axios(`http://localhost:4500/products/washingmachine`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => setData(res.data))
+      .catch((err) => console.error(err));
+  };
+
+  const getLaptopData = () => {
+    axios(`http://localhost:4500/products/laptop`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => setData(res.data))
       .catch((err) => console.error(err));
   };
 
   const handelClick = (value) => {
-    getuserdata();
+    if (value == "allUsers") {
+      getuserdata();
+    } else if (value == "AllTvProducts") {
+      getTvData();
+    } else if (value == "AllRefrigeratorProducts") {
+      getRefrigeratorData();
+    } else if (value == "AllWashingmachineProducts") {
+      getWashingmachineData();
+    } else if (value == "AllLaptopProducts") {
+      getLaptopData();
+    }
     setPage(value);
     onClose();
   };
 
-  const handelUserEdit = (id) => {
-    // let edit;
-    // if (editKey == "city" || editKey == "pincode" || editKey == "state") {
-    //   edit = { address: { [editKey]: editValue } };
-    // } else {
+  const handelRefrigeratorEdit = (id) => {
     let edit = { [editKey]: editValue };
-    // }
+
+    axios(`http://localhost:4500/products/refigerator/${id}`, {
+      method: "PATCH",
+      data: edit,
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getRefrigeratorData();
+      })
+      .catch((err) => console.error(err));
+  };
+  const handelWashingmachineEdit = (id) => {
+    let edit = { [editKey]: editValue };
+
+    axios(`http://localhost:4500/products/washingmachine/${id}`, {
+      method: "PATCH",
+      data: edit,
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getWashingmachineData();
+      })
+      .catch((err) => console.error(err));
+  };
+  const handelLaptopEdit = (id) => {
+    let edit = { [editKey]: editValue };
+
+    axios(`http://localhost:4500/products/laptop/${id}`, {
+      method: "PATCH",
+      data: edit,
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getLaptopData();
+      })
+      .catch((err) => console.error(err));
+  };
+  const handelTvEdit = (id) => {
+    let edit = { [editKey]: editValue };
+
+    axios(`http://localhost:4500/products/tv/${id}`, {
+      method: "PATCH",
+      data: edit,
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getTvData();
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handelUserEdit = (id) => {
+    let edit = { [editKey]: editValue };
 
     if (editKey == "mobile" && editValue.length !== 10) {
       alert("mobile length must be 10");
@@ -110,6 +234,9 @@ const AdminPage = () => {
     }
   };
 
+  const handelTvDelete = (id) => {
+    console.log(id);
+  };
   const handelUserDelete = (id) => {
     axios(`http://localhost:4500/users/${id}`, {
       method: "DELETE",
@@ -128,14 +255,22 @@ const AdminPage = () => {
 
   const handelUserAddChange = (e) => {
     let { name, value } = e.target;
-    // if (name == "pincode") {
-    //   value = +value;
-    // }
-    setUserAddData({ ...userAddData, [name]: value });
+    if (name == "pincode" || name == "city" || name == "state") {
+      if (name == "pincode") {
+        value = +value;
+      }
+      setUserAddData({
+        ...userAddData,
+        address: { ...userAddData.address, [name]: value },
+      });
+    } else {
+      setUserAddData({ ...userAddData, [name]: value });
+    }
   };
 
   const handelUserAddSubmit = (e) => {
     e.preventDefault();
+
     if (userAddData.password.length < 6) {
       alert("password must be at least 6 characters");
     } else if (userAddData.mobile.length !== 10) {
@@ -158,6 +293,7 @@ const AdminPage = () => {
         });
     }
   };
+
   return (
     <>
       <Box
@@ -205,6 +341,110 @@ const AdminPage = () => {
                 color="red"
                 fontSize="18px"
               >
+                Tv Products
+              </MenuButton>
+              <MenuList border="2px solid red" bgColor="#fff">
+                <MenuItem
+                  onClick={() => handelClick("AddTvProduct")}
+                  icon={<AddIcon />}
+                >
+                  Add Tv Products
+                </MenuItem>
+                <MenuItem
+                  onClick={() => handelClick("AllTvProducts")}
+                  icon={<EditIcon />}
+                >
+                  All TV's
+                </MenuItem>
+              </MenuList>
+            </Menu>
+            <Menu>
+              <MenuButton
+                border="2px solid #5AB9C1"
+                bgColor="#5AB9C1"
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                color="red"
+                fontSize="18px"
+              >
+                Refrigerator Products
+              </MenuButton>
+              <MenuList border="2px solid red" bgColor="#fff">
+                <MenuItem
+                  onClick={() => handelClick("AddRefrigeratorProduct")}
+                  icon={<AddIcon />}
+                >
+                  Add Refrigerators
+                </MenuItem>
+                <MenuItem
+                  onClick={() => handelClick("AllRefrigeratorProducts")}
+                  icon={<EditIcon />}
+                >
+                  All Refrigerator's
+                </MenuItem>
+              </MenuList>
+            </Menu>
+            <Menu>
+              <MenuButton
+                border="2px solid #5AB9C1"
+                bgColor="#5AB9C1"
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                color="red"
+                fontSize="18px"
+              >
+                Laptops
+              </MenuButton>
+              <MenuList border="2px solid red" bgColor="#fff">
+                <MenuItem
+                  onClick={() => handelClick("AddLaptopProduct")}
+                  icon={<AddIcon />}
+                >
+                  Add Laptop
+                </MenuItem>
+                <MenuItem
+                  onClick={() => handelClick("AllLaptopProducts")}
+                  icon={<EditIcon />}
+                >
+                  All Laptop's
+                </MenuItem>
+              </MenuList>
+            </Menu>
+            <Menu>
+              <MenuButton
+                border="2px solid #5AB9C1"
+                bgColor="#5AB9C1"
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                color="red"
+                fontSize="18px"
+              >
+                Washingmachine
+              </MenuButton>
+              <MenuList border="2px solid red" bgColor="#fff">
+                <MenuItem
+                  onClick={() => handelClick("AddWashingmachineProduct")}
+                  icon={<AddIcon />}
+                >
+                  Add Washingmachine
+                </MenuItem>
+                <MenuItem
+                  onClick={() => handelClick("AllWashingmachineProducts")}
+                  icon={<EditIcon />}
+                >
+                  All Washingmachine's
+                </MenuItem>
+              </MenuList>
+            </Menu>
+            <Menu>
+              <MenuButton
+                border="2px solid #5AB9C1"
+                bgColor="#5AB9C1"
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                color="red"
+                fontSize="18px"
+              >
                 Users
               </MenuButton>
               <MenuList border="2px solid red" bgColor="#fff">
@@ -243,6 +483,307 @@ const AdminPage = () => {
           <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
+
+      {page == "AllTvProducts" ? (
+        <Box p="0px 20px">
+          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
+            {data?.map((tv, index) => {
+              return (
+                <Box
+                  p="10px"
+                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                  key={index}
+                >
+                  <Img src={tv.image}></Img>
+                  <Text>product_name : {tv.product_name}</Text>
+                  <Text>brand : {tv.brand}</Text>
+                  <Text>delivery : {tv.delivery}</Text>
+                  <Text>discount : {tv.discount}</Text>
+                  <Text>emi : {tv.emi}</Text>
+                  <Text>image : {tv.image}</Text>
+                  <Text>mrp : {tv.mrp}</Text>
+                  <Text>items_left : {tv.items_left}</Text>
+                  <Text>price : {tv.price}</Text>
+                  <Text>prod_type : {tv.prod_type}</Text>
+
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button mt="8px">Edit</Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>Confirmation!</PopoverHeader>
+                      <PopoverBody>
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            handelTvEdit(tv._id);
+                          }}
+                        >
+                          <FormLabel>updation key</FormLabel>
+                          <Input
+                            type="text"
+                            onChange={(e) => setEditKey(e.target.value)}
+                            isRequired
+                          />
+                          <FormLabel>updated value</FormLabel>
+                          <Input
+                            type={editKey == "email" ? "email" : "text"}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            isRequired
+                          />
+                          <Input
+                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                            w="50%"
+                            mt="5px"
+                            type="submit"
+                          />
+                        </form>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                  <Button
+                    mt="8px"
+                    onClick={() => handelTvDelete(tv._id)}
+                    ml="5px"
+                  >
+                    Remove
+                  </Button>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        </Box>
+      ) : (
+        ""
+      )}
+
+      {page == "AllRefrigeratorProducts" ? (
+        <Box p="0px 20px">
+          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
+            {data?.map((tv, index) => {
+              return (
+                <Box
+                  p="10px"
+                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                  key={index}
+                >
+                  <Img src={tv.image}></Img>
+                  <Text>product_name : {tv.product_name}</Text>
+                  <Text>brand : {tv.brand}</Text>
+                  <Text>delivery : {tv.delivery}</Text>
+                  <Text>discount : {tv.discount}</Text>
+                  <Text>emi : {tv.emi}</Text>
+                  <Text>image : {tv.image}</Text>
+                  <Text>mrp : {tv.mrp}</Text>
+                  <Text>items_left : {tv.items_left}</Text>
+                  <Text>price : {tv.price}</Text>
+                  <Text>prod_type : {tv.prod_type}</Text>
+
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button mt="8px">Edit</Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>Confirmation!</PopoverHeader>
+                      <PopoverBody>
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            handelRefrigeratorEdit(tv._id);
+                          }}
+                        >
+                          <FormLabel>updation key</FormLabel>
+                          <Input
+                            type="text"
+                            onChange={(e) => setEditKey(e.target.value)}
+                            isRequired
+                          />
+                          <FormLabel>updated value</FormLabel>
+                          <Input
+                            type={editKey == "price" ? "price" : "text"}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            isRequired
+                          />
+                          <Input
+                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                            w="50%"
+                            mt="5px"
+                            type="submit"
+                          />
+                        </form>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                  <Button
+                    mt="8px"
+                    onClick={() => handelTvDelete(tv._id)}
+                    ml="5px"
+                  >
+                    Remove
+                  </Button>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        </Box>
+      ) : (
+        ""
+      )}
+
+      {page == "AllWashingmachineProducts" ? (
+        <Box p="0px 20px">
+          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
+            {data?.map((tv, index) => {
+              return (
+                <Box
+                  p="10px"
+                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                  key={index}
+                >
+                  <Img src={tv.image}></Img>
+                  <Text>product_name : {tv.product_name}</Text>
+                  <Text>brand : {tv.brand}</Text>
+                  <Text>delivery : {tv.delivery}</Text>
+                  <Text>discount : {tv.discount}</Text>
+                  <Text>emi : {tv.emi}</Text>
+                  <Text>image : {tv.image}</Text>
+                  <Text>mrp : {tv.mrp}</Text>
+                  <Text>items_left : {tv.items_left}</Text>
+                  <Text>price : {tv.price}</Text>
+                  <Text>prod_type : {tv.prod_type}</Text>
+
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button mt="8px">Edit</Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>Confirmation!</PopoverHeader>
+                      <PopoverBody>
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+
+                            handelWashingmachineEdit(tv._id);
+                          }}
+                        >
+                          <FormLabel>updation key</FormLabel>
+                          <Input
+                            type="text"
+                            onChange={(e) => setEditKey(e.target.value)}
+                            isRequired
+                          />
+                          <FormLabel>updated value</FormLabel>
+                          <Input
+                            type={editKey == "price" ? "price" : "text"}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            isRequired
+                          />
+                          <Input
+                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                            w="50%"
+                            mt="5px"
+                            type="submit"
+                          />
+                        </form>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                  <Button
+                    mt="8px"
+                    onClick={() => handelTvDelete(tv._id)}
+                    ml="5px"
+                  >
+                    Remove
+                  </Button>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        </Box>
+      ) : (
+        ""
+      )}
+      {page == "AllLaptopProducts" ? (
+        <Box p="0px 20px">
+          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
+            {data?.map((tv, index) => {
+              return (
+                <Box
+                  p="10px"
+                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                  key={index}
+                >
+                  <Img src={tv.image}></Img>
+                  <Text>product_name : {tv.product_name}</Text>
+                  <Text>brand : {tv.brand}</Text>
+                  <Text>delivery : {tv.delivery}</Text>
+                  <Text>discount : {tv.discount}</Text>
+                  <Text>emi : {tv.emi}</Text>
+                  <Text>image : {tv.image}</Text>
+                  <Text>mrp : {tv.mrp}</Text>
+                  <Text>items_left : {tv.items_left}</Text>
+                  <Text>price : {tv.price}</Text>
+                  <Text>prod_type : {tv.prod_type}</Text>
+
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button mt="8px">Edit</Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>Confirmation!</PopoverHeader>
+                      <PopoverBody>
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+
+                            handelLaptopEdit(tv._id);
+                          }}
+                        >
+                          <FormLabel>updation key</FormLabel>
+                          <Input
+                            type="text"
+                            onChange={(e) => setEditKey(e.target.value)}
+                            isRequired
+                          />
+                          <FormLabel>updated value</FormLabel>
+                          <Input
+                            type={editKey == "price" ? "price" : "text"}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            isRequired
+                          />
+                          <Input
+                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                            w="50%"
+                            mt="5px"
+                            type="submit"
+                          />
+                        </form>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                  <Button
+                    mt="8px"
+                    onClick={() => handelTvDelete(tv._id)}
+                    ml="5px"
+                  >
+                    Remove
+                  </Button>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        </Box>
+      ) : (
+        ""
+      )}
       {page == "allUsers" ? (
         <Box p="0px 20px">
           <SimpleGrid columns={[1, 2, 3]} spacing="40px">
@@ -339,7 +880,6 @@ const AdminPage = () => {
                   placeholder="enter email"
                   type="email"
                 />
-
                 <FormLabel>Password</FormLabel>
                 <Input
                   name="password"
@@ -349,7 +889,6 @@ const AdminPage = () => {
                   placeholder="enter password"
                   type="password"
                 />
-
                 <FormLabel>Mobile</FormLabel>
                 <Input
                   name="mobile"
@@ -359,44 +898,34 @@ const AdminPage = () => {
                   type="number"
                   placeholder="enter mobile"
                 />
-
-                {/* <FormLabel>Enter address</FormLabel>
-                <Input
-                  name="address"
-                  value={userAddData.address}
-                  onChange={handelUserAddChange}
-                  isRequired
-                  type="text"
-                  placeholder="enter address"
-                />
-
-                <FormLabel>Pincode</FormLabel>
-                <Input
-                  name="pincode"
-                  value={userAddData.pincode}
-                  onChange={handelUserAddChange}
-                  type="number"
-                  placeholder="enter pin"
-                  isRequired
-                />
                 <FormLabel>City</FormLabel>
                 <Input
                   name="city"
-                  value={userAddData.city}
+                  value={userAddData.address.city}
                   onChange={handelUserAddChange}
-                  type="text"
-                  placeholder="enter city"
                   isRequired
+                  placeholder="enter city"
+                  type="text"
                 />
                 <FormLabel>State</FormLabel>
                 <Input
                   name="state"
-                  value={userAddData.state}
+                  value={userAddData.address.state}
                   onChange={handelUserAddChange}
-                  type="text"
-                  placeholder="enter state"
                   isRequired
-                /> */}
+                  placeholder="enter state"
+                  type="text"
+                />
+                <FormLabel>Pincode</FormLabel>
+                <Input
+                  name="pincode"
+                  value={userAddData.address.pincode}
+                  onChange={handelUserAddChange}
+                  isRequired
+                  placeholder="enter pincode"
+                  type="number"
+                />
+
                 <Input
                   alignSelf="center"
                   w="90%"
