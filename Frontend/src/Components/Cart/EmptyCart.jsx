@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-    Box,
-    Image,
-    Text  
-  } from "@chakra-ui/react";
-  import logo from '../Resources/ShopQ.jpeg'
+import {Box, Image, Text} from "@chakra-ui/react";
+import Cart from './empty.gif'
+  // import logo from '.../Resources/ShopQ.jpeg'
 //   import axios from 'axios';
-  import cart from '../Resources/empty.gif'
+//  import cart from './ShopQ.jpeg'
 //   import { useEffect } from 'react';
 
 //   const getData=()=>{
@@ -36,7 +33,7 @@ const EmptyCart = () => {
     //     <Text textAlign={'left'} lineHeight={'50px'} borderBottom={'0.5px solid lightgray'} ml={'30px'} pt={"20px"} color={'#363636'} fontWeight={'bold'} fontSize={"24px"} fontFamily={'Roboto, Arial, Helvetica, sans-serif;'}> My Cart</Text>
        
         <Box>
-            <Image  pt={'60px'} margin={'auto'} src={cart}></Image>
+            <Image  pt={'60px'} margin={'auto'} src={Cart}></Image>
             <Text borderBottom={'0.5px solid lightgray'} color={'#939393'} textAlign={'center'} fontSize={'16px'} pb={'15px'} pt={'10px'}>You don't have any Product in your Cart.</Text>
         </Box>
   

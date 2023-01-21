@@ -1,12 +1,11 @@
-import Address from "./page/Address";
-import Cart from "./page/Cart";
-import {Ass} from './Components/FullyCart'
+import AllRouter from "./productcomponents/AllPages/AllRouter"
+
 
 function App() {
   return (
     <div className="App">
 
-  <Cart />
+  <AllRouter />
 
     </div>
   );
