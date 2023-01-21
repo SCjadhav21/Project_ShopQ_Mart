@@ -15,6 +15,7 @@ const AdminAuthentication = async (req, res, next) => {
         req.body.userId = result.userId;
         next();
       } else {
+        console.log(users.email, process.env.adminEmail);
         res.send({ msg: "Not Authorised", alert: "you are not Authorised" });
       }
     }

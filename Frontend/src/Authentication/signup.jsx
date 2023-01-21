@@ -25,6 +25,11 @@ const Signup = () => {
     mobile: "",
     password: "",
     email: "",
+    address: {
+      pincode: "",
+      city: "",
+      state: "",
+    },
   });
   const [show, setShow] = React.useState(false);
   const [navigate, setNavigate] = useState(false);
@@ -33,15 +38,28 @@ const Signup = () => {
   const handleClick = () => setShow(!show);
 
   const handleChange = (e) => {
-    const { value, name } = e.target;
+    let { value, name } = e.target;
 
-    setData({ ...data, [name]: value });
+    if (name == "pincode" || name == "city" || name == "state") {
+      if (name == "pincode") {
+        value = +value;
+      }
+      setData({ ...data, address: { ...data.address, [name]: value } });
+    } else {
+      setData({ ...data, [name]: value });
+    }
   };
 
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(data);
-    if (data.name && data.password && data.email && data.mobile) {
+    if (
+      data.name &&
+      data.password &&
+      data.email &&
+      data.mobile &&
+      data.address
+    ) {
       if (data.password.length < 6) {
         alert("password is too stort");
       } else if (data.mobile.length != 10) {
@@ -250,6 +268,58 @@ const Signup = () => {
                     type="number"
                     placeholder="Enter Mobile"
                   />
+                  <FormLabel
+                    borderBottom="1px solid #ddd"
+                    width="100%"
+                    fontSize="14px"
+                    padding="6px 0px"
+                    color="#212121"
+                  >
+                    City
+                  </FormLabel>
+                  <Input
+                    name="city"
+                    onChange={handleChange}
+                    value={data.address.city}
+                    isRequired
+                    type="text"
+                    placeholder="Enter City"
+                  />
+                  <FormLabel
+                    borderBottom="1px solid #ddd"
+                    width="100%"
+                    fontSize="14px"
+                    padding="6px 0px"
+                    color="#212121"
+                  >
+                    pincode
+                  </FormLabel>
+                  <Input
+                    name="pincode"
+                    onChange={handleChange}
+                    value={data.address.pincode}
+                    isRequired
+                    type="number"
+                    placeholder="Enter pincode"
+                  />
+                  <FormLabel
+                    borderBottom="1px solid #ddd"
+                    width="100%"
+                    fontSize="14px"
+                    padding="6px 0px"
+                    color="#212121"
+                  >
+                    State
+                  </FormLabel>
+                  <Input
+                    name="state"
+                    onChange={handleChange}
+                    value={data.address.state}
+                    isRequired
+                    type="text"
+                    placeholder="Enter State"
+                  />
+
                   <FormLabel
                     borderBottom="1px solid #ddd"
                     width="100%"
