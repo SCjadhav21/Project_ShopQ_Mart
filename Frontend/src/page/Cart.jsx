@@ -24,6 +24,7 @@ const getData = () => {
 const Cart = () => {
   const [data, setData] = useState([]);
   const cart = useSelector((store) => store.Cart.cart);
+  console.log(cart)
   // const [count, setCount]=useState(cart.length || 0)
   const c = cart.length;
 
