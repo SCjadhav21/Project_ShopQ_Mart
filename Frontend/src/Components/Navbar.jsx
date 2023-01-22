@@ -138,7 +138,7 @@ const Navbar = () => {
                 <BellIcon color={"teal"} w={"40px"} h={"25px"} />
               </Button>
             </Link>
-            <Link href="/cart">
+            <Link to="/cart">
               <Button border={"none"} backgroundColor={"transparent"}>
                 <Image
                   w={"22px"}

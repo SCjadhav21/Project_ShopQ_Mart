@@ -15,12 +15,17 @@ import Login from "../../Authentication/login";
 import Signup from "../../Authentication/signup";
 import AdminPage from "../../Authentication/AdminPage";
 import Cart from "../../page/Cart";
+import Address from "../../page/Address";
+import Payment from "../../page/Payment";
 
 const AllRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/address" element={<Address />} />
+      <Route path="/payment" element={<Payment />} />
+
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/adminpage" element={<AdminPage />} />
