@@ -4,6 +4,7 @@ const Refrigerator = require("../Models/refrigerator.model");
 const WashingMachine = require("../Models/washingmachine.model");
 const Laptop = require("../Models/laptop.model");
 const Product = require("../Models/product.model");
+const { AdminAuthentication } = require("../Middelware/adminauth");
 
 const productsRouter = express.Router();
 
@@ -219,7 +220,9 @@ productsRouter.get("/laptop/:id", async (req, res) => {
   }
 });
 
-productsRouter.post("", async (req, res) => {
+// productsRouter.use(AdminAuthentication);
+
+productsRouter.post("", AdminAuthentication, async (req, res) => {
   try {
     const product = await Product.create(req.body);
     res.status(201).send("Data added successfully");
@@ -228,16 +231,38 @@ productsRouter.post("", async (req, res) => {
   }
 });
 
-productsRouter.post("/tv", async (req, res) => {
+productsRouter.post("/tv", AdminAuthentication, async (req, res) => {
+  const payload = req.body;
   try {
-    const tv = await TV.create(req.body);
-    res.status(201).send("Data added successfully");
-  } catch (e) {
-    return res.status(500).send(e.message);
+    const tv = await TV.create(payload);
+    res.status(201).send("Product added successfully!");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err.message);
   }
 });
 
-productsRouter.post("/refrigerator", async (req, res) => {
+productsRouter.patch("/tv/:id", AdminAuthentication, async (req, res) => {
+  const id = req.params.id;
+  const payload = req.body;
+  try {
+    const tv = await TV.findByIdAndUpdate(id, payload).lean().exec();
+    res.status(201).send("Product data updated!");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+productsRouter.delete("/tv/:id", AdminAuthentication, async (req, res) => {
+  const id = req.params.id;
+  try {
+    const tv = await TV.findByIdAndDelete(id).lean().exec();
+    res.status(201).send("Data deleted successfully!");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+productsRouter.post("/refrigerator", AdminAuthentication, async (req, res) => {
   try {
     const refrigerator = await Refrigerator.create(req.body);
     res.status(201).send("Data added successfully");
@@ -245,22 +270,105 @@ productsRouter.post("/refrigerator", async (req, res) => {
     return res.status(500).send(e.message);
   }
 });
+productsRouter.patch(
+  "/refigerator/:id",
+  AdminAuthentication,
+  async (req, res) => {
+    const id = req.params.id;
+    const payload = req.body;
+    try {
+      const refigerator = await Refrigerator.findByIdAndUpdate(id, payload)
+        .lean()
+        .exec();
+      res.status(201).send("Product data updated!");
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
+);
+productsRouter.delete(
+  "/refigerator/:id",
+  AdminAuthentication,
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      const refigerator = await Refrigerator.findByIdAndDelete().lean().exec();
+      res.status(201).send("Data deleted successfully!");
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
+);
 
-productsRouter.post("/washingmachine", async (req, res) => {
+productsRouter.post(
+  "/washingmachine",
+  AdminAuthentication,
+  async (req, res) => {
+    try {
+      const washingmachine = await WashingMachine.create(req.body);
+      res.status(201).send("Data added successfully");
+    } catch (e) {
+      return res.status(500).send(e.message);
+    }
+  }
+);
+productsRouter.patch(
+  "/washingmachine/:id",
+  AdminAuthentication,
+  async (req, res) => {
+    const id = req.params.id;
+    const payload = req.body;
+    try {
+      const washingmachine = await TV.findByIdAndUpdate(id, payload)
+        .lean()
+        .exec();
+      res.status(201).send("Product data updated!");
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
+);
+productsRouter.delete(
+  "/washingmachine/:id",
+  AdminAuthentication,
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      const washingmachine = await WashingMachine.findByIdAndDelete(id)
+        .lean()
+        .exec();
+      res.status(201).send("Data deleted successfully!");
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
+);
+
+productsRouter.post("/laptop", AdminAuthentication, async (req, res) => {
   try {
-    const washingmachine = await WashingMachine.create(req.body);
+    const laptop = await Laptop.create(req.body);
     res.status(201).send("Data added successfully");
   } catch (e) {
     return res.status(500).send(e.message);
   }
 });
-
-productsRouter.post("/laptop", async (req, res) => {
+productsRouter.patch("/laptop/:id", AdminAuthentication, async (req, res) => {
+  const id = req.params.id;
+  const payload = req.body;
   try {
-    const laptop = await Laptop.insertMany(req.body);
-    res.status(201).send("Data added successfully");
-  } catch (e) {
-    return res.status(500).send(e.message);
+    const laptop = await Laptop.findByIdAndUpdate(id, payload).lean().exec();
+    res.status(201).send("Product data updated!");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+productsRouter.delete("/laptop/:id", AdminAuthentication, async (req, res) => {
+  const id = req.params.id;
+  try {
+    const laptop = await Laptop.findByIdAndDelete(id).lean().exec();
+    res.status(201).send("Data deleted successfully!");
+  } catch (err) {
+    res.status(500).send(err.message);
   }
 });
 
