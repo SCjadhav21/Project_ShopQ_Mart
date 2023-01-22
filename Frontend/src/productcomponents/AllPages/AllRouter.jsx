@@ -34,15 +34,15 @@ const AllRouter = () => {
 
 
             <Route path="/refrigerator" element={<CombinePageRafrigetor/>} />
-            <Route path="/refrigerator/refrigerator/:id" element={<SinglePageRator/>} />
+            <Route path="/refrigerator/:id" element={<SinglePageRator/>} />
 
 
             <Route path="/laptop" element={<CombineLap/>} />
-            <Route path="/laptop/laptop/:id" element={<SinglePageLaptop/>} />
+            <Route path="/laptop/:id" element={<SinglePageLaptop/>} />
 
             
-            <Route path="/washing" element={<CombineMachine/>} />
-            <Route path="/washing/washing/:id" element= 
+            <Route path="/washingmachine" element={<CombineMachine/>} />
+            <Route path="/washingmachine/:id" element= 
              {<SinglepageMachine/>} />
 
 

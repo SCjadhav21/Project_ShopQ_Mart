@@ -50,7 +50,7 @@ const LaptopProduct = () => {
         data.length>0 && data.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`laptop/${elem._id}`)}>
+         <div onClick={()=>navigate(`/laptop/${elem._id}`)}>
          <img src={elem.image}  alt="shirt" />
        
          </div>

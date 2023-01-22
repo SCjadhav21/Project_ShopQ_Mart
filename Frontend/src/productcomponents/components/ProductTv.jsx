@@ -76,7 +76,7 @@ export default function ProductTv() {
        TV.length>0 && TV.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`/${elem._id}`)}>
+         <div onClick={()=>navigate(`/tv/${elem._id}`)}>
          <img src={elem.image}  alt="shirt" width="100%" height="250px"/>
        
          </div>
