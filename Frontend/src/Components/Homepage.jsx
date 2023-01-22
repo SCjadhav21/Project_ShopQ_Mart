@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import Product from './Product/Product';
 import Ads from './Advertisement/Ads';
+import Footer from './Footer/Footer';
 
 const Homepage = () => {
   return (
@@ -9,6 +10,7 @@ const Homepage = () => {
         <Navbar/>
   <Ads/>
        <Product/>
+       <Footer/>
     </div>
   )
 }

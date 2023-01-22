@@ -1,3 +1,5 @@
+import Footer from "./Components/Footer/Footer";
+import Homepage from "./Components/Homepage";
 import AllRouter from "./productcomponents/AllPages/AllRouter";
 
 
@@ -5,12 +7,11 @@ import AllRouter from "./productcomponents/AllPages/AllRouter";
 function App() {
   return (
     <div className="App">
-<<<<<<< Updated upstream
-      <AllRouter />
-=======
+
+
+ <Homepage/>
  
-<AllRouter/>
->>>>>>> Stashed changes
+
     </div>
   );
 }

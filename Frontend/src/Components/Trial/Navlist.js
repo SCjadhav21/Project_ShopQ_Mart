@@ -15,7 +15,7 @@ const Navlist = () => {
           <ul className="dropdown">
          
             <li className="maintext">Smartphone</li>
-            <li onClick={() => navigate("/")}>
+            <li onClick={() => navigate("/refrigerator")}>
               i kall
             </li>
             <li>MI</li>
@@ -44,42 +44,43 @@ const Navlist = () => {
           MEN
           <ul className="dropdown">
             <li >
-              Apples & Peers
+              T-Shirt
             </li>
-            <li>Avocado, Peach, Plum</li>
-            <li>Banana,Melons & Coconut</li>
-            <li>Dates</li>
-            <li>Citrus, Mangoes & Graps</li>
-            <li>Cherries, Berries</li>
-            <li>Exotic Fruits</li>
-            <li>Seasonal & Minor Fruits</li>
+            <li>Shirt</li>
+            <li>Jeans</li>
+            <li>Cargos</li>
+            <li>Trousers</li>
+            <li>Track Pants</li>
+            <li>Jacket</li>
+            <li>Winter wear</li>
+            <li>Inner Sleepwear</li>
           </ul>
         </li>
         <li>
           WOMEN
           <ul className="dropdown">
-            <li >Kitchenware</li>
-            <li>Dining</li>
-            <li onClick={() => navigate("/electronicProducts")}>Electricals</li>
-            <li>Furniture</li>
-            <li>Home Appliances</li>
-            <li>Toys & Games</li>
-            <li>Disposable</li>
-            <li>Stationary</li>
+            <li >Saree</li>
+            <li>Kurta</li>
+            <li onClick={() => navigate("/electronicProducts")}>Lehnga</li>
+            <li>Tops & Teas</li>
+            <li>Skirts</li>
+            <li>Bra</li>
+            <li>Penties</li>
+            <li>Lingerie sets</li>
             <li>Garden</li>
-            <li>Pooja Needs</li>
+            <li>Shap wear</li>
           </ul>
         </li>
         <li>
           {/* <Link> */}
             HOME & KITCHEN
             <ul className="dropdown">
-              <li>Mens</li>
-              <li>Womens</li>
-              <li>Boys</li>
-              <li>Girls</li>
-              <li>Junior Boys</li>
-              <li>Infant</li>
+              <li>Dinner Set </li>
+              <li>Cookware</li>
+              <li>Container Sets</li>
+              <li>Kitchen tools</li>
+              <li>Lunch box</li>
+              <li>Share Food</li>
             </ul>
           {/* </Link> */}
         </li>
@@ -87,9 +88,9 @@ const Navlist = () => {
           {/* <Link> */}
             APPLIANCES
             <ul className="dropdown">
-              <li>Mobiles & Tablets</li>
-              <li>TV & speakers</li>
-              <li>Home Appliance</li>
+              <li >Mobiles & Tablets</li>
+              <li onClick={() => navigate("/tv")}>TV & speakers</li>
+              <li onClick={() => navigate("/refrigerator")}>Home Appliance</li>
               <li>Camera</li>
               <li>Kitchen Appliance</li>
               <li>Smart Devices</li>
@@ -123,8 +124,10 @@ const Navlist = () => {
         <li>
           OFFERS
           <ul className="dropdown">
-            <li>Fine Jwellery </li>
+            <li>All top OFFERS</li>
             <li>Jwellery</li>
+            <li>Cloths</li>
+            <li>Season Essentials</li>
           </ul>
         </li>
         <li>

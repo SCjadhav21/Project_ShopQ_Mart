@@ -5,6 +5,7 @@ import ShopQ from '../Resources/ShopQ.jpeg'
 import { Icon, createIcon,BellIcon,WarningIcon } from '@chakra-ui/icons'
 import Navlist from "./Trial/Navlist"
 import { useEffect } from 'react';
+import axios from 'axios';
 // import Product from './Product/Product';
 // import UncontrolledExample from './Banner/Banner';
 // import {images} from "./components/_data"
@@ -13,15 +14,32 @@ import { useEffect } from 'react';
 // import Ads from './Advertisement/Ads';
 
 const Navbar = () => {
+  const [userData, setUserData] = useState([]);
+  const [data,setData]=useState("")
 
-  const[data,setData]=useState("")
+
+
+  // const getuserdata = () => {
+  //   axios(`http://localhost:4500/users/`, {
+  //     method: "GET",
+  //     headers: {
+  //       "content-type": "application/json",
+  //       Authorization: localStorage.getItem("token"),
+  //     },
+  //   })
+  //     .then((res) => setUserData(res.data.data))
+  //     .catch((err) => console.error(err));
+  // };
+
+
+  
       
   
    
   const handleLogin =()=>{
      
     let token=localStorage.getItem('token')
-       token?setData('signout'):setData("Sign In")
+       token?setData("Logout"):setData("Sign In")
     }
     
     const handleLogout=()=>{
@@ -45,8 +63,8 @@ const Navbar = () => {
             </Box>
             <Box display={'flex'} w="20%"  margin="auto">
                 <Link display={'flex'} href='' ml={'20px'} textDecoration={'none'} color={'teal'}>
-                {/* <Text mt={'12px'} fontSize={'13px'} fontWeight={"500"}>Location</Text>
-                <Image w={'35px'} h={'30px'} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaR-Pzqjuoro9Sg7bw-y7D7ldTWMAd304Ij1sk03YWrNvA5Y2Puo8h7jgk4BrIODMjJ0&usqp=CAU"/> */}
+                <Text mt={'12px'} fontSize={'13px'} fontWeight={"500"}>Location</Text>
+                <Image w={'35px'} h={'30px'} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaR-Pzqjuoro9Sg7bw-y7D7ldTWMAd304Ij1sk03YWrNvA5Y2Puo8h7jgk4BrIODMjJ0&usqp=CAU"/>
                 </Link>
                 <Link>
                 <Button border={'none'} backgroundColor='transparent' ><BellIcon color={'teal'} w={'40px'} h={'25px'}/></Button>
