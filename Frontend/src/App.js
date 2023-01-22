@@ -1,19 +1,10 @@
-// import Cart from "./page/Cart"
-import Address from "./page/Address"
-import Cart from "./page/Cart"
-import Payment from "./page/Payment"
-import AllRouter from "./productcomponents/AllPages/AllRouter"
-
+import AllRouter from "./productcomponents/AllPages/AllRouter";
 
 function App() {
-
-
-  return(
+  return (
     <div className="App">
- 
-   <AllRouter />
-    
+      <AllRouter />
     </div>
-  )
+  );
 }
-export default App
+export default App;

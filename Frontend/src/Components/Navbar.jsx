@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import "./Homepage.css";
 import {Box, Button, Link,Input,Image, Text} from "@chakra-ui/react"
 import ShopQ from '../Resources/ShopQ.jpeg'
@@ -79,31 +79,51 @@ const Navbar = () => {
                 </Link>
             </Box>
         </Box>
-        <Navlist/>
-      <Box className='navbarpanel'>
-     
-        <Box id='navbar' >
-            <Link href='' className="navbutton">Time sales</Link>
-            <Link href='' className="navbutton">Flue Care</Link>
-            <Link href='' className="navbutton">Food & Beverage</Link>
-            <Link href='' className="navbutton">Personal Hygiene</Link>
-            <Link href='' className="navbutton">Home Cleaning</Link>
-            <Link href='' className="navbutton">Nutrition & Suplements</Link>
-            <Link href='' className="navbutton">Kitchen & Dining</Link>
-            <Link href='' className="navbutton"> Refurbished Mobiles</Link>
-            <Link href='' className="navbutton"> Mobile Accessories</Link>
+      </Box>
+      <Navlist />
+      <Box className="navbarpanel">
+        <Box id="navbar">
+          <Link href="" className="navbutton">
+            Time sales
+          </Link>
+          <Link href="" className="navbutton">
+            Flue Care
+          </Link>
+          <Link href="" className="navbutton">
+            Food & Beverage
+          </Link>
+          <Link href="" className="navbutton">
+            Personal Hygiene
+          </Link>
+          <Link href="" className="navbutton">
+            Home Cleaning
+          </Link>
+          <Link href="" className="navbutton">
+            Nutrition & Suplements
+          </Link>
+          <Link href="" className="navbutton">
+            Kitchen & Dining
+          </Link>
+          <Link href="" className="navbutton">
+            {" "}
+            Refurbished Mobiles
+          </Link>
+          <Link href="" className="navbutton">
+            {" "}
+            Mobile Accessories
+          </Link>
         </Box>
-        </Box>
-        {/* <Product/> */}
-        {/* <Box w={"50%"} maxW="3xl" mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
+      </Box>
+      {/* <Product/> */}
+      {/* <Box w={"50%"} maxW="3xl" mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
           <Gallery images={images}/>
         </Box> */}
 
-        {/* <UncontrolledExample/> */}
-       {/* <Ads/>
+      {/* <UncontrolledExample/> */}
+      {/* <Ads/>
        <Product/> */}
     </Box>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

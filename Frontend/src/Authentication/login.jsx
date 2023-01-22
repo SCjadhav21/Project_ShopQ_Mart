@@ -19,9 +19,10 @@ import {
   Show,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
+  const [home, setHome] = useState(false);
   const [navigate, setNavigate] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -53,6 +54,7 @@ const Login = () => {
           console.log(res);
           alert(res.data.msg);
           if (res.data.msg == "Login Successfull") {
+            console.log("data", res.data.token);
             localStorage.setItem("token", res.data.token);
             setNavigate(true);
           }
@@ -69,6 +71,9 @@ const Login = () => {
   useEffect(() => {
     onOpen();
   }, []);
+  if (home) {
+    return <Navigate to="/" />;
+  }
   if (navigate) {
     return <Navigate to="/" />;
   }
@@ -195,17 +200,17 @@ const Login = () => {
             </Show>
 
             <Box w={["100%", "100%", "70%"]}>
-              <ModalCloseButton />
+              <ModalCloseButton onClick={() => setHome(true)} />
               <ModalHeader p="0px 20px 0px 20px" display="flex" gap="10%">
                 <Text
                   borderBottom="2px solid #24a3b5"
                   color="#24a3b5"
                   padding="0 8px 8px"
                 >
-                  login
+                  Login
                 </Text>
                 <Text color="#24a3b5" padding="0 8px ">
-                  signup
+                  <Link to="/signup">Signup</Link>
                 </Text>
               </ModalHeader>
 
