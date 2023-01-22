@@ -19,17 +19,17 @@ const Navbar = () => {
 
 
 
-  // const getuserdata = () => {
-  //   axios(`http://localhost:4500/users/`, {
-  //     method: "GET",
-  //     headers: {
-  //       "content-type": "application/json",
-  //       Authorization: localStorage.getItem("token"),
-  //     },
-  //   })
-  //     .then((res) => setUserData(res.data.data))
-  //     .catch((err) => console.error(err));
-  // };
+  const getuserdata = ({token}) => {
+
+    return axios('http://localhost:4500/users/personalDetail', {
+       method: "GET",
+       headers: {
+         "content-type": "application/json",
+         Authorization: token,
+       },
+     })
+     
+   };
 
 
   
@@ -54,7 +54,7 @@ const Navbar = () => {
   
 
     return (
-    <Box backgroundColor={'rgb(239,247,250)'}>
+    <Box backgroundColor={'#ffffff'}>
         <Box display={'flex'} mt="1%" w={'100%'} mb="1%">
             <Box w={'25%'}><Image src={ShopQ} w={'180px'} ml="50px" /></Box>
             <Box display={'flex'} border={'1px solid grey'} borderRadius={'10px'} w={'48%'}  mt={"13px"}>
