@@ -1,8 +1,18 @@
 const express = require("express");
 const { Authentication } = require("../Middelware/authentication");
+const { AdminAuthentication } = require("../Middelware/adminauth");
 const Cart = require("../Models/cart.model");
 
 const cartRouter = express.Router();
+
+cartRouter.get("/allitems", AdminAuthentication, async (req, res) => {
+  try {
+    const cart = await Cart.find().lean().exec();
+    return res.status(200).send(cart);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 cartRouter.get("", Authentication, async (req, res) => {
   try {
@@ -42,6 +52,14 @@ cartRouter.patch("/:id", Authentication, async (req, res) => {
     return res.status(500).send(e.message);
   }
 });
+cartRouter.patch("/allitems/:id", AdminAuthentication, async (req, res) => {
+  try {
+    const cart = await Cart.findByIdAndUpdate(req.body.id).lean().exec();
+    return res.status(200).send("Data successfully updated!");
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 cartRouter.delete("/:id", Authentication, async (req, res) => {
   try {
@@ -49,6 +67,14 @@ cartRouter.delete("/:id", Authentication, async (req, res) => {
     return res.status(200).send("Data succesfully deleted!");
   } catch (e) {
     return res.status(500).send(e.message);
+  }
+});
+cartRouter.delete("/allitems/:id", AdminAuthentication, async (req, res) => {
+  try {
+    const cart = await Cart.findByIdAndDelete(req.params.id).lean().exec();
+    return res.status(200).send("Data successfully deleted!");
+  } catch (e) {
+    res.status(500).send(e.message);
   }
 });
 

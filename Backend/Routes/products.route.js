@@ -292,7 +292,9 @@ productsRouter.delete(
   async (req, res) => {
     const id = req.params.id;
     try {
-      const refigerator = await Refrigerator.findByIdAndDelete().lean().exec();
+      const refigerator = await Refrigerator.findByIdAndDelete(id)
+        .lean()
+        .exec();
       res.status(201).send("Data deleted successfully!");
     } catch (err) {
       res.status(500).send(err.message);
