@@ -10,7 +10,7 @@ const WasgingMachine = () => {
     const[data,setData]=useState([])
 
       useEffect(()=>{
-        axios.get("http://localhost:4500/products/washingmachine").then((res)=>{
+        axios.get("https://splendid-bear-cap.cyclic.app/washingmachine").then((res)=>{
             setData(res.data)
            
         })

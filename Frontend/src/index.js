@@ -4,13 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from "@chakra-ui/react";
+import {store} from "./productcomponents/Redux/store"
 
 import {Provider} from "react-redux";
-import {store} from "./Cart_REDUX/store"
+//import {store} from "./Cart_REDUX/store"
+
+
 
 import {BrowserRouter} from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
+  
   <BrowserRouter>
   <ChakraProvider>
    <Provider store={store}>

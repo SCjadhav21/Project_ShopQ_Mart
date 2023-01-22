@@ -5,7 +5,7 @@ import "./laptop.css"
  
 export const  getData= (sortdata)=>{
   
-  return axios.get(`http://localhost:4500/products/laptop`,sortdata)
+  return axios.get(`https://splendid-bear-cap.cyclic.app/products/laptop`,sortdata)
 
 }
 

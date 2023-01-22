@@ -36,7 +36,7 @@ import {
 
     const {id}=useParams()
     useEffect(()=>{
-        axios.get(`http://localhost:4500/products/laptop/${id}`).then((res)=>{
+        axios.get(`https://splendid-bear-cap.cyclic.app/products/laptop/${id}`).then((res)=>{
             setData(res.data)
             
         })
