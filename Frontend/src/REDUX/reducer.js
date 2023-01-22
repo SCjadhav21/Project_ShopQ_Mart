@@ -8,6 +8,7 @@ import {
 
  const initailState={
     cart:[],
+    cartItem:0,
     isLoading:false,
     isError:false
  }
@@ -21,7 +22,7 @@ import {
             
             
             case  GET_CART_SUCCESS:  
-                return{...oldstate,isLoading:false,cart:payload}
+                return{...oldstate,isLoading:false,cart:payload,cartItem:payload.length}
                 
              
             case  GET_CART_ERROR:  
@@ -35,4 +36,4 @@ import {
         }
  }
 
-export  default Cartreducer
+export  {Cartreducer}
