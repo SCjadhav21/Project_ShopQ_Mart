@@ -65,7 +65,7 @@ const Signup = () => {
       } else if (data.mobile.length != 10) {
         alert("mobile number length should be 10");
       } else {
-        axios("http://localhost:4500/users/register", {
+        axios("https://splendid-bear-cap.cyclic.app/users/register", {
           method: "POST",
           data: data,
           headers: {

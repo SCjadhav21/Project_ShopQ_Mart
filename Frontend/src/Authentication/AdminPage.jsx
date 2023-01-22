@@ -162,7 +162,7 @@ const AdminPage = () => {
   // All get methods
 
   const getuserdata = () => {
-    axios(`http://localhost:4500/users/`, {
+    axios(`https://splendid-bear-cap.cyclic.app/users/`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -175,7 +175,7 @@ const AdminPage = () => {
   };
 
   const getTvData = () => {
-    axios(`http://localhost:4500/products/tv`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/tv`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -187,7 +187,7 @@ const AdminPage = () => {
   };
 
   const getRefrigeratorData = () => {
-    axios(`http://localhost:4500/products/refrigerator`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/refrigerator`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -198,7 +198,7 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
   const getWashingmachineData = () => {
-    axios(`http://localhost:4500/products/washingmachine`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/washingmachine`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -210,7 +210,7 @@ const AdminPage = () => {
   };
 
   const getLaptopData = () => {
-    axios(`http://localhost:4500/products/laptop`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/laptop`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -243,7 +243,7 @@ const AdminPage = () => {
   const handelRefrigeratorEdit = (id) => {
     let edit = { [editKey]: editValue };
 
-    axios(`http://localhost:4500/products/refigerator/${id}`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/refigerator/${id}`, {
       method: "PATCH",
       data: edit,
       headers: {
@@ -260,14 +260,17 @@ const AdminPage = () => {
   const handelWashingmachineEdit = (id) => {
     let edit = { [editKey]: editValue };
 
-    axios(`http://localhost:4500/products/washingmachine/${id}`, {
-      method: "PATCH",
-      data: edit,
-      headers: {
-        "content-type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-    })
+    axios(
+      `https://splendid-bear-cap.cyclic.app/products/washingmachine/${id}`,
+      {
+        method: "PATCH",
+        data: edit,
+        headers: {
+          "content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => {
         alert(res.data);
         getWashingmachineData();
@@ -277,7 +280,7 @@ const AdminPage = () => {
   const handelLaptopEdit = (id) => {
     let edit = { [editKey]: editValue };
 
-    axios(`http://localhost:4500/products/laptop/${id}`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/laptop/${id}`, {
       method: "PATCH",
       data: edit,
       headers: {
@@ -294,7 +297,7 @@ const AdminPage = () => {
   const handelTvEdit = (id) => {
     let edit = { [editKey]: editValue };
 
-    axios(`http://localhost:4500/products/tv/${id}`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/tv/${id}`, {
       method: "PATCH",
       data: edit,
       headers: {
@@ -315,7 +318,7 @@ const AdminPage = () => {
     if (editKey == "mobile" && editValue.length !== 10) {
       alert("mobile length must be 10");
     } else {
-      axios(`http://localhost:4500/users/${id}`, {
+      axios(`https://splendid-bear-cap.cyclic.app/users/${id}`, {
         method: "PATCH",
         data: edit,
         headers: {
@@ -333,7 +336,7 @@ const AdminPage = () => {
 
   // All Delete functions
   const handelTvDelete = (id) => {
-    axios(`http://localhost:4500/products/tv/${id}`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/tv/${id}`, {
       method: "DELETE",
 
       headers: {
@@ -348,7 +351,7 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
   const handelLaptopDelete = (id) => {
-    axios(`http://localhost:4500/products/laptop/${id}`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/laptop/${id}`, {
       method: "DELETE",
 
       headers: {
@@ -363,8 +366,7 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
   const handelRefrigeratorDelete = (id) => {
-    console.log(id);
-    axios(`http://localhost:4500/products/refigerator/${id}`, {
+    axios(`https://splendid-bear-cap.cyclic.app/products/refigerator/${id}`, {
       method: "DELETE",
 
       headers: {
@@ -374,19 +376,22 @@ const AdminPage = () => {
     })
       .then((res) => {
         alert(res.data);
-        getuserdata();
+        getRefrigeratorData();
       })
       .catch((err) => console.error(err));
   };
   const handelWashingmachineDelete = (id) => {
-    axios(`http://localhost:4500/products/washingmachine/${id}`, {
-      method: "DELETE",
+    axios(
+      `https://splendid-bear-cap.cyclic.app/products/washingmachine/${id}`,
+      {
+        method: "DELETE",
 
-      headers: {
-        "content-type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-    })
+        headers: {
+          "content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => {
         alert(res.data);
         getuserdata();
@@ -394,7 +399,7 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
   const handelUserDelete = (id) => {
-    axios(`http://localhost:4500/users/${id}`, {
+    axios(`https://splendid-bear-cap.cyclic.app/users/${id}`, {
       method: "DELETE",
 
       headers: {
@@ -627,7 +632,7 @@ const AdminPage = () => {
     e.preventDefault();
     // console.log(productsAddData);
 
-    axios("http://localhost:4500/products/tv", {
+    axios("https://splendid-bear-cap.cyclic.app/products/tv", {
       method: "POST",
       data: productsAddData,
       headers: {
@@ -646,7 +651,7 @@ const AdminPage = () => {
   const handelRefrigeratorAddSubmit = (e) => {
     e.preventDefault();
 
-    axios("http://localhost:4500/products/refrigerator", {
+    axios("https://splendid-bear-cap.cyclic.app/products/refrigerator", {
       method: "POST",
       data: refrigeratorAddData,
       headers: {
@@ -670,7 +675,7 @@ const AdminPage = () => {
     } else if (userAddData.mobile.length !== 10) {
       alert("mobile must be 10 characters");
     } else {
-      axios("http://localhost:4500/users/register", {
+      axios("https://splendid-bear-cap.cyclic.app/users/register", {
         method: "POST",
         data: userAddData,
         headers: {
