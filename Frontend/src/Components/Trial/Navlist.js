@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import "./Styles.css";
 import { useNavigate } from "react-router-dom";
-import { Image,Text } from "@chakra-ui/react";
+import { Image,Text,Box } from "@chakra-ui/react";
 
 const Navlist = () => {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ const Navlist = () => {
         <li>
           MOBILES & MORE
           <ul className="dropdown">
+         
             <li className="maintext">Smartphone</li>
             <li onClick={() => navigate("/")}>
               i kall
