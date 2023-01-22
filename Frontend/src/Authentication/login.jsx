@@ -42,7 +42,7 @@ const Login = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      axios("http://localhost:4500/users/login", {
+      axios("https://splendid-bear-cap.cyclic.app/users/login", {
         method: "POST",
         data: data,
         headers: {
