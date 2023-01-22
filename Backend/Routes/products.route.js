@@ -246,7 +246,7 @@ productsRouter.patch("/tv/:id", AdminAuthentication, async (req, res) => {
   const id = req.params.id;
   const payload = req.body;
   try {
-    const tv = await TV.findByIdAndUpdate(id, payload);
+    const tv = await TV.findByIdAndUpdate(id, payload).lean().exec();
     res.status(201).send("Product data updated!");
   } catch (err) {
     res.status(500).send(err.message);
@@ -255,7 +255,7 @@ productsRouter.patch("/tv/:id", AdminAuthentication, async (req, res) => {
 productsRouter.delete("/tv/:id", AdminAuthentication, async (req, res) => {
   const id = req.params.id;
   try {
-    const tv = await TV.findByIdAndDelete(id);
+    const tv = await TV.findByIdAndDelete(id).lean().exec();
     res.status(201).send("Data deleted successfully!");
   } catch (err) {
     res.status(500).send(err.message);
@@ -277,7 +277,9 @@ productsRouter.patch(
     const id = req.params.id;
     const payload = req.body;
     try {
-      const refigerator = await Refrigerator.findByIdAndUpdate(id, payload);
+      const refigerator = await Refrigerator.findByIdAndUpdate(id, payload)
+        .lean()
+        .exec();
       res.status(201).send("Product data updated!");
     } catch (err) {
       res.status(500).send(err.message);
@@ -290,7 +292,7 @@ productsRouter.delete(
   async (req, res) => {
     const id = req.params.id;
     try {
-      const refigerator = await Refrigerator.findByIdAndDelete(id);
+      const refigerator = await Refrigerator.findByIdAndDelete().lean().exec();
       res.status(201).send("Data deleted successfully!");
     } catch (err) {
       res.status(500).send(err.message);
@@ -317,7 +319,9 @@ productsRouter.patch(
     const id = req.params.id;
     const payload = req.body;
     try {
-      const washingmachine = await TV.findByIdAndUpdate(id, payload);
+      const washingmachine = await TV.findByIdAndUpdate(id, payload)
+        .lean()
+        .exec();
       res.status(201).send("Product data updated!");
     } catch (err) {
       res.status(500).send(err.message);
@@ -330,7 +334,9 @@ productsRouter.delete(
   async (req, res) => {
     const id = req.params.id;
     try {
-      const washingmachine = await WashingMachine.findByIdAndDelete(id);
+      const washingmachine = await WashingMachine.findByIdAndDelete(id)
+        .lean()
+        .exec();
       res.status(201).send("Data deleted successfully!");
     } catch (err) {
       res.status(500).send(err.message);
@@ -340,7 +346,7 @@ productsRouter.delete(
 
 productsRouter.post("/laptop", AdminAuthentication, async (req, res) => {
   try {
-    const laptop = await Laptop.insertMany(req.body);
+    const laptop = await Laptop.create(req.body);
     res.status(201).send("Data added successfully");
   } catch (e) {
     return res.status(500).send(e.message);
@@ -350,7 +356,7 @@ productsRouter.patch("/laptop/:id", AdminAuthentication, async (req, res) => {
   const id = req.params.id;
   const payload = req.body;
   try {
-    const laptop = await Laptop.findByIdAndUpdate(id, payload);
+    const laptop = await Laptop.findByIdAndUpdate(id, payload).lean().exec();
     res.status(201).send("Product data updated!");
   } catch (err) {
     res.status(500).send(err.message);
@@ -359,7 +365,7 @@ productsRouter.patch("/laptop/:id", AdminAuthentication, async (req, res) => {
 productsRouter.delete("/laptop/:id", AdminAuthentication, async (req, res) => {
   const id = req.params.id;
   try {
-    const laptop = await Laptop.findByIdAndDelete(id);
+    const laptop = await Laptop.findByIdAndDelete(id).lean().exec();
     res.status(201).send("Data deleted successfully!");
   } catch (err) {
     res.status(500).send(err.message);
