@@ -30,16 +30,18 @@ import {
          type:GET_SHIRT_ERROR
     }
  } 
- 
-     const getShirt=(params)=>(dispatch)=>{
+ //http://localhost:4500/products/tv
+
+ const getShirt=(params)=>(dispatch)=>{
     
       
-          dispatch(getShirtRequest())
-          return axios.get("http://localhost:4500/products/tv",params)
-          .then((res)=>{dispatch(getShirtSuccess(res.data))
-      
-           }).catch((err)=>dispatch(getShirtError()))
- }
+   dispatch(getShirtRequest())
+   return axios.get("https://splendid-bear-cap.cyclic.app/products/tv",params)
+   .then((res)=>{dispatch(getShirtSuccess(res.data))
+
+    }).catch((err)=>dispatch(getShirtError()))
+}
+
  
 
  export {getShirt}

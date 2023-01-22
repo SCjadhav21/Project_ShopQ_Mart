@@ -10,41 +10,60 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function ProductTv() {
 
-  const shirt=useSelector(store=>store.shirt)
+  const TV=useSelector(store=>store.TV)
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const location=useLocation()
   const[searchParams]=useSearchParams()
  
+//  if(TV.length===0){
+     
+
+    //   // const sort=searchParams.get("sort")
+    //   // const getTVparams={
+    //   //       params:{
+    //   //         discount:searchParams.getAll("discount"),
+    //   //         sort:sort &&"price",
+    //   //         order:sort
+    //   //       }
+    //   // }
+
+
+    //   dispatch(getShirt())
+
+      
+    //  }
+
  
 
-  useEffect(()=>{
-     if(location||shirt.length===0){
-      const sort=searchParams.get("sort")
-      let  company=searchParams.getAll("brand")
-     
+    useEffect(()=>{
+      if(location||TV.length===0){
+       const sort=searchParams.get("sort")
+       let  company=searchParams.getAll("brand")
       
-    
-      const getTVparams={
-         
-         
-
-            params:{
+       
+     
+       const getTVparams={
+          
+          
+ 
+             params:{
+              
+               discount:searchParams.getAll("discount"),
+               brand:company[company.length-1],
              
-              discount:searchParams.getAll("discount"),
-              brand:company[company.length-1],
-            
-              sort:sort &&"price",
-              order:sort
-            }
+               sort:sort &&"price",
+               order:sort
+             }
+       }
+ 
+ 
+       dispatch(getShirt(getTVparams))
+ 
+ 
       }
-
-
-      dispatch(getShirt(getTVparams))
-
-
-     }
-  },[dispatch,shirt.length,location])
+   },[dispatch,TV.length,location])
+ 
 
     
 
@@ -54,19 +73,19 @@ export default function ProductTv() {
     
    <div className='ProductCss'>
      {
-       shirt.length>0 && shirt.map((elem)=>(
+       TV.length>0 && TV.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`/${elem._id}`)} >
-         <img src={elem.image}  alt="shirt" width="100%" />
+         <div onClick={()=>navigate(`/tv/${elem._id}`)}>
+         <img src={elem.image}  alt="shirt" width="100%" height="250px"/>
        
          </div>
           
-         <h1 className='productname'>{elem.product_name} </h1>
-         <h1 className='productname'>{elem.brand}</h1>
-         <h1  className='productname'>MRP:{elem.mrp} </h1>
-         <h1 className='ratingcsss'>Discount:{elem.discount} </h1>
-         <h1   className='productname'>Price:{elem.price} </h1>
+         <h1>{elem.product_name} </h1>
+         <h1>{elem.brand}</h1>
+         <h1>MRP:{elem.mrp} </h1>
+         <h1 className='discountcss'>Discount:{elem.discount} </h1>
+         <h1>Price:{elem.price} </h1>
          <h1 className='ratingcsss'>{"Rating :"}{elem.rating}</h1>
         
          

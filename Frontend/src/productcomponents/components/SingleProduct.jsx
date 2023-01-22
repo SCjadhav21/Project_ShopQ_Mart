@@ -29,22 +29,22 @@ import {
   
   export default function Simple() {
 
-    const navigate=useNavigate()
+  
      
     
     const[data,setData]=useState([])
 
     const {id}=useParams()
     useEffect(()=>{
-        axios.get(`http://localhost:4500/products/tv/${id}`).then((res)=>{
+        axios.get(`https://splendid-bear-cap.cyclic.app/products/tv/${id}`).then((res)=>{
             setData(res.data)
             // console.log(res.data)
         })
-    },[])
+    },[id])
  
     const handleCart=(payload)=>{
       
-      axios(`http://localhost:4500/cart`,{
+      axios(`https://splendid-bear-cap.cyclic.app/cart`,{
         method:"POST",
         data:payload,
         headers:{
@@ -56,18 +56,6 @@ import {
       }).then((res)=>alert("Product is Added successfully"))
 
 
-      // {
-      //   product_name: { type: String, required: true },
-      //   image: { type: String, required: true },
-      //   price: { type: Number, required: true },
-      //   shipping: { type: String, required: true },
-      //   quantity: { type: Number, default: 1, min: 1 },
-      //   userId: {
-      //     type: mongoose.Schema.Types.ObjectId,
-      //     ref: "user",
-      //     required: true,
-      //   },
-      // },
     }
 
 
