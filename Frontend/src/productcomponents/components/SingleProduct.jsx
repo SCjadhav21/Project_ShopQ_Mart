@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 
 
@@ -29,18 +29,34 @@ import {
   
   export default function Simple() {
 
+  
+     
     
     const[data,setData]=useState([])
 
     const {id}=useParams()
     useEffect(()=>{
-        axios.get(`http://localhost:4500/products/tv/${id}`).then((res)=>{
+        axios.get(`https://splendid-bear-cap.cyclic.app/products/tv/${id}`).then((res)=>{
             setData(res.data)
             // console.log(res.data)
         })
-    },[])
+    },[id])
  
-    console.log(data)
+    const handleCart=(payload)=>{
+      
+      axios(`https://splendid-bear-cap.cyclic.app/cart`,{
+        method:"POST",
+        data:payload,
+        headers:{
+          "content-type":"application/json",
+          Authorization:localStorage.getItem("token")
+          
+        }
+        
+      }).then((res)=>alert("Product is Added successfully"))
+
+
+    }
 
 
     return (
@@ -183,10 +199,10 @@ import {
               _hover={{
                 transform: 'translateY(2px)',
                 boxShadow: 'lg',
-              }}>
+              }}   onClick={()=>handleCart(data)}>
               Add to cart
             </Button>
-  
+             
             <Stack direction="row" alignItems="center" justifyContent={'center'}>
               <MdLocalShipping />
               <Text>2-3 business days delivery</Text>

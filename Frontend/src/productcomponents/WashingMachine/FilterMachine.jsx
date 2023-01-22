@@ -1,32 +1,15 @@
 import React from 'react'
 
 const FilterMachine = () => {
+
+  
   return (
     <div style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
     <div>
     <h1>FILTER COMPONENT</h1>
     </div>
 
-           <div>
-        <h1>Price</h1>
-        <div >
-        <input 
-        type="checkbox"/>
-       <label>Rs. 10000 - Rs. 19000 (10)</label>
-      
-        </div>
-        <div>
-        <input 
-        type="checkbox"
-       
-      
-       />
-       <label>Rs. 19000 and Above (17)</label>
-      
-        </div>
-           </div>
-            <br/>
-            <hr/>
+          
        
     
 

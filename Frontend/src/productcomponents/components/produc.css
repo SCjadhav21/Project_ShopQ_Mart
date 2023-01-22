@@ -4,24 +4,55 @@
     grid-template-columns: repeat(3,1fr);
     gap: 10px;
    
+   
+   
 }
 
 .onlycartcss{
    
     text-align: left;
     padding: 10px;
+    
+}
+.onlycartcss img{
+    height: 200px;
 }
 
 .onlycartcss:hover{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border: 1px solid #24A6BA;
+    border: 1px solid hwb(188 9% 44%);
 }
 
 .discountcss{
     color: #24A6BA ;
     font-weight: 800px;
+    font-size: 18px;
 }
 
 .ratingcsss{
     color: orangered;
+}
+
+
+.filtercss{
+    width: 20%;
+    font-size: 16px;
+}
+
+
+
+
+.productname{
+    font-size: 16px;
+    font-weight: 200px;
+    color: grey;
+}
+
+.inputbox{
+   padding-left:15px;
+   font-size: 16px;
+}
+.inputbox  input{
+  width: 10%;
+  color: gray;
 }

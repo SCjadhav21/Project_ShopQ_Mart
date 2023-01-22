@@ -10,27 +10,60 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function ProductTv() {
 
-  const shirt=useSelector(store=>store.shirt)
+  const TV=useSelector(store=>store.TV)
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const location=useLocation()
   const[searchParams]=useSearchParams()
-  console.log(shirt)
+ 
+//  if(TV.length===0){
+     
+
+    //   // const sort=searchParams.get("sort")
+    //   // const getTVparams={
+    //   //       params:{
+    //   //         discount:searchParams.getAll("discount"),
+    //   //         sort:sort &&"price",
+    //   //         order:sort
+    //   //       }
+    //   // }
+
+
+    //   dispatch(getShirt())
+
+      
+    //  }
+
  
 
-  useEffect(()=>{
-     if(location||shirt.length===0){
-      const sort=searchParams.get("sort")
-      const getTVparams={
-            params:{
-              discount:searchParams.getAll("discount"),
-              sort:sort &&"price",
-              order:sort
-            }
+    useEffect(()=>{
+      if(location||TV.length===0){
+       const sort=searchParams.get("sort")
+       let  company=searchParams.getAll("brand")
+      
+       
+     
+       const getTVparams={
+          
+          
+ 
+             params:{
+              
+               discount:searchParams.getAll("discount"),
+               brand:company[company.length-1],
+             
+               sort:sort &&"price",
+               order:sort
+             }
+       }
+ 
+ 
+       dispatch(getShirt(getTVparams))
+ 
+ 
       }
-      dispatch(getShirt(getTVparams))
-     }
-  },[dispatch,shirt.length,location])
+   },[dispatch,TV.length,location])
+ 
 
     
 
@@ -40,10 +73,10 @@ export default function ProductTv() {
     
    <div className='ProductCss'>
      {
-       shirt.length>0 && shirt.map((elem)=>(
+       TV.length>0 && TV.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`/${elem._id}`)}>
+         <div onClick={()=>navigate(`/tv/${elem._id}`)}>
          <img src={elem.image}  alt="shirt" width="100%" height="250px"/>
        
          </div>

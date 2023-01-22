@@ -26,7 +26,7 @@ import {
     List,
     ListItem,
   } from '@chakra-ui/react';
-  import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+  
   import { MdLocalShipping } from 'react-icons/md';
   
   export default function SinglePageLaptop() {
@@ -36,13 +36,13 @@ import {
 
     const {id}=useParams()
     useEffect(()=>{
-        axios.get(`http://localhost:4500/products/laptop/${id}`).then((res)=>{
+        axios.get(`https://splendid-bear-cap.cyclic.app/products/laptop/${id}`).then((res)=>{
             setData(res.data)
-            console.log(res.data)
+            
         })
     },[])
  
-    console.log(data)
+    
 
 
     return (

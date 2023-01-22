@@ -1,12 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import "./refrigerator.css"
 
 const  getData= (sortdata)=>{
   
-  return axios.get(`http://localhost:4500/products/refrigerator`,sortdata)
+  return axios.get(`https://splendid-bear-cap.cyclic.app/products/refrigerator`,sortdata)
 
 }
 
@@ -15,29 +15,33 @@ const Refrigerator = () => {
     const navigate=useNavigate()
 
     const[data,setData]=useState([])
+
     const[searchParams]=useSearchParams()
+     const location=useLocation()
 
-
+   
     const sort=searchParams.get("sort")
-    useEffect(()=>{
-     
-      const getTVparams={
-            params:{
-              discount:searchParams.getAll("discount"),
-              sort:sort &&"price",
-              order:sort
-            }
-      }
-    
-    
-      getData(getTVparams).then((res)=>{
-        setData(res.data)
-        console.log(res.data)
-      })
+      useEffect(()=>{
+       
+        const getTVparams={
+              params:{
+                discount:searchParams.getAll("discount"),
+                sort:sort &&"price",
+                order:sort
+              }
+        }
       
-     
-         
-    },[sort])
+      
+        getData(getTVparams).then((res)=>{
+          setData(res.data)
+          
+        })
+        
+       
+           
+      },[sort,location,searchParams])
+
+
 
 
      
@@ -51,8 +55,8 @@ const Refrigerator = () => {
         data.length>0 && data.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`refrigerator/${elem._id}`)}>
-         <img src={elem.image}  alt="shirt" />
+         <div onClick={()=>navigate(`/refrigerator/${elem._id}`)}>
+         <img src={elem.image}  alt="shirt"  />
        
          </div>
           

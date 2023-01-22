@@ -36,13 +36,13 @@ import {
 
     const {id}=useParams()
     useEffect(()=>{
-        axios.get(`http://localhost:4500/products/washingmachine/${id}`).then((res)=>{
+        axios.get(`https://splendid-bear-cap.cyclic.app/products/washingmachine/${id}`).then((res)=>{
             setData(res.data)
-            console.log(res.data)
+           
         })
     },[])
  
-    console.log(data)
+    
 
 
     return (

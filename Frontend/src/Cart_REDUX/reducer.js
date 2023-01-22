@@ -14,7 +14,7 @@ import {
  }
 
 
- const reducer=(oldstate=initailState,action)=>{
+ const Cartreducer=(oldstate=initailState,action)=>{
         const {type,payload}=action
         switch (type) {
             case GET_CART_REQUEST:
@@ -36,4 +36,4 @@ import {
         }
  }
 
-export {reducer}
+export  default Cartreducer

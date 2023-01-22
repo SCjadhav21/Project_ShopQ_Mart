@@ -12,13 +12,16 @@ const Filter = () => {
 
    const[searchParams,setSearchParams]=useSearchParams()
 
-  const initialCategory=searchParams.getAll("discount")
+  // const initialCategory=searchParams.getAll("discount")
   
   const initialSort=searchParams.getAll("sort")
+  
 
-  const[discount,setDiscount]=useState(initialCategory||[])
+  const[discount,setDiscount]=useState([])
 
   const[sort,setSort]=useState(initialSort[0]||"")
+
+  const[brand,setBrand]=useState([])
 
 
 
@@ -48,23 +51,42 @@ const Filter = () => {
 
  }
 
+ const handleFitterBrand=(e)=>{
+
+  const newBrand=[...brand]
+
+  if(newBrand.includes(e.target.value)){
+    // remove it
+    newBrand.splice(newBrand.indexOf(e.target.value),1)
+
+  }else{
+    newBrand.push(e.target.value)
+
+  }
+
+
+  setBrand(newBrand)
+
+ }
+
 
  useEffect(()=>{
   let obj={}
   obj.discount=discount
+   brand && ( obj.brand=brand)
   sort && (obj.sort=sort);
   
-  console.log(obj)
+  
   setSearchParams(obj)
 
- },[discount,setSearchParams,sort])
+ },[discount,setSearchParams,sort,brand])
 
  
 
 
   return (
-    <div style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
-<h1>FILTER COMPONENT</h1>
+    <div  className='filtercss'>
+         <h1>FILTER COMPONENT</h1>
         <div >
           
           
@@ -80,13 +102,13 @@ const Filter = () => {
 
             {/* discount */}
 
-
-                <div>
-                  <h1>Discount</h1>
-
+            <h1>Discount</h1>
+                <div  className='inputbox'>
+                 
+               
 
                   
-                  <div>
+                  <div >
                               <input 
                               type="checkbox"
                               value="4%"
@@ -163,10 +185,68 @@ const Filter = () => {
                 <hr/>
 
 
-      {/* rating */}
+                <h1>Brand</h1>
+                <div  className='inputbox'>
+                 
+               
 
-      <div>
-                  <h1>Product Rating</h1>
+                  
+                  <div >
+                              <input 
+                              type="checkbox"
+                              value="TCL"
+                              //checked={discount.includes("TCL")}
+                              onChange={handleFitterBrand}
+                            
+                            
+                            />
+                            <label> TCL</label>
+                
+                  </div>
+                      <div>
+                            <input 
+                            type="checkbox"
+                            value="LG"
+                            //checked={discount.includes("LG")}
+                            onChange={handleFitterBrand}
+                          
+                        
+                            />
+                            <label> LG</label>
+                    
+                      </div>
+
+                  <div>
+                          <input 
+                          type="checkbox"
+                          value="Sony"
+                          //checked={discount.includes("Sony")}
+                          onChange={handleFitterBrand}
+                        
+                        
+                        />
+                        <label> Sony</label>
+                
+                  </div>
+
+                  
+                
+
+
+
+
+
+
+
+                </div>
+                <br/>
+                <hr/>          
+
+
+      {/* rating */}
+      <h1>Product Rating</h1>
+      <div   className='inputbox'>
+                 
                   <div>
                   <input 
                   type="checkbox"
@@ -231,7 +311,7 @@ const Filter = () => {
 
            
         <h1>SORT COMPONENT</h1>
-           <div onClick={HandleSort}>
+           <div onClick={HandleSort}  className='inputbox'>
               <input type="radio"  value="asc" name="sort"
                 defaultChecked={sort==="asc"}
               />

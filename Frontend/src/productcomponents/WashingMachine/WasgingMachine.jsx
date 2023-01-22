@@ -10,9 +10,9 @@ const WasgingMachine = () => {
     const[data,setData]=useState([])
 
       useEffect(()=>{
-        axios.get("http://localhost:4500/products/washingmachine").then((res)=>{
+        axios.get("https://splendid-bear-cap.cyclic.app/products/washingmachine").then((res)=>{
             setData(res.data)
-            console.log(res.data)
+           
         })
          
            
@@ -24,7 +24,7 @@ const WasgingMachine = () => {
         data.length>0 && data.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
-         <div onClick={()=>navigate(`machine/${elem._id}`)}>
+         <div onClick={()=>navigate(`/washingmachine/${elem._id}`)}>
          <img src={elem.image}  alt="shirt" />
        
          </div>

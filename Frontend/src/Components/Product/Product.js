@@ -705,7 +705,7 @@ const Product = () => {
         </Box>
 
        
-      <Center>
+      <Center mb={'50px'}>
         <main id="trend" >
           <section>
             <div class="slide">

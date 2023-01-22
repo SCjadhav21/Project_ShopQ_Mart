@@ -5,7 +5,7 @@ import ProductTv from './ProductTv'
 
 const TVmain = () => {
   return (
-    <div style={{display:"flex"}}>
+    <div style={{display:"flex",gap:"5px"}}>
   
     <Filter/>
     <ProductTv/>
