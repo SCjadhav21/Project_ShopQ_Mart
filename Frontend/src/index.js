@@ -4,10 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from "@chakra-ui/react";
-import {store} from "./productcomponents/Redux/store"
-
+import {store} from "./REDUX/store";
 import {Provider} from "react-redux";
-//import {store} from "./Cart_REDUX/store"
+
 
 
 

@@ -12,7 +12,7 @@ import {
   import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import {getcartSuccess,getcartError,getcartRequest} from "../Cart_REDUX/action"
+import {getcartSuccess,getcartError,getcartRequest} from "../REDUX/action"
 // import {getData} from '../Cart_REDUX/action'
 
   const getData=()=>{

@@ -36,4 +36,4 @@ import {
         }
  }
 
-export  default Cartreducer
+export  {Cartreducer}

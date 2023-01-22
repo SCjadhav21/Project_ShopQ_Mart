@@ -2,7 +2,7 @@ import { Flex, FormLabel, Select, useColorModeValue as mode, useColorModeValue, 
 import axios from "axios";
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { getcartError, getcartRequest, getcartSuccess } from '../../Cart_REDUX/action';
+import { getcartError, getcartRequest, getcartSuccess } from '../../REDUX/action';
 
 const Update=(id,e)=>{
   const payload={"quantity":`${e}`};

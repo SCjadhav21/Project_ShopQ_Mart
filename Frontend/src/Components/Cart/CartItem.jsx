@@ -4,7 +4,7 @@ import { formatPrice } from './PriceTag';
 import { CartProductMeta } from './CartProductMeta';
 import { QuantitySelect } from './QuantitySelect';
 import axios from 'axios';
-import { getcartError, getcartRequest, getcartSuccess } from '../../Cart_REDUX/action';
+import { getcartError, getcartRequest, getcartSuccess } from '../../REDUX/action';
 import { useDispatch, useSelector } from 'react-redux';
 
 const onClickDelete=(_id)=>{
@@ -16,7 +16,7 @@ const onClickDelete=(_id)=>{
     return axios.get('http://localhost:4500/cart', { headers: {"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NiOWNjNTVmZjQ4NzQ0ZWZmMzdjMzAiLCJpYXQiOjE2NzQyODgzNjZ9.AyPui0HUid4sDEoUyZ_qfNzPVxd-5QQc_Cpd4ZHptZQ" }} )
   }
 export const CartItem = (props) => {
-    const { isBestSeller, image, isInStock, _id,  onChangeQuantity, onClickSaveForLater, price, locale, currency, quantity,product_name,shipping } = props;
+    const { isBestSeller, image, isInStock, _id, onClickSaveForLater, price, locale, currency, quantity,product_name,shipping } = props;
    const dispatch = useDispatch()
    const handleGet=()=>{
     dispatch(getcartRequest())

@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { formatPrice } from './PriceTag';
-import { getcartError, getcartRequest, getcartSuccess } from '../../Cart_REDUX/action';
+import { getcartError, getcartRequest, getcartSuccess } from '../../REDUX/action';
 import { useDispatch } from 'react-redux';
 const OrderSummaryItem = (props) => {
     const { label, value, children } = props;
@@ -64,7 +64,7 @@ export const CartOrderSummary = () => {
         </Flex>
       </Stack>
     </Stack>
-    <Button color="#fff" bgGradient="linear(0deg,#ff934b 0%,#ff5e62 100%)" size="lg" fontSize="md">
+    <Button color="#fff" bgGradient="linear(0deg,#ff934b 0%,#ff5e62 100%)" size="lg" fontSize="md" _hover={{"color":"#24a3b2", "bg":"#c0feff"}}>
       Checkout
     </Button>
   </Stack>
