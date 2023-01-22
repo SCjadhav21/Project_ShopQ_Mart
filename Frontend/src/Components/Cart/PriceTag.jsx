@@ -10,7 +10,8 @@ export function formatPrice(value, opts = {}) {
     return formatter.format(value);
 }
 export const PriceTag = (props) => {
-    const { price, currency, salePrice, rootProps, priceProps, salePriceProps } = props;
+  const { price, currency, salePrice, rootProps, priceProps, salePriceProps } = props;
+    
     return (<HStack spacing="1" {...rootProps}>
       <Price isOnSale={!!salePrice} textProps={priceProps}>
         {formatPrice(price, { currency })}

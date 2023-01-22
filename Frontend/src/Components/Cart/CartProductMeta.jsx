@@ -2,7 +2,7 @@ import { Badge, Box, HStack, Icon, Image, Stack, Text, useColorModeValue as mode
 import * as React from 'react';
 import { HiCheckCircle } from 'react-icons/hi';
 export const CartProductMeta = (props) => {
-    const { isBestSeller, image, title, variants, isInStock } = props;
+    const { isBestSeller, image, title, shipping, isInStock } = props;
     return (<Stack direction="row" spacing={{ base: '3', md: '5' }} width="full">
       <Box width="24" height="24" rounded="lg" borderWidth="1px" overflow="hidden">
         <Image fit="cover" src={image} alt={title} draggable="false" loading="lazy" width="full" height="full"/>
@@ -12,9 +12,9 @@ export const CartProductMeta = (props) => {
           <Text fontWeight="semibold" lineHeight="1" noOfLines={1}>
             {title}
           </Text>
-          {variants && (<Text color={mode('gray.600', 'gray.400')} lineHeight="1">
-              {variants.map((item) => item.value).join(', ')}
-            </Text>)}
+          <Text fontWeight="semibold" color={mode('green')} lineHeight="1">
+              {shipping}
+            </Text>
           {isBestSeller && (<Badge variant="solid" colorScheme="orange" fontSize="x-small">
               #1 Best seller
             </Badge>)}
