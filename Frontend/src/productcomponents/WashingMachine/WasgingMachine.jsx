@@ -12,7 +12,7 @@ const WasgingMachine = () => {
       useEffect(()=>{
         axios.get("http://localhost:4500/products/washingmachine").then((res)=>{
             setData(res.data)
-            console.log(res.data)
+           
         })
          
            

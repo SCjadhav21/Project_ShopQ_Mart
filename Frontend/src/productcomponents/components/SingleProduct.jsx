@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 
 
@@ -29,6 +29,8 @@ import {
   
   export default function Simple() {
 
+    const navigate=useNavigate()
+     
     
     const[data,setData]=useState([])
 
@@ -40,7 +42,33 @@ import {
         })
     },[])
  
-    console.log(data)
+    const handleCart=(payload)=>{
+      
+      axios(`http://localhost:4500/cart`,{
+        method:"POST",
+        data:payload,
+        headers:{
+          "content-type":"application/json",
+          Authorization:localStorage.getItem("token")
+          
+        }
+        
+      }).then((res)=>alert("Product is Added successfully"))
+
+
+      // {
+      //   product_name: { type: String, required: true },
+      //   image: { type: String, required: true },
+      //   price: { type: Number, required: true },
+      //   shipping: { type: String, required: true },
+      //   quantity: { type: Number, default: 1, min: 1 },
+      //   userId: {
+      //     type: mongoose.Schema.Types.ObjectId,
+      //     ref: "user",
+      //     required: true,
+      //   },
+      // },
+    }
 
 
     return (
@@ -183,10 +211,10 @@ import {
               _hover={{
                 transform: 'translateY(2px)',
                 boxShadow: 'lg',
-              }}>
+              }}   onClick={()=>handleCart(data)}>
               Add to cart
             </Button>
-  
+             
             <Stack direction="row" alignItems="center" justifyContent={'center'}>
               <MdLocalShipping />
               <Text>2-3 business days delivery</Text>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import "./laptop.css"
  
 export const  getData= (sortdata)=>{
@@ -16,6 +16,7 @@ const LaptopProduct = () => {
     const[data,setData]=useState([])
 
     const[searchParams]=useSearchParams()
+     const location=useLocation()
 
    
     const sort=searchParams.get("sort")
@@ -32,12 +33,12 @@ const LaptopProduct = () => {
       
         getData(getTVparams).then((res)=>{
           setData(res.data)
-          console.log(res.data)
+         
         })
         
        
            
-      },[sort])
+      },[sort,location,searchParams])
 
 
 

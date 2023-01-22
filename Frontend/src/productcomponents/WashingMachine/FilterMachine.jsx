@@ -1,6 +1,8 @@
 import React from 'react'
 
 const FilterMachine = () => {
+
+  
   return (
     <div style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
     <div>

@@ -3,12 +3,14 @@ import { useSearchParams } from 'react-router-dom'
 
 const FiltterRefri = () => {
 
+      
   const[searchParams,setSearchParams]=useSearchParams()
 
+  const initialCategory=searchParams.getAll("discount")
   
   const initialSort=searchParams.getAll("sort")
 
- 
+  const[discount,setDiscount]=useState(initialCategory||[])
 
   const[sort,setSort]=useState(initialSort[0]||"")
 
@@ -16,53 +18,51 @@ const FiltterRefri = () => {
 
  
 
- const HandleSort=(e)=>{
+  const HandleSort=(e)=>{
 
-  setSort(e.target.value)
-}
-   
+    setSort(e.target.value)
+  }
 
 
-useEffect(()=>{
+ const handleFitterDiscount=(e)=>{
+
+  const newCategory=[...discount]
+
+  if(newCategory.includes(e.target.value)){
+    // remove it
+    newCategory.splice(newCategory.indexOf(e.target.value),1)
+
+  }else{
+    newCategory.push(e.target.value)
+
+  }
+
+
+  setDiscount(newCategory)
+
+ }
+
+
+ useEffect(()=>{
   let obj={}
-  
+  obj.discount=discount
   sort && (obj.sort=sort);
- 
   
+ 
   setSearchParams(obj)
 
- },[setSearchParams,sort])
+ },[discount,setSearchParams,sort])
 
 
   return (
     
-    <div  style={{border:"1px solid red" ,width:"20%",fontSize:"16px"}}>
+    <div  style={{width:"20%",fontSize:"16px"}}>
     <div >
       <div>
       <h1>FILTER COMPONENT</h1>
       </div>
 
-             <div>
-          <h1>Price</h1>
-          <div >
-          <input 
-          type="checkbox"/>
-         <label>Rs. 10000 - Rs. 19000 (10)</label>
-        
-          </div>
-          <div>
-          <input 
-          type="checkbox"
-         
-        
-         />
-         <label>Rs. 19000 and Above (17)</label>
-        
-          </div>
-             </div>
-              <br/>
-              <hr/>
-         
+            
       
 
 
@@ -108,48 +108,90 @@ useEffect(()=>{
             <hr/>
 
 
+            <h1>Discount</h1>
+                <div >
+                 
+               
 
-            <div>
-              <h1>Discount</h1>
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label>       2%</label>
-            
-              </div>
+                  
+                  <div >
+                              <input 
+                              type="checkbox"
+                              value="1%"
+                              checked={discount.includes("1%")}
+                              onChange={handleFitterDiscount}
+                            
+                            
+                            />
+                            <label> 1%</label>
+                
+                  </div>
+                      <div>
+                            <input 
+                            type="checkbox"
+                            value="8%"
+                            checked={discount.includes("8%")}
+                            onChange={handleFitterDiscount}
+                          
+                        
+                            />
+                            <label> 8%</label>
+                    
+                      </div>
 
-              <div>
-              <input 
-              type="checkbox"
+                  <div>
+                          <input 
+                          type="checkbox"
+                          value="20%"
+                          checked={discount.includes("20%")}
+                          onChange={handleFitterDiscount}
+                        
+                        
+                        />
+                        <label> 20%</label>
+                
+                  </div>
+
+                  <div>
+                              <input 
+                              type="checkbox"
+                              value="10%"
+                              checked={discount.includes("10%")}
+                              onChange={handleFitterDiscount}
+                            
+                            
+                            />
+                            <label> 10%</label>
+                
+                  </div>
+
+                  <div>
+                          <input 
+                            type="checkbox"
+                            value="15%"
+                            checked={discount.includes("15%")}
+                            onChange={handleFitterDiscount}
+                          
+                          
+                          />
+                          <label> 15%</label>
+                          
+                  </div>
+
+                
+
+
+
+
+
+
+
+                </div>
+                <br/>
+                <hr/>
             
-            
-            />
-            <label> 3%</label>
-            
-              </div>
-
-              <div>
-              <input 
-              type="checkbox"
-            
-            
-            />
-            <label> 4%</label>
-            
-              </div>
-
-             
 
 
-
-
-
-            </div>
-            <br/>
-            <hr/>
 
              <div>
               <h1>Product Rating</h1>
