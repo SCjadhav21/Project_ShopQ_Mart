@@ -59,6 +59,47 @@ const AdminPage = () => {
       state: "",
     },
   });
+  const [productsAddData, setProductsAddData] = useState({
+    product_name: "",
+    product_id: "",
+    brand: "",
+    image: "",
+    price: "",
+    mrp: "",
+    discount: "",
+    prod_type: "",
+    rating: "",
+    product_desc: "",
+    product_specs: {
+      key_features: {
+        brand: "",
+      },
+      tv_specifications: {
+        ptype: "",
+        display_size: "",
+        screen_size_range: "",
+        functionality: "",
+      },
+      general_feature: {
+        display_resolution: "",
+      },
+      connectivity: {
+        usb_port: "",
+        hdmi_ports: "",
+      },
+      electronic_warranty: {
+        warranty_available: "",
+        duration: "",
+      },
+    },
+    cod: "",
+    shipping: "",
+    delivery: "",
+    items_left: "",
+    sold_by_location: "",
+    sold_by: "",
+    emi: "",
+  });
   const [page, setPage] = useState("main");
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
@@ -66,6 +107,8 @@ const AdminPage = () => {
   const [userData, setuserData] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+
+  // All get methods
 
   const getuserdata = () => {
     axios(`http://localhost:4500/users/`, {
@@ -127,6 +170,8 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
 
+  // All handel page change methods
+
   const handelClick = (value) => {
     if (value == "allUsers") {
       getuserdata();
@@ -143,6 +188,7 @@ const AdminPage = () => {
     onClose();
   };
 
+  //  All Edite Methods
   const handelRefrigeratorEdit = (id) => {
     let edit = { [editKey]: editValue };
 
@@ -234,8 +280,66 @@ const AdminPage = () => {
     }
   };
 
+  // All Delete functions
   const handelTvDelete = (id) => {
-    console.log(id);
+    axios(`http://localhost:4500/products/tv/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getuserdata();
+      })
+      .catch((err) => console.error(err));
+  };
+  const handelLaptopDelete = (id) => {
+    axios(`http://localhost:4500/products/laptop/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getuserdata();
+      })
+      .catch((err) => console.error(err));
+  };
+  const handelRefrigeratorDelete = (id) => {
+    axios(`http://localhost:4500/products/refrigerator/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getuserdata();
+      })
+      .catch((err) => console.error(err));
+  };
+  const handelWashingmachineDelete = (id) => {
+    axios(`http://localhost:4500/products/washingmachine/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        getuserdata();
+      })
+      .catch((err) => console.error(err));
   };
   const handelUserDelete = (id) => {
     axios(`http://localhost:4500/users/${id}`, {
@@ -253,6 +357,100 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
 
+  // All Adding functions
+  const handelTvAddChange = (e) => {
+    let { name, value } = e.target;
+
+    if (
+      name == "brand" ||
+      name == "ptype" ||
+      name == "display_size" ||
+      name == "usb_port" ||
+      name == "hdmi_ports" ||
+      name == "warranty_available" ||
+      name == "duration" ||
+      name == "screen_size_range" ||
+      name == "functionality" ||
+      name == "display_resolution"
+    ) {
+      if (name == "brand") {
+        setProductsAddData({
+          ...productsAddData,
+          product_specs: {
+            ...productsAddData.product_specs,
+            key_features: {
+              ...productsAddData.product_specs.key_features,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "usb_port" || name == "hdmi_ports") {
+        setProductsAddData({
+          ...productsAddData,
+          product_specs: {
+            ...productsAddData.product_specs,
+            connectivity: {
+              ...productsAddData.product_specs.connectivity,
+              [name]: value,
+            },
+          },
+        });
+      } else if (
+        name == "ptype" ||
+        name == "display_size" ||
+        name == "screen_size_range" ||
+        name == "functionality"
+      ) {
+        setProductsAddData({
+          ...productsAddData,
+          product_specs: {
+            ...productsAddData.product_specs,
+            tv_specifications: {
+              ...productsAddData.product_specs.tv_specifications,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "display_resolution") {
+        setProductsAddData({
+          ...productsAddData,
+          product_specs: {
+            ...productsAddData.product_specs,
+            general_feature: {
+              ...productsAddData.product_specs.general_feature,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "warranty_available" || name == "duration") {
+        setProductsAddData({
+          ...productsAddData,
+          product_specs: {
+            ...productsAddData.product_specs,
+            electronic_warranty: {
+              ...productsAddData.product_specs.electronic_warranty,
+              [name]: value,
+            },
+          },
+        });
+      }
+    } else {
+      if (
+        name == "price" ||
+        name == "mrp" ||
+        name == "product_id" ||
+        name == "rating" ||
+        name == "emi" ||
+        name == "items_left"
+      ) {
+        value = +value;
+      }
+      if (name == "mainbrand") {
+        name = "brand";
+      }
+      setProductsAddData({ ...productsAddData, [name]: value });
+    }
+  };
   const handelUserAddChange = (e) => {
     let { name, value } = e.target;
     if (name == "pincode" || name == "city" || name == "state") {
@@ -267,7 +465,26 @@ const AdminPage = () => {
       setUserAddData({ ...userAddData, [name]: value });
     }
   };
+  const handelTvAddSubmit = (e) => {
+    e.preventDefault();
+    // console.log(productsAddData);
 
+    axios("http://localhost:4500/products/tv", {
+      method: "POST",
+      data: productsAddData,
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.message);
+      });
+  };
   const handelUserAddSubmit = (e) => {
     e.preventDefault();
 
@@ -281,6 +498,7 @@ const AdminPage = () => {
         data: userAddData,
         headers: {
           "content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
         },
       })
         .then((res) => {
@@ -562,24 +780,24 @@ const AdminPage = () => {
       {page == "AllRefrigeratorProducts" ? (
         <Box p="0px 20px">
           <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {data?.map((tv, index) => {
+            {data?.map((refrigerator, index) => {
               return (
                 <Box
                   p="10px"
                   boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
                   key={index}
                 >
-                  <Img src={tv.image}></Img>
-                  <Text>product_name : {tv.product_name}</Text>
-                  <Text>brand : {tv.brand}</Text>
-                  <Text>delivery : {tv.delivery}</Text>
-                  <Text>discount : {tv.discount}</Text>
-                  <Text>emi : {tv.emi}</Text>
-                  <Text>image : {tv.image}</Text>
-                  <Text>mrp : {tv.mrp}</Text>
-                  <Text>items_left : {tv.items_left}</Text>
-                  <Text>price : {tv.price}</Text>
-                  <Text>prod_type : {tv.prod_type}</Text>
+                  <Img src={refrigerator.image}></Img>
+                  <Text>product_name : {refrigerator.product_name}</Text>
+                  <Text>brand : {refrigerator.brand}</Text>
+                  <Text>delivery : {refrigerator.delivery}</Text>
+                  <Text>discount : {refrigerator.discount}</Text>
+                  <Text>emi : {refrigerator.emi}</Text>
+                  <Text>image : {refrigerator.image}</Text>
+                  <Text>mrp : {refrigerator.mrp}</Text>
+                  <Text>items_left : {refrigerator.items_left}</Text>
+                  <Text>price : {refrigerator.price}</Text>
+                  <Text>prod_type : {refrigerator.prod_type}</Text>
 
                   <Popover>
                     <PopoverTrigger>
@@ -593,7 +811,7 @@ const AdminPage = () => {
                         <form
                           onSubmit={(e) => {
                             e.preventDefault();
-                            handelRefrigeratorEdit(tv._id);
+                            handelRefrigeratorEdit(refrigerator._id);
                           }}
                         >
                           <FormLabel>updation key</FormLabel>
@@ -604,7 +822,7 @@ const AdminPage = () => {
                           />
                           <FormLabel>updated value</FormLabel>
                           <Input
-                            type={editKey == "price" ? "price" : "text"}
+                            type={editKey == "price" ? "number" : "text"}
                             onChange={(e) => setEditValue(e.target.value)}
                             isRequired
                           />
@@ -620,7 +838,7 @@ const AdminPage = () => {
                   </Popover>
                   <Button
                     mt="8px"
-                    onClick={() => handelTvDelete(tv._id)}
+                    onClick={() => handelRefrigeratorDelete(refrigerator._id)}
                     ml="5px"
                   >
                     Remove
@@ -637,24 +855,24 @@ const AdminPage = () => {
       {page == "AllWashingmachineProducts" ? (
         <Box p="0px 20px">
           <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {data?.map((tv, index) => {
+            {data?.map((washingmachine, index) => {
               return (
                 <Box
                   p="10px"
                   boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
                   key={index}
                 >
-                  <Img src={tv.image}></Img>
-                  <Text>product_name : {tv.product_name}</Text>
-                  <Text>brand : {tv.brand}</Text>
-                  <Text>delivery : {tv.delivery}</Text>
-                  <Text>discount : {tv.discount}</Text>
-                  <Text>emi : {tv.emi}</Text>
-                  <Text>image : {tv.image}</Text>
-                  <Text>mrp : {tv.mrp}</Text>
-                  <Text>items_left : {tv.items_left}</Text>
-                  <Text>price : {tv.price}</Text>
-                  <Text>prod_type : {tv.prod_type}</Text>
+                  <Img src={washingmachine.image}></Img>
+                  <Text>product_name : {washingmachine.product_name}</Text>
+                  <Text>brand : {washingmachine.brand}</Text>
+                  <Text>delivery : {washingmachine.delivery}</Text>
+                  <Text>discount : {washingmachine.discount}</Text>
+                  <Text>emi : {washingmachine.emi}</Text>
+                  <Text>image : {washingmachine.image}</Text>
+                  <Text>mrp : {washingmachine.mrp}</Text>
+                  <Text>items_left : {washingmachine.items_left}</Text>
+                  <Text>price : {washingmachine.price}</Text>
+                  <Text>prod_type : {washingmachine.prod_type}</Text>
 
                   <Popover>
                     <PopoverTrigger>
@@ -669,7 +887,7 @@ const AdminPage = () => {
                           onSubmit={(e) => {
                             e.preventDefault();
 
-                            handelWashingmachineEdit(tv._id);
+                            handelWashingmachineEdit(washingmachine._id);
                           }}
                         >
                           <FormLabel>updation key</FormLabel>
@@ -680,7 +898,7 @@ const AdminPage = () => {
                           />
                           <FormLabel>updated value</FormLabel>
                           <Input
-                            type={editKey == "price" ? "price" : "text"}
+                            type={editKey == "price" ? "number" : "text"}
                             onChange={(e) => setEditValue(e.target.value)}
                             isRequired
                           />
@@ -696,7 +914,9 @@ const AdminPage = () => {
                   </Popover>
                   <Button
                     mt="8px"
-                    onClick={() => handelTvDelete(tv._id)}
+                    onClick={() =>
+                      handelWashingmachineDelete(washingmachine._id)
+                    }
                     ml="5px"
                   >
                     Remove
@@ -712,24 +932,24 @@ const AdminPage = () => {
       {page == "AllLaptopProducts" ? (
         <Box p="0px 20px">
           <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {data?.map((tv, index) => {
+            {data?.map((laptop, index) => {
               return (
                 <Box
                   p="10px"
                   boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
                   key={index}
                 >
-                  <Img src={tv.image}></Img>
-                  <Text>product_name : {tv.product_name}</Text>
-                  <Text>brand : {tv.brand}</Text>
-                  <Text>delivery : {tv.delivery}</Text>
-                  <Text>discount : {tv.discount}</Text>
-                  <Text>emi : {tv.emi}</Text>
-                  <Text>image : {tv.image}</Text>
-                  <Text>mrp : {tv.mrp}</Text>
-                  <Text>items_left : {tv.items_left}</Text>
-                  <Text>price : {tv.price}</Text>
-                  <Text>prod_type : {tv.prod_type}</Text>
+                  <Img src={laptop.image}></Img>
+                  <Text>product_name : {laptop.product_name}</Text>
+                  <Text>brand : {laptop.brand}</Text>
+                  <Text>delivery : {laptop.delivery}</Text>
+                  <Text>discount : {laptop.discount}</Text>
+                  <Text>emi : {laptop.emi}</Text>
+                  <Text>image : {laptop.image}</Text>
+                  <Text>mrp : {laptop.mrp}</Text>
+                  <Text>items_left : {laptop.items_left}</Text>
+                  <Text>price : {laptop.price}</Text>
+                  <Text>prod_type : {laptop.prod_type}</Text>
 
                   <Popover>
                     <PopoverTrigger>
@@ -744,7 +964,7 @@ const AdminPage = () => {
                           onSubmit={(e) => {
                             e.preventDefault();
 
-                            handelLaptopEdit(tv._id);
+                            handelLaptopEdit(laptop._id);
                           }}
                         >
                           <FormLabel>updation key</FormLabel>
@@ -755,7 +975,7 @@ const AdminPage = () => {
                           />
                           <FormLabel>updated value</FormLabel>
                           <Input
-                            type={editKey == "price" ? "price" : "text"}
+                            type={editKey == "price" ? "number" : "text"}
                             onChange={(e) => setEditValue(e.target.value)}
                             isRequired
                           />
@@ -771,7 +991,7 @@ const AdminPage = () => {
                   </Popover>
                   <Button
                     mt="8px"
-                    onClick={() => handelTvDelete(tv._id)}
+                    onClick={() => handelLaptopDelete(laptop._id)}
                     ml="5px"
                   >
                     Remove
@@ -849,6 +1069,290 @@ const AdminPage = () => {
               );
             })}
           </SimpleGrid>
+        </Box>
+      ) : (
+        ""
+      )}
+
+      {page == "AddTvProduct" ? (
+        <Box display="flex" justifyContent="center">
+          <Box w={["100%", "70%", "50%"]} p="10%" border="2px solid red">
+            <form onSubmit={handelTvAddSubmit}>
+              <FormControl
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+              >
+                <FormLabel>product_name</FormLabel>
+                <Input
+                  name="product_name"
+                  value={productsAddData.product_name}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter product_name"
+                  type="text"
+                />
+                <FormLabel>product_id</FormLabel>
+                <Input
+                  name="product_id"
+                  value={productsAddData.product_id}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter product_id"
+                  type="number"
+                />
+                <FormLabel>mainbrand</FormLabel>
+                <Input
+                  name="mainbrand"
+                  value={productsAddData.brand}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter brand"
+                  type="text"
+                />
+                <FormLabel>image</FormLabel>
+                <Input
+                  name="image"
+                  value={productsAddData.image}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  type="url"
+                  placeholder="enter image"
+                />
+                <FormLabel>mrp</FormLabel>
+                <Input
+                  name="mrp"
+                  value={productsAddData.mrp}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter mrp"
+                  type="number"
+                />
+                <FormLabel>discount</FormLabel>
+                <Input
+                  name="discount"
+                  value={productsAddData.discount}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter discount"
+                  type="text"
+                />
+                <FormLabel>price</FormLabel>
+                <Input
+                  name="price"
+                  value={productsAddData.price}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter price"
+                  type="number"
+                />
+                <FormLabel>prod_type</FormLabel>
+                <Input
+                  name="prod_type"
+                  value={productsAddData.prod_type}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter prod_type"
+                  type="text"
+                />
+                <FormLabel>rating</FormLabel>
+                <Input
+                  name="rating"
+                  value={productsAddData.rating}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter rating"
+                  type="number"
+                />
+                <FormLabel>product_desc</FormLabel>
+                <Input
+                  name="product_desc"
+                  value={productsAddData.product_desc}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter product_desc"
+                  type="text"
+                />
+                <FormLabel>items_left</FormLabel>
+                <Input
+                  name="items_left"
+                  value={productsAddData.items_left}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter items_left"
+                  type="number"
+                />
+                <FormLabel>emi</FormLabel>
+                <Input
+                  name="emi"
+                  value={productsAddData.emi}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter emi"
+                  type="number"
+                />
+                <FormLabel>shipping</FormLabel>
+                <Input
+                  name="shipping"
+                  value={productsAddData.shipping}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter shipping"
+                  type="text"
+                />
+                <FormLabel>cod</FormLabel>
+                <Input
+                  name="cod"
+                  value={productsAddData.cod}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter cod"
+                  type="text"
+                />
+                <FormLabel>delivery</FormLabel>
+                <Input
+                  name="delivery"
+                  value={productsAddData.delivery}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter delivery"
+                  type="text"
+                />
+                <FormLabel>sold_by_location</FormLabel>
+                <Input
+                  name="sold_by_location"
+                  value={productsAddData.sold_by_location}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter sold_by_location"
+                  type="text"
+                />
+                <FormLabel>sold_by</FormLabel>
+                <Input
+                  name="sold_by"
+                  value={productsAddData.sold_by}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter sold_by"
+                  type="text"
+                />
+                <FormLabel>brand</FormLabel>
+                <Input
+                  name="brand"
+                  value={productsAddData.product_specs.key_features.brand}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter brand"
+                  type="text"
+                />{" "}
+                <FormLabel>ptype</FormLabel>
+                <Input
+                  name="ptype"
+                  value={productsAddData.product_specs.tv_specifications.ptype}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter ptype"
+                  type="text"
+                />{" "}
+                <FormLabel>screen_size_range</FormLabel>
+                <Input
+                  name="screen_size_range"
+                  value={
+                    productsAddData.product_specs.tv_specifications
+                      .screen_size_range
+                  }
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter screen_size_range"
+                  type="text"
+                />{" "}
+                <FormLabel>display_size</FormLabel>
+                <Input
+                  name="display_size"
+                  value={
+                    productsAddData.product_specs.tv_specifications.display_size
+                  }
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter display_size"
+                  type="text"
+                />{" "}
+                <FormLabel>functionality</FormLabel>
+                <Input
+                  name="functionality"
+                  value={
+                    productsAddData.product_specs.tv_specifications
+                      .functionality
+                  }
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter functionality"
+                  type="text"
+                />{" "}
+                <FormLabel>display_resolution</FormLabel>
+                <Input
+                  name="display_resolution"
+                  value={
+                    productsAddData.product_specs.general_feature
+                      .display_resolution
+                  }
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter display_resolution"
+                  type="text"
+                />{" "}
+                <FormLabel>usb_port</FormLabel>
+                <Input
+                  name="usb_port"
+                  value={productsAddData.product_specs.connectivity.usb_port}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter usb_port"
+                  type="text"
+                />
+                <FormLabel>hdmi_ports</FormLabel>
+                <Input
+                  name="hdmi_ports"
+                  value={productsAddData.product_specs.connectivity.hdmi_ports}
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter hdmi_ports"
+                  type="text"
+                />
+                <FormLabel>warranty_available</FormLabel>
+                <Input
+                  name="warranty_available"
+                  value={
+                    productsAddData.product_specs.electronic_warranty
+                      .warranty_available
+                  }
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter warranty_available"
+                  type="text"
+                />
+                <FormLabel>duration</FormLabel>
+                <Input
+                  name="duration"
+                  value={
+                    productsAddData.product_specs.electronic_warranty.duration
+                  }
+                  onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter duration"
+                  type="text"
+                />
+                <Input
+                  alignSelf="center"
+                  w="90%"
+                  type="submit"
+                  mt="10px"
+                  borderRadius="20px"
+                  bgGradient="linear(0deg,#ff934b 0%,#ff5e62 100%)"
+                />
+              </FormControl>
+            </form>
+          </Box>
         </Box>
       ) : (
         ""
