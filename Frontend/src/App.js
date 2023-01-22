@@ -1,3 +1,4 @@
+import Navbar from "./Components/Navbar";
 import AllRouter from "./productcomponents/AllPages/AllRouter";
 
 function App() {

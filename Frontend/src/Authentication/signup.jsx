@@ -32,6 +32,7 @@ const Signup = () => {
     },
   });
   const [show, setShow] = React.useState(false);
+  const [home, setHome] = React.useState(false);
   const [navigate, setNavigate] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -75,7 +76,7 @@ const Signup = () => {
           .then((res) => {
             console.log(res);
             alert(res.data.msg);
-            if (res.data == "user Registered") {
+            if (res.data.msg == "user Registered") {
               setNavigate(true);
             }
           })
@@ -92,7 +93,9 @@ const Signup = () => {
   useEffect(() => {
     onOpen();
   }, []);
-
+  if (home) {
+    return <Navigate to="/" />;
+  }
   if (navigate) {
     return <Navigate to="/login" />;
   }
@@ -106,7 +109,7 @@ const Signup = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalCloseButton />
+          <ModalCloseButton onClick={() => setHome(true)} />
           <Box w={["", "", "100vh"]} bgColor="#fff" p="10px" display="flex">
             <Show above="md">
               {" "}

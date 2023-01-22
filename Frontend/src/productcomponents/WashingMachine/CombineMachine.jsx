@@ -1,16 +1,20 @@
-import React from 'react'
-import FilterMachine from './FilterMachine'
-import WasgingMachine from './WasgingMachine'
+import React from "react";
+import Footer from "../../Components/Footer/Footer";
+import Navbar from "../../Components/Navbar";
+import FilterMachine from "./FilterMachine";
+import WasgingMachine from "./WasgingMachine";
 
 const CombineMachine = () => {
   return (
-    <div style={{display:"flex",gap:"5px"}}>
-     <FilterMachine/>
-     <WasgingMachine/>
-    
-      
-    </div>
-  )
-}
+    <>
+      <Navbar />
+      <div style={{ display: "flex", gap: "5px" }}>
+        <FilterMachine />
+        <WasgingMachine />
+      </div>
+      <Footer />
+    </>
+  );
+};
 
-export default CombineMachine
+export default CombineMachine;
