@@ -48,6 +48,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const AdminPage = () => {
+  // userIntialState
   const [userAddData, setUserAddData] = useState({
     name: "",
     email: "",
@@ -59,6 +60,7 @@ const AdminPage = () => {
       state: "",
     },
   });
+  // tvProductsInitialState
   const [productsAddData, setProductsAddData] = useState({
     product_name: "",
     product_id: "",
@@ -86,6 +88,55 @@ const AdminPage = () => {
       connectivity: {
         usb_port: "",
         hdmi_ports: "",
+      },
+      electronic_warranty: {
+        warranty_available: "",
+        duration: "",
+      },
+    },
+    cod: "",
+    shipping: "",
+    delivery: "",
+    items_left: "",
+    sold_by_location: "",
+    sold_by: "",
+    emi: "",
+  });
+  // refrigeratorInitalization
+  const [refrigeratorAddData, setRefrigeratorAddData] = useState({
+    product_name: "",
+    product_id: "",
+    brand: "",
+    image: "",
+    price: "",
+    mrp: "",
+    discount: "",
+    prod_type: "",
+    rating: "",
+    product_desc: "",
+    product_specs: {
+      key_features: {
+        brand: "",
+      },
+      refrigerator_specification: {
+        gross_capacity: "",
+        gross_capacity_range: "",
+        door_type: "",
+        technology: "",
+      },
+      refrigerator_features: {
+        shelf_material: "",
+        no_of_shelves: "",
+      },
+      product_warranty: {
+        main_unit: "",
+        compressor: "",
+      },
+      power: {
+        energy_rating: "",
+      },
+      convenience_features: {
+        door_lock: "",
       },
       electronic_warranty: {
         warranty_available: "",
@@ -312,7 +363,8 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
   const handelRefrigeratorDelete = (id) => {
-    axios(`http://localhost:4500/products/refrigerator/${id}`, {
+    console.log(id);
+    axios(`http://localhost:4500/products/refigerator/${id}`, {
       method: "DELETE",
 
       headers: {
@@ -357,10 +409,13 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
 
-  // All Adding functions
-  const handelTvAddChange = (e) => {
-    let { name, value } = e.target;
+  // All ChangeData functions
 
+  const handelTvAddChange = (e) => {
+    let { name, value, type } = e.target;
+    if (type == "number") {
+      value = +value;
+    }
     if (
       name == "brand" ||
       name == "ptype" ||
@@ -435,28 +490,128 @@ const AdminPage = () => {
         });
       }
     } else {
-      if (
-        name == "price" ||
-        name == "mrp" ||
-        name == "product_id" ||
-        name == "rating" ||
-        name == "emi" ||
-        name == "items_left"
-      ) {
-        value = +value;
-      }
       if (name == "mainbrand") {
         name = "brand";
       }
       setProductsAddData({ ...productsAddData, [name]: value });
     }
   };
-  const handelUserAddChange = (e) => {
-    let { name, value } = e.target;
-    if (name == "pincode" || name == "city" || name == "state") {
-      if (name == "pincode") {
-        value = +value;
+  const handelRefrigeratorAddChange = (e) => {
+    let { name, value, type } = e.target;
+    if (type == "number") {
+      value = +value;
+    }
+    if (
+      name == "brand" ||
+      name == "gross_capacity" ||
+      name == "gross_capacity_range" ||
+      name == "door_type" ||
+      name == "technology" ||
+      name == "shelf_material" ||
+      name == "no_of_shelves" ||
+      name == "warranty_available" ||
+      name == "duration" ||
+      name == "main_unit" ||
+      name == "compressor" ||
+      name == "door_lock" ||
+      name == "energy_rating"
+    ) {
+      if (name == "brand") {
+        setRefrigeratorAddData({
+          ...refrigeratorAddData,
+          product_specs: {
+            ...refrigeratorAddData.product_specs,
+            key_features: {
+              ...refrigeratorAddData.product_specs.key_features,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "shelf_material" || name == "no_of_shelves") {
+        setRefrigeratorAddData({
+          ...refrigeratorAddData,
+          product_specs: {
+            ...refrigeratorAddData.product_specs,
+            refrigerator_features: {
+              ...refrigeratorAddData.product_specs.refrigerator_features,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "warranty_available" || name == "duration") {
+        setRefrigeratorAddData({
+          ...refrigeratorAddData,
+          product_specs: {
+            ...refrigeratorAddData.product_specs,
+            electronic_warranty: {
+              ...refrigeratorAddData.product_specs.electronic_warranty,
+              [name]: value,
+            },
+          },
+        });
+      } else if (
+        name == "gross_capacity" ||
+        name == "door_type" ||
+        name == "gross_capacity_range" ||
+        name == "technology"
+      ) {
+        setRefrigeratorAddData({
+          ...refrigeratorAddData,
+          product_specs: {
+            ...refrigeratorAddData.product_specs,
+            refrigerator_specification: {
+              ...refrigeratorAddData.product_specs.refrigerator_specification,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "door_lock") {
+        setRefrigeratorAddData({
+          ...refrigeratorAddData,
+          product_specs: {
+            ...refrigeratorAddData.product_specs,
+            convenience_features: {
+              ...refrigeratorAddData.product_specs.convenience_features,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "energy_rating") {
+        setRefrigeratorAddData({
+          ...refrigeratorAddData,
+          product_specs: {
+            ...refrigeratorAddData.product_specs,
+            power: {
+              ...refrigeratorAddData.product_specs.power,
+              [name]: value,
+            },
+          },
+        });
+      } else if (name == "main_unit" || name == "compressor") {
+        setRefrigeratorAddData({
+          ...refrigeratorAddData,
+          product_specs: {
+            ...refrigeratorAddData.product_specs,
+            product_warranty: {
+              ...refrigeratorAddData.product_specs.product_warranty,
+              [name]: value,
+            },
+          },
+        });
       }
+    } else {
+      if (name == "mainbrand") {
+        name = "brand";
+      }
+      setRefrigeratorAddData({ ...refrigeratorAddData, [name]: value });
+    }
+  };
+  const handelUserAddChange = (e) => {
+    let { name, value, type } = e.target;
+    if (type == "number") {
+      value = +value;
+    }
+    if (name == "pincode" || name == "city" || name == "state") {
       setUserAddData({
         ...userAddData,
         address: { ...userAddData.address, [name]: value },
@@ -465,6 +620,9 @@ const AdminPage = () => {
       setUserAddData({ ...userAddData, [name]: value });
     }
   };
+
+  // All Adding functions
+
   const handelTvAddSubmit = (e) => {
     e.preventDefault();
     // console.log(productsAddData);
@@ -472,6 +630,25 @@ const AdminPage = () => {
     axios("http://localhost:4500/products/tv", {
       method: "POST",
       data: productsAddData,
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.message);
+      });
+  };
+  const handelRefrigeratorAddSubmit = (e) => {
+    e.preventDefault();
+
+    axios("http://localhost:4500/products/refrigerator", {
+      method: "POST",
+      data: refrigeratorAddData,
       headers: {
         "content-type": "application/json",
         Authorization: localStorage.getItem("token"),
@@ -1338,6 +1515,332 @@ const AdminPage = () => {
                     productsAddData.product_specs.electronic_warranty.duration
                   }
                   onChange={handelTvAddChange}
+                  isRequired
+                  placeholder="enter duration"
+                  type="text"
+                />
+                <Input
+                  alignSelf="center"
+                  w="90%"
+                  type="submit"
+                  mt="10px"
+                  borderRadius="20px"
+                  bgGradient="linear(0deg,#ff934b 0%,#ff5e62 100%)"
+                />
+              </FormControl>
+            </form>
+          </Box>
+        </Box>
+      ) : (
+        ""
+      )}
+      {page == "AddRefrigeratorProduct" ? (
+        <Box display="flex" justifyContent="center">
+          <Box w={["100%", "70%", "50%"]} p="10%" border="2px solid red">
+            <form onSubmit={handelRefrigeratorAddSubmit}>
+              <FormControl
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+              >
+                <FormLabel>product_name</FormLabel>
+                <Input
+                  name="product_name"
+                  value={refrigeratorAddData.product_name}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter product_name"
+                  type="text"
+                />
+                <FormLabel>product_id</FormLabel>
+                <Input
+                  name="product_id"
+                  value={refrigeratorAddData.product_id}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter product_id"
+                  type="number"
+                />
+                <FormLabel>mainbrand</FormLabel>
+                <Input
+                  name="mainbrand"
+                  value={refrigeratorAddData.brand}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter brand"
+                  type="text"
+                />
+                <FormLabel>image</FormLabel>
+                <Input
+                  name="image"
+                  value={refrigeratorAddData.image}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  type="url"
+                  placeholder="enter image"
+                />
+                <FormLabel>mrp</FormLabel>
+                <Input
+                  name="mrp"
+                  value={refrigeratorAddData.mrp}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter mrp"
+                  type="number"
+                />
+                <FormLabel>discount</FormLabel>
+                <Input
+                  name="discount"
+                  value={refrigeratorAddData.discount}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter discount"
+                  type="text"
+                />
+                <FormLabel>price</FormLabel>
+                <Input
+                  name="price"
+                  value={refrigeratorAddData.price}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter price"
+                  type="number"
+                />
+                <FormLabel>prod_type</FormLabel>
+                <Input
+                  name="prod_type"
+                  value={refrigeratorAddData.prod_type}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter prod_type"
+                  type="text"
+                />
+                <FormLabel>rating</FormLabel>
+                <Input
+                  name="rating"
+                  value={refrigeratorAddData.rating}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter rating"
+                  type="number"
+                />
+                <FormLabel>product_desc</FormLabel>
+                <Input
+                  name="product_desc"
+                  value={refrigeratorAddData.product_desc}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter product_desc"
+                  type="text"
+                />
+                <FormLabel>items_left</FormLabel>
+                <Input
+                  name="items_left"
+                  value={refrigeratorAddData.items_left}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter items_left"
+                  type="number"
+                />
+                <FormLabel>emi</FormLabel>
+                <Input
+                  name="emi"
+                  value={refrigeratorAddData.emi}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter emi"
+                  type="number"
+                />
+                <FormLabel>shipping</FormLabel>
+                <Input
+                  name="shipping"
+                  value={refrigeratorAddData.shipping}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter shipping"
+                  type="text"
+                />
+                <FormLabel>cod</FormLabel>
+                <Input
+                  name="cod"
+                  value={refrigeratorAddData.cod}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter cod"
+                  type="text"
+                />
+                <FormLabel>delivery</FormLabel>
+                <Input
+                  name="delivery"
+                  value={refrigeratorAddData.delivery}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter delivery"
+                  type="text"
+                />
+                <FormLabel>sold_by_location</FormLabel>
+                <Input
+                  name="sold_by_location"
+                  value={refrigeratorAddData.sold_by_location}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter sold_by_location"
+                  type="text"
+                />
+                <FormLabel>sold_by</FormLabel>
+                <Input
+                  name="sold_by"
+                  value={refrigeratorAddData.sold_by}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter sold_by"
+                  type="text"
+                />
+                <FormLabel>brand</FormLabel>
+                <Input
+                  name="brand"
+                  value={refrigeratorAddData.product_specs.key_features.brand}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter brand"
+                  type="text"
+                />{" "}
+                <FormLabel>technology</FormLabel>
+                <Input
+                  name="technology"
+                  value={
+                    refrigeratorAddData.product_specs.refrigerator_specification
+                      .technology
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter technology"
+                  type="text"
+                />{" "}
+                <FormLabel>door_type</FormLabel>
+                <Input
+                  name="door_type"
+                  value={
+                    refrigeratorAddData.product_specs.refrigerator_specification
+                      .door_type
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter door_type"
+                  type="text"
+                />{" "}
+                <FormLabel>gross_capacity_range</FormLabel>
+                <Input
+                  name="gross_capacity_range"
+                  value={
+                    refrigeratorAddData.product_specs.refrigerator_specification
+                      .gross_capacity_range
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter gross_capacity_range"
+                  type="text"
+                />{" "}
+                <FormLabel>gross_capacity</FormLabel>
+                <Input
+                  name="gross_capacity"
+                  value={
+                    refrigeratorAddData.product_specs.refrigerator_specification
+                      .gross_capacity
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter gross_capacity"
+                  type="text"
+                />{" "}
+                <FormLabel>shelf_material</FormLabel>
+                <Input
+                  name="shelf_material"
+                  value={
+                    refrigeratorAddData.product_specs.refrigerator_features
+                      .shelf_material
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter shelf_material"
+                  type="text"
+                />{" "}
+                <FormLabel>no_of_shelves</FormLabel>
+                <Input
+                  name="no_of_shelves"
+                  value={
+                    refrigeratorAddData.product_specs.refrigerator_features
+                      .no_of_shelves
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter no_of_shelves"
+                  type="text"
+                />{" "}
+                <FormLabel>main_unit</FormLabel>
+                <Input
+                  name="main_unit"
+                  value={
+                    refrigeratorAddData.product_specs.product_warranty.main_unit
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter main_unit"
+                  type="text"
+                />{" "}
+                <FormLabel>compressor</FormLabel>
+                <Input
+                  name="compressor"
+                  value={
+                    refrigeratorAddData.product_specs.product_warranty
+                      .compressor
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter compressor"
+                  type="text"
+                />{" "}
+                <FormLabel>energy_rating</FormLabel>
+                <Input
+                  name="energy_rating"
+                  value={refrigeratorAddData.product_specs.power.energy_rating}
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter energy_rating"
+                  type="number"
+                />
+                <FormLabel>door_lock</FormLabel>
+                <Input
+                  name="door_lock"
+                  value={
+                    refrigeratorAddData.product_specs.convenience_features
+                      .door_lock
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter door_lock"
+                  type="text"
+                />
+                <FormLabel>warranty_available</FormLabel>
+                <Input
+                  name="warranty_available"
+                  value={
+                    refrigeratorAddData.product_specs.electronic_warranty
+                      .warranty_available
+                  }
+                  onChange={handelRefrigeratorAddChange}
+                  isRequired
+                  placeholder="enter warranty_available"
+                  type="text"
+                />
+                <FormLabel>duration</FormLabel>
+                <Input
+                  name="duration"
+                  value={
+                    refrigeratorAddData.product_specs.electronic_warranty
+                      .duration
+                  }
+                  onChange={handelRefrigeratorAddChange}
                   isRequired
                   placeholder="enter duration"
                   type="text"
