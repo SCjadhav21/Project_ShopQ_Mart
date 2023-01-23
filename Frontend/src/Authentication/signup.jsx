@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import {
   Modal,
@@ -19,6 +19,7 @@ import {
   Show,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import Homepage from "../Components/Homepage";
 const Signup = () => {
   const [data, setData] = useState({
     name: "",
@@ -101,8 +102,9 @@ const Signup = () => {
   }
   return (
     <>
+      <Homepage />
       <Modal
-        isCentered
+        mt="50px"
         onClose={onClose}
         isOpen={isOpen}
         motionPreset="slideInBottom"
@@ -224,14 +226,14 @@ const Signup = () => {
             <Box w={["100%", "100%", "70%"]}>
               <ModalHeader p="0px 20px 0px 20px" display="flex" gap="10%">
                 <Text color="#24a3b5" padding="0 8px ">
-                  login
+                  <Link to="/login">login</Link>
                 </Text>
                 <Text
                   borderBottom="2px solid #24a3b5"
                   color="#24a3b5"
                   padding="0 8px 8px"
                 >
-                  signup
+                  <Link to="signup">signup</Link>
                 </Text>
               </ModalHeader>
 

@@ -9,7 +9,7 @@ const TVmain = () => {
     <>
       {" "}
       <Navbar />
-      <div style={{ display: "flex", gap: "5px" }}>
+      <div style={{ display: "flex" }}>
         <Filter />
         <ProductTv />
       </div>

@@ -30,6 +30,7 @@ const AllRouter = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/adminpage" element={<AdminPage />} />
       <Route path="/tv" element={<TVmain />} />
+
       <Route path="/tv/:id" element={<SingleProduct />} />
 
       <Route path="/refrigerator" element={<CombinePageRafrigetor />} />

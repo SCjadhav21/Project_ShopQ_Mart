@@ -2,7 +2,11 @@
     width: 80%;
     display: grid;
     grid-template-columns: repeat(3,1fr);
+    grid-template-rows:repeat(auto,300px);
     gap: 10px;
+    border: 1px solid  #24A6BA ;
+
+   
    
    
    
@@ -12,6 +16,7 @@
    
     text-align: left;
     padding: 10px;
+    border: 1px solid  #24A6BA ;
     
 }
 .onlycartcss img{
@@ -20,7 +25,7 @@
 
 .onlycartcss:hover{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border: 1px solid hwb(188 9% 44%);
+    border: 2px solid #24A6BA;
 }
 
 .discountcss{
@@ -37,6 +42,12 @@
 .filtercss{
     width: 20%;
     font-size: 16px;
+    background-color: #24A6BA ;
+   
+   
+ 
+  
+   
 }
 
 
@@ -50,9 +61,14 @@
 
 .inputbox{
    padding-left:15px;
-   font-size: 16px;
+   font-size: 18px;
+  
+  
+   color: white;
+   background-color: #24A6BA ;
 }
 .inputbox  input{
   width: 10%;
   color: gray;
+  
 }

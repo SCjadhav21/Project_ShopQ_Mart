@@ -21,6 +21,8 @@ import {
 import { useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Components/Navbar";
+import Homepage from "../Components/Homepage";
 const Login = () => {
   const [home, setHome] = useState(false);
   const [navigate, setNavigate] = useState(false);
@@ -79,6 +81,7 @@ const Login = () => {
   }
   return (
     <>
+      <Homepage />
       <Modal
         isCentered
         onClose={onClose}
@@ -207,7 +210,7 @@ const Login = () => {
                   color="#24a3b5"
                   padding="0 8px 8px"
                 >
-                  Login
+                  <Link to="/login">Login</Link>
                 </Text>
                 <Text color="#24a3b5" padding="0 8px ">
                   <Link to="/signup">Signup</Link>

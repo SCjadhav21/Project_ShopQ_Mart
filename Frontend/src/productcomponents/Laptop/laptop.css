@@ -2,14 +2,15 @@
     width: 80%;
     display: grid;
     grid-template-columns: repeat(3,1fr);
+    grid-template-rows:repeat(auto,300px);
     gap: 10px;
-    border: 1px solid black;
-   
+    border: 1px solid #24A6BA;
+    text-align: center;
 }
 
 .onlycartcss{
+    text-align: center;
    
-    text-align: left;
     padding: 15px;
 }
 
@@ -25,4 +26,36 @@
 
 .ratingcsss{
     color: orangered;
+}
+
+
+.productname{
+    font-size: 16px;
+    font-weight: 200px;
+    color: grey;
+}
+
+.inputbox{
+   padding-left:15px;
+   font-size: 18px;
+  
+  
+   color: white;
+   background-color: #24A6BA ;
+}
+.inputbox  input{
+  width: 10%;
+  color: gray;
+  
+}
+
+.filtercss{
+    width: 20%;
+    font-size: 16px;
+    background-color: #24A6BA ;
+   
+   
+ 
+  
+   
 }
