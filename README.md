@@ -64,16 +64,5 @@
                 </ul>
             </li>
             
-             <li>
-                <h4>Frontend Deployed Link:-</h4>
-                <p><a href="https://shopqmart.vercel.app/</a></p>
-            </li>
-            <li>
-                <h4>Frontend Deployed Link2:-</h4>
-                <p><a href="https://storied-douhua-955862.netlify.app/</a></p>
-            </li>
-             <li>
-                <h4>Backend Deployed Link:-</h4>
-                <p><a href="https://splendid-bear-cap.cyclic.app/</a></p>
-            </li>
+            
         </ul>
