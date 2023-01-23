@@ -1,16 +1,20 @@
-
-<h1 align="center">Well Come To Shop Mart</h1>
+ <h1 align="center">Well Come To ShopQ Mart</h1>
 <h4>Introduction:-</h4>
-<p>Hi buddy 👋, This is a clone website of a well known ShopClues website .
+<p>Hi buddy 👋, This is a clone website of a well known grocery website ShopClues.com.
    This is a constructive week project at Masai made by four people within four days.
-   
+   It is responsive for all type of device.
  </p>
    <ul>
             <li>
                 <h4>Tech Stacks:-</h4>
                 <ul>
-                   
-                    
+                    <li>
+                        <a href="https://getbootstrap.com" target="_blank" rel="noreferrer">
+                            <span>Bootstrap</span>
+                            <img src="https://cdn-icons-png.flaticon.com/128/5968/5968672.png" alt="bootstrap"
+                                width="20" height="20" />
+                        </a>
+                    </li>
                     <li>
                         <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer">
                             <span>CSS3</span>
@@ -47,22 +51,10 @@
                                 alt="redux" width="20" height="20" />
                         </a>
                     </li>
-                     <li>
-                        <a href="https://getbootstrap.com" target="_blank" rel="noreferrer">
-                            <span>MongoDB</span>
-                            <img src="https://miro.medium.com/max/512/1*doAg1_fMQKWFoub-6gwUiQ.png" alt="bootstrap"
-                                width="20" height="20" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://getbootstrap.com" target="_blank" rel="noreferrer">
-                            <span>Chakra UI</span>
-                            <img src="https://miro.medium.com/max/800/1*8hhfdEqRkRQSaJrJlx60zg.png" alt="bootstrap"
-                                width="20" height="20" />
-                        </a>
-                    </li>
                 </ul>
             </li>
-            
-            
+             <li>
+                <h4>Deployed Link:-</h4>
+                <p><a href="https://shopqmart.vercel.app/">https://shopqmart.vercel.app/</a></p>
+            </li>
         </ul>
