@@ -5,7 +5,7 @@
    It is responsive for all type of device.
  </p>
  
- 
+
 <ul>     
             <li>
                 <h4>Tech Stacks:-</h4>
