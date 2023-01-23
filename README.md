@@ -29,7 +29,7 @@ Technologies used in the project:
 *   Mongoose
 
 
-
+<ul>
    <li>
       <h4>Frontend Deployed Link:-</h4>
       <p><a href="https://shopqmart.vercel.app/">https://shopqmart.vercel.app/</a></p>
@@ -39,4 +39,5 @@ Technologies used in the project:
       <h4>Backend Deployed Link:-</h4>
       <p><a href="https://splendid-bear-cap.cyclic.app/">https://splendid-bear-cap.cyclic.app/</a></p>
   </li>
+  </ul>
        
