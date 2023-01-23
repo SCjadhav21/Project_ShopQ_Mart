@@ -1,3 +1,4 @@
+
 <h1 align="center" id="title">ShopQ Mart</h1>
 
 <p align="center"><img src="https://socialify.git.ci/SCjadhav21/Project_ShopQ_Mart/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
@@ -26,3 +27,16 @@ Technologies used in the project:
 *   JWT
 *   Bcrypt
 *   Mongoose
+
+
+
+   <li>
+      <h4>Frontend Deployed Link:-</h4>
+      <p><a href="https://shopqmart.vercel.app/">https://shopqmart.vercel.app/</a></p>
+    <p><a href="https://storied-douhua-955862.netlify.app/">https://storied-douhua-955862.netlify.app/</a></p>
+  </li>
+  <li>
+      <h4>Backend Deployed Link:-</h4>
+      <p><a href="https://splendid-bear-cap.cyclic.app/">https://splendid-bear-cap.cyclic.app/</a></p>
+  </li>
+       
