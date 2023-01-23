@@ -4,14 +4,16 @@
    This is a constructive week project at Masai made by four people within four days.
    It is responsive for all type of device.
  </p>
-   <ul>
+ 
+ 
+<ul>     
             <li>
                 <h4>Tech Stacks:-</h4>
                 <ul>
                     <li>
-                        <a href="https://getbootstrap.com" target="_blank" rel="noreferrer">
-                            <span>Bootstrap</span>
-                            <img src="https://cdn-icons-png.flaticon.com/128/5968/5968672.png" alt="bootstrap"
+                        <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer">
+                            <span>MnogoDb</span>
+                            <img src="https://i.ytimg.com/an/K_m2976Yvbx-TyDLw7n1WA/featured_channel.jpg?v=6176c4d2" alt="bootstrap"
                                 width="20" height="20" />
                         </a>
                     </li>
@@ -51,10 +53,22 @@
                                 alt="redux" width="20" height="20" />
                         </a>
                     </li>
+                     <li>
+                        <a href="https://redux.js.org" target="_blank" rel="noreferrer">
+                            <span>Chakra UI</span>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1r9zrqpw22G5lG84Ve50fpxkOuFVq8LxhbNq0jilkANT7IDub59zpo_coUmkMMFAVzK8&usqp=CAU"
+                                alt="redux" width="20" height="20" />
+                        </a>
+                    </li>
                 </ul>
             </li>
              <li>
-                <h4>Deployed Link:-</h4>
+                <h4>Frontend Deployed Link:-</h4>
                 <p><a href="https://shopqmart.vercel.app/">https://shopqmart.vercel.app/</a></p>
+              <p><a href="https://storied-douhua-955862.netlify.app/">https://storied-douhua-955862.netlify.app/</a></p>
+            </li>
+            <li>
+                <h4>Backend Deployed Link:-</h4>
+                <p><a href="https://splendid-bear-cap.cyclic.app/">https://splendid-bear-cap.cyclic.app/</a></p>
             </li>
         </ul>
