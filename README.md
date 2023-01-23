@@ -1,5 +1,5 @@
-# Project_ShopClues.com
-<h1 align="center">Well Come To Smart Store</h1>
+
+<h1 align="center">Well Come To Shop Mart</h1>
 <h4>Introduction:-</h4>
 <p>Hi buddy 👋, This is a clone website of a well known ShopClues website .
    This is a constructive week project at Masai made by four people within four days.
