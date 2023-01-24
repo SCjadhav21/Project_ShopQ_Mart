@@ -1,6 +1,8 @@
 import { FaUserCircle, FaRegHeart } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
+import { FiShoppingCart } from "react-icons/fi";
 import { RiAdminLine } from "react-icons/ri";
+import { MdOutlineSwitchAccount } from "react-icons/md";
 // import {  } from "react-icons/ri";
 import React, { useState, useEffect } from "react";
 import "./Homepage.css";
@@ -190,7 +192,10 @@ const Navbar = () => {
                     }
                     variant="outline"
                   />
-                  <MenuList p="0px">
+                  <MenuList
+                    p="0px"
+                    boxShadow="rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
+                  >
                     <Box
                       borderRadius="5px 5px 0% 0%"
                       bgColor="#24A3B5"
@@ -212,29 +217,43 @@ const Navbar = () => {
                         {data.toUpperCase()}
                       </Text>
                     </Box>
+
                     <MenuItem
-                      onClick={() => handleLogout()}
-                      fontSize="20px"
-                      icon={<BiLogOut />}
-                      // command="⌘T"
-                    >
-                      Logout
-                    </MenuItem>
-                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
                       onClick={AuthorisedOrNot}
                       icon={<RiAdminLine />}
-                      command="⌘N"
                     >
                       Admin Page
                     </MenuItem>
-                    <MenuItem icon={<FaRegHeart />} command="⌘⇧N">
+                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
+                      icon={<FaRegHeart />}
+                    >
                       WishList
                     </MenuItem>
-                    <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
+                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
+                      icon={<MdOutlineSwitchAccount />}
+                    >
                       My Profie
                     </MenuItem>
-                    <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
-                      My Cart
+                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
+                      icon={<FiShoppingCart />}
+                    >
+                      <Link href="/cart">My Cart</Link>
+                    </MenuItem>
+                    <MenuItem
+                      p="8px 15px 15px 15px"
+                      onClick={() => handleLogout()}
+                      fontSize="18px"
+                      icon={<BiLogOut />}
+                    >
+                      Logout
                     </MenuItem>
                   </MenuList>
                 </Menu>
