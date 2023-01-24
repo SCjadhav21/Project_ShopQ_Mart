@@ -253,10 +253,10 @@ const Login = () => {
                     padding="0 8px "
                     borderBottom="2px solid #24a3b5"
                   >
-                    <Link to="/login">Login</Link>
+                    <Link to="/login">LOGIN</Link>
                   </Text>
                   <Text color="#24a3b5" padding="0 8px 8px">
-                    <Link to="/signup">Sign Up</Link>
+                    <Link to="/signup">REGISTER</Link>
                   </Text>
                 </Box>
                 <Box fontSize={15} fontWeight="bold">
