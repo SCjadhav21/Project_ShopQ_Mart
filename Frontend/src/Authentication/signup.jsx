@@ -17,10 +17,17 @@ import {
   InputRightElement,
   InputGroup,
   Show,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import Homepage from "../Components/Homepage";
+import { CloseIcon } from "@chakra-ui/icons";
 const Signup = () => {
+  const toast = useToast();
   const [data, setData] = useState({
     name: "",
     mobile: "",
@@ -75,19 +82,47 @@ const Signup = () => {
           },
         })
           .then((res) => {
-            console.log(res);
-            alert(res.data.msg);
             if (res.data.msg == "user Registered") {
+              toast({
+                title: "Account created.",
+                description: "We've created your account for you.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              });
               setNavigate(true);
+            } else {
+              toast({
+                title: "Acount has been Already Regestered.",
+                description: "Please Login to account or Create with new Email",
+                status: "error",
+                duration: 3000,
+
+                isClosable: true,
+              });
             }
           })
           .catch((err) => {
-            console.log(err);
-            alert(err.message);
+            let message = err.message;
+            toast({
+              title: { message },
+              description: err.description,
+              status: "error",
+              duration: 3000,
+
+              isClosable: true,
+            });
           });
       }
     } else {
-      alert("Please fill all the fields");
+      toast({
+        title: "Please fill all the fields",
+
+        status: "error",
+        duration: 3000,
+
+        isClosable: true,
+      });
     }
   };
 
@@ -111,7 +146,6 @@ const Signup = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalCloseButton onClick={() => setHome(true)} />
           <Box w={["", "", "100vh"]} bgColor="#fff" p="10px" display="flex">
             <Show above="md">
               {" "}
@@ -121,6 +155,7 @@ const Signup = () => {
                 padding="95px 20px 0px 20px"
                 textAlign="center"
                 bgColor="#FBFBFB"
+                // bgGradient="linear(0deg,#ff934a 0%,#ff5e62 100%)"
               >
                 <Box
                   display="inline-block"
@@ -224,17 +259,35 @@ const Signup = () => {
               </Box>
             </Show>
             <Box w={["100%", "100%", "70%"]}>
-              <ModalHeader p="0px 20px 0px 20px" display="flex" gap="10%">
-                <Text color="#24a3b5" padding="0 8px ">
-                  <Link to="/login">login</Link>
-                </Text>
-                <Text
-                  borderBottom="2px solid #24a3b5"
-                  color="#24a3b5"
-                  padding="0 8px 8px"
-                >
-                  <Link to="signup">signup</Link>
-                </Text>
+              <ModalHeader
+                p="0px 20px 0px 20px"
+                display="flex"
+                gap="10%"
+                justifyContent="space-between"
+              >
+                <Box display="flex" gap="10%" w="80%">
+                  {" "}
+                  <Text color="#24a3b5" padding="0 8px ">
+                    <Link to="/login">Login</Link>
+                  </Text>
+                  <Text
+                    borderBottom="2px solid #24a3b5"
+                    color="#24a3b5"
+                    padding="0 8px 8px"
+                  >
+                    <Link to="signup">Sign Up</Link>
+                  </Text>
+                </Box>
+                <Box fontSize={15} fontWeight="bold">
+                  <Button
+                    bgColor="#fff"
+                    border="1px solid #E8F0FE"
+                    onClick={() => setHome(true)}
+                  >
+                    {" "}
+                    <CloseIcon />
+                  </Button>
+                </Box>
               </ModalHeader>
 
               <Box p="20px 20px 0px 20px">
