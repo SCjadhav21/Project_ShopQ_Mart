@@ -1,13 +1,14 @@
 .navbarpanel{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
  margin-top: -20px;
+ border: 2px solid ;
 }
 #navbar{
     width: 70%;
     justify-content: space-between;
     display: flex;
     margin: auto;
-    /* border: 3px solid red; */
+    border: 3px solid red;
     padding: 7px;
     margin-top: 20px;
 }

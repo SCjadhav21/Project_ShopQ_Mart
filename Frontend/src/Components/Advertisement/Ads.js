@@ -48,18 +48,17 @@ const Ads = () => {
       const activeIndex = current - 1;
 
   return (
-    <Box display={'flex'} margin="20px" >
+    <Box display={'flex'} margin="20px"  border={'3px solid red'}>
       
         <Flex
       
         direction="column"
         // overflow="hidden"
-        // border={'10px solid red'}
+        border={'3px solid green'}
         w="80%"
-        h={"360px"}
      boxShadow={"rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"}
       >
-        <Flex align="center" justify="center"  position="relative" >
+        <Flex   position="relative" >
    
           <ImageContainer
             // initial="enter"

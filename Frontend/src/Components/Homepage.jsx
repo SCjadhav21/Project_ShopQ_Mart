@@ -10,7 +10,7 @@ const Homepage = () => {
         <Navbar/>
   <Ads/>
        <Product/>
-       <Footer/>
+       {/* <Footer/> */}
     </div>
   )
 }

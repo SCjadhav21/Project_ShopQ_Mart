@@ -221,6 +221,8 @@ import {
   Text,
   Center,
   Tag,
+  Show,
+  Hide
 } from "@chakra-ui/react";
 import ShopQ from "../Resources/ShopQ.jpeg";
 import { Link } from "react-router-dom";
@@ -274,25 +276,27 @@ const Navbar = () => {
 
   return (
     <Box backgroundColor={"#ffffff"}>
-      <Box display={"flex"} mt="1%" w={"100%"} mb="1%">
-        <Box w={"25%"}>
-          <Image src={ShopQ} w={"180px"} ml="50px" />
+      <Box style={{display:'flex', width:'100%', justifyContent:'space-around'}}   mb="1%" >
+        <Box w={{ base:110, md: 150,lg:200 }} border={'1px solid red'} >
+          <Image src={ShopQ}   />
         </Box>
 
         <Center
-          display={"flex"}
-          border={"1px solid grey"}
+          border={'1px solid red'}
+          // border={"none"}
           borderRadius={"10px"}
-          w={"45%"}
-          mt={"13px"}
+          w={{ base: '30%', sm: '35%', md: '45%' }}
         >
           <Input
             w={"85%"}
-            style={{ border: "red", paddingLeft: "25px" }}
+            borderRadius={'0'}
+            bgColor={'#e9f6f7'}
+            border={'1px solid grey'}
             placeholder="What is on your mind today?"
           />
           <Button
-            w={"25%"}
+            w={"15%"}
+            
             style={{
               border: "none",
               background:
@@ -305,54 +309,13 @@ const Navbar = () => {
           </Button>
         </Center>
 
-        {/* <Box display={"flex"} w="20%" margin="auto">
-          <Link
-            display={"flex"}
-            href=""
-            ml={"20px"}
-            textDecoration={"none"}
-            color={"teal"}
-          >
-            <Text mt={"12px"} fontSize={"13px"} fontWeight={"500"}>
-              Location
-            </Text>
-            <Image
-              w={"35px"}
-              h={"30px"}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaR-Pzqjuoro9Sg7bw-y7D7ldTWMAd304Ij1sk03YWrNvA5Y2Puo8h7jgk4BrIODMjJ0&usqp=CAU"
-            />
-          </Link>
-          <Link>
-            <Button border={"none"} backgroundColor="transparent">
-              <BellIcon color={"teal"} w={"40px"} h={"25px"} />
-            </Button>
-          </Link>
-          <Link to="/cart">
-            <Button border={"none"} backgroundColor={"transparent"}>
-              <Image
-                w={"22px"}
-                h={"20px"}
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmWILI-X5CIcJt1_73TP-c7j2bVHrMq94GDTh0DyAvYpGhkeNcD2WKPuGJdiZHc0iVmUE&usqp=CAU"
-              />
-            </Button>
-          </Link>
-          <Link to={data == "Sign In" ? "/login" : ""}>
-            <Button
-              onClick={data == "Sign In" ? handleLogin : handleLogout}
-              border={"none"}
-              backgroundColor={"transparent"}
-              fontWeight={"500"}
-            >
-              {data}
-            </Button>
-          </Link>
-        </Box> */}
-        <Box ml={45}>
-          <Flex mt={"10px"} gap={10}>
-            <Link href="" ml={"20px"} textDecoration={"none"} color={"teal"}>
+        
+        <Box  w={['0%','0%','20%']} marginTop={'10px'} >
+          <Center style={{justifyContent:'space-around'}}  >
+            <Link href=""  textDecoration={"none"} color={"teal"}>
               {/* <Text mt={'12px'} fontSize={'13px'} fontWeight={"500"}>Location</Text> */}
-              <Center>
-                <MdLocationOn fontSize={20} color={"#24a3b5"} />
+              <Center  >
+                <MdLocationOn fontSize={25} color={"#24a3b5"}  w={'20px'}  />
               </Center>
 
               {/* <Image
@@ -366,12 +329,12 @@ const Navbar = () => {
               </Text>
             </Link>
             <Link>
-              <Center mt={"7px"}>
-                <BellIcon color={"#24a3b5"} fontSize={25} />
+              <Center >
+                <BellIcon color={"#24a3b5"} fontSize={25}  />
               </Center>
             </Link>
             <Link to="/cart">
-              <Center mt={"7px"}>
+              <Center >
                 <HiShoppingCart color={"#24a3b5"} fontSize={25} />
               </Center>
 
@@ -393,18 +356,18 @@ const Navbar = () => {
                   fontWeight={"500"}
                 >
                   <Center>
-                    <Tag bg={"#ff645f"} color={"white"} h={10}>
+                    <Tag bg={"#ff645f"} color={"white"} >
                       {data.toUpperCase()}
                     </Tag>
                   </Center>
                 </Button>
               </Center>
             </Link>
-          </Flex>
+          </Center>
         </Box>
       </Box>
-      <Navlist />
-      <Box className="navbarpanel">
+      {/* <Navlist /> */}
+      {/* <Box className="navbarpanel">
         <Box id="navbar">
           <Link href="" className="navbutton">
             Time sales
@@ -436,7 +399,7 @@ const Navbar = () => {
             Mobile Accessories
           </Link>
         </Box>
-      </Box>
+      </Box> */}
       {/* <Product/> */}
       {/* <Box w={"50%"} maxW="3xl" mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
           <Gallery images={images}/>
