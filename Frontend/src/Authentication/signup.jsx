@@ -6,7 +6,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   Button,
   useDisclosure,
   Box,
@@ -17,10 +16,6 @@ import {
   InputRightElement,
   InputGroup,
   Show,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
   useToast,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
@@ -49,8 +44,8 @@ const Signup = () => {
   const handleChange = (e) => {
     let { value, name } = e.target;
 
-    if (name == "pincode" || name == "city" || name == "state") {
-      if (name == "pincode") {
+    if (name === "pincode" || name === "city" || name === "state") {
+      if (name === "pincode") {
         value = +value;
       }
       setData({ ...data, address: { ...data.address, [name]: value } });
@@ -71,7 +66,7 @@ const Signup = () => {
     ) {
       if (data.password.length < 6) {
         alert("password is too stort");
-      } else if (data.mobile.length != 10) {
+      } else if (data.mobile.length !== 10) {
         alert("mobile number length should be 10");
       } else {
         axios("https://splendid-bear-cap.cyclic.app/users/register", {
@@ -82,7 +77,7 @@ const Signup = () => {
           },
         })
           .then((res) => {
-            if (res.data.msg == "user Registered") {
+            if (res.data.msg === "user Registered") {
               toast({
                 title: "Account created.",
                 description: "We've created your account for you.",
@@ -116,11 +111,10 @@ const Signup = () => {
       }
     } else {
       toast({
-        title: "Please fill all the fields",
-
+        title: "Some filed are Empty",
+        description: "Please fill all the fields",
         status: "error",
         duration: 3000,
-
         isClosable: true,
       });
     }

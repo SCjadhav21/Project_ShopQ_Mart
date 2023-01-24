@@ -4,9 +4,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Button,
   useDisclosure,
   Box,
@@ -22,7 +19,7 @@ import {
 import { useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../Components/Navbar";
+
 import Homepage from "../Components/Homepage";
 import { CloseIcon } from "@chakra-ui/icons";
 const Login = () => {
@@ -56,7 +53,7 @@ const Login = () => {
         },
       })
         .then((res) => {
-          if (res.data.msg == "Login Successfull") {
+          if (res.data.msg === "Login Successfull") {
             toast({
               title: "Login Successfull",
               description: "You've Logged In your account.",
@@ -69,7 +66,7 @@ const Login = () => {
           } else {
             toast({
               title: "Wrong Credentials",
-              description: "You've Not Logged In your account.",
+              description: "Please Check your Email or Password.",
               status: "error",
               duration: 3000,
               isClosable: true,
