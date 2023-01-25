@@ -15,6 +15,8 @@ import {
   Text,
   Center,
   Tag,
+  Show,
+  Hide,
   MenuButton,
   MenuList,
   MenuItem,
@@ -107,25 +109,33 @@ const Navbar = () => {
   }
   return (
     <Box backgroundColor={"#ffffff"}>
-      <Box display={"flex"} mt="1%" w={"100%"} mb="1%">
-        <Box w={"25%"}>
-          <Image src={ShopQ} w={"180px"} ml="50px" />
+      <Box
+        style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "space-around",
+          mt: "1%",
+        }}
+      >
+        <Box w={{ base: 110, md: 150, lg: 200 }} mt={"10px"}>
+          <Image src={ShopQ} />
         </Box>
 
         <Center
-          display={"flex"}
-          border={"1px solid grey"}
+          // border={'1px solid red'}
+          // border={"none"}
           borderRadius={"10px"}
-          w={"45%"}
-          mt={"13px"}
+          w={{ base: "30%", sm: "40%", md: "45%" }}
         >
           <Input
             w={"85%"}
-            style={{ border: "red", paddingLeft: "25px" }}
+            borderRadius={"0"}
+            bgColor={"#e9f6f7"}
+            border={"1px solid grey"}
             placeholder="What is on your mind today?"
           />
           <Button
-            w={"25%"}
+            w={"15%"}
             style={{
               border: "none",
               background:
@@ -138,11 +148,12 @@ const Navbar = () => {
           </Button>
         </Center>
 
-        <Box ml={45}>
-          <Flex mt={"10px"} gap={10}>
-            <Link href="" ml={"20px"} textDecoration={"none"} color={"teal"}>
+        <Box w={["0%", "0%", "20%"]} marginTop={"10px"}>
+          <Center style={{ justifyContent: "space-around" }}>
+            <Link href="" textDecoration={"none"} color={"teal"}>
+              {/* <Text mt={'12px'} fontSize={'13px'} fontWeight={"500"}>Location</Text> */}
               <Center>
-                <MdLocationOn fontSize={20} color={"#24a3b5"} />
+                <MdLocationOn fontSize={25} color={"#24a3b5"} w={"20px"} />
               </Center>
 
               {/* <Image
@@ -156,12 +167,12 @@ const Navbar = () => {
               </Text>
             </Link>
             <Link>
-              <Center mt={"7px"}>
+              <Center>
                 <BellIcon color={"#24a3b5"} fontSize={25} />
               </Center>
             </Link>
             <Link to="/cart">
-              <Center mt={"7px"}>
+              <Center>
                 <HiShoppingCart color={"#24a3b5"} fontSize={25} />
               </Center>
 
@@ -218,14 +229,18 @@ const Navbar = () => {
                       </Text>
                     </Box>
 
-                    <MenuItem
-                      p="8px 15px"
-                      fontSize="18px"
-                      onClick={AuthorisedOrNot}
-                      icon={<RiAdminLine />}
-                    >
-                      Admin Page
-                    </MenuItem>
+                    {!data2 ? (
+                      <MenuItem
+                        p="8px 15px"
+                        fontSize="18px"
+                        onClick={AuthorisedOrNot}
+                        icon={<RiAdminLine />}
+                      >
+                        Admin Page
+                      </MenuItem>
+                    ) : (
+                      ""
+                    )}
                     <MenuItem
                       p="8px 15px"
                       fontSize="18px"
@@ -259,7 +274,7 @@ const Navbar = () => {
                 </Menu>
               </Center>
             </Link>
-          </Flex>
+          </Center>
         </Box>
       </Box>
       <Navlist />

@@ -133,45 +133,68 @@ const Product = () => {
        
       <Center>
         <main id="trend" >
-          <section>
-            <div class="slide">
+          <section >
+            {/* <Box class="slide">
               <a href="">
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"80%"}
+                      width={{ base: '100%', sm: '50%', md: '85%' }}
                       src="https://cdn.shopclues.com/images1/thumbnails/115246/200/200/152689876-115246212-1659944528.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Venerate Headphone Stand</Text>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }}>Venerate Headphone Stand</Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$145</Text>
-                    <Text style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$1999</Text>
-                    <Text style={{color:'teal',fontWeight:'500',ml:'15px'}}>87% off</Text>
+                    <Text id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$1999</Text>
+                    <Text id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>87% off</Text>
                   </Box>
                 </Box>
               </a>
-            </div>
+            </Box> */}
+
             <div class="slide">
               <a href="">
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"80%"}
+                      width={{ base: '100%', sm: '50%', md: '85%' }}
+                      src="https://cdn.shopclues.com/images1/thumbnails/115246/200/200/152689876-115246212-1659944528.jpg"
+                    >
+                    </Image>
+                  </Box>
+                </Center>
+                <Box>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }} >Venerate Headphone Stand</Text>
+                  <Box display={'flex'}>
+                    <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$145</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$1999</Text>
+                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>87% off</Text>
+                  </Box>
+                </Box>
+              </a>
+            </div>
+
+            <div class="slide">
+              <a href="">
+                <Center>
+                  <Box display={"flex"} className="multiimage">
+                    <Image
+                      width={{ base: '100%', sm: '50%', md: '85%' }}
                       src="https://cdn.shopclues.com/images1/thumbnails/81476/200/200/135627858-81476269-1665754103.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >MTR MT310 Dual Sim </Text>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }} >MTR MT310 Dual Sim </Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$749</Text>
-                    <Text style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$999</Text>
-                    <Text style={{color:'teal',fontWeight:'500',ml:'15px'}}>25% off</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$999</Text>
+                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>25% off</Text>
                   </Box>
                 </Box>
               </a>
@@ -182,18 +205,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"80%"}
+                     width={{ base: '100%', sm: '50%', md: '85%' }}
                       src="https://cdn.shopclues.com/images1/thumbnails/71795/200/200/128902274-71795769-1653057803.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Premium Quality Nylon</Text>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }}>Premium Quality Nylon</Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$250</Text>
-                    <Text style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$399</Text>
-                    <Text style={{color:'teal',fontWeight:'500',ml:'15px'}}>37% off</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$399</Text>
+                    <Text  id='hide'style={{color:'teal',fontWeight:'500',ml:'15px'}}>37% off</Text>
                   </Box>
                 </Box>
               </a>
@@ -204,18 +227,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"80%"}
+                   width={{ base: '100%', sm: '50%', md: '85%' }}
                       src="https://cdn.shopclues.com/images1/thumbnails/115737/200/200/152853766-115737455-1637323013.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Dizom Dz-104 Hip-Hop</Text>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }}>Dizom Dz-104 Hip-Hop</Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$389</Text>
-                    <Text style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$2499</Text>
-                    <Text style={{color:'teal',fontWeight:'500',ml:'15px'}}>84% off</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$2499</Text>
+                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>84% off</Text>
                   </Box>
                 </Box>
               </a>
@@ -226,18 +249,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"80%"}
+                      width={{ base: '100%', sm: '50%', md: '85%' }}
                       src="https://cdn.shopclues.com/images1/thumbnails/115044/200/200/152634665-115044372-1629705035.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >ZEB-UCC100 2.0 Cable</Text>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }} >ZEB-UCC100 2.0 Cable</Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$139</Text>
-                    <Text style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$899</Text>
-                    <Text style={{color:'teal',fontWeight:'500',ml:'15px'}}>85% off</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$899</Text>
+                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>85% off</Text>
                   </Box>
                 </Box>
               </a>
@@ -248,18 +271,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"80%"}
+                      width={{ base: '100%', sm: '50%', md: '85%' }}
                       src="https://cdn.shopclues.com/images1/thumbnails/95155/200/200/142698419-95155481-1653692385.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >ESHOPINDIA Data Cable</Text>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }}>ESHOPINDIA Data Cable</Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$270</Text>
-                    <Text style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$499</Text>
-                    <Text style={{color:'teal',fontWeight:'500',ml:'15px'}}>46% off</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$499</Text>
+                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>46% off</Text>
                   </Box>
                 </Box>
               </a>
@@ -270,17 +293,17 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"80%"}
+                      width={{ base: '100%', sm: '50%', md: '85%' }}
                       src="https://cdn.shopclues.com/images1/thumbnails/112883/200/200/151860087-112883707-1664649308.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Innotek Mini k1</Text>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }}>Innotek Mini k1</Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$169</Text>
-                    <Text style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$599</Text>
+                    <Text  id='hide'style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$599</Text>
                     <Text style={{color:'teal',fontWeight:'500',ml:'15px'}}>72% off</Text>
                   </Box>
                 </Box>
@@ -672,8 +695,8 @@ const Product = () => {
       
       </Box>
 
-      <Box mb={'100px'}>
-        <Box mb={'50px'} mt={'25px'}>
+      <Box mb={'50px'}>
+        <Box mb={'30px'} mt={'25px'}>
         <Text color={'black'} fontWeight={'500'} ml={'20px'} fontSize={'20px'} >
                  Budget Bazar
         </Text>
