@@ -224,6 +224,17 @@ const AdminPage = () => {
       .catch((err) => console.error(err));
   };
 
+  const getOrders = () => {
+    axios(`https://splendid-bear-cap.cyclic.app/cart/allitems`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => setData(res.data))
+      .catch((err) => console.error(err));
+  };
   // All handel page change methods
 
   const handelClick = (value) => {
@@ -237,7 +248,10 @@ const AdminPage = () => {
       getWashingmachineData();
     } else if (value == "AllLaptopProducts") {
       getLaptopData();
+    } else if (value == "allOrders") {
+      getOrders();
     }
+
     setPage(value);
     onClose();
   };
@@ -896,8 +910,18 @@ const AdminPage = () => {
                 Orders
               </MenuButton>
               <MenuList border="2px solid red" bgColor="#fff">
-                <MenuItem icon={<ViewIcon />}>View Orders</MenuItem>
-                <MenuItem icon={<EditIcon />}>Delete Orders</MenuItem>
+                <MenuItem
+                  onClick={() => handelClick("allOrders")}
+                  icon={<ViewIcon />}
+                >
+                  View Orders
+                </MenuItem>
+                <MenuItem
+                  onClick={() => handelClick("deleteOrders")}
+                  icon={<EditIcon />}
+                >
+                  Delete Orders
+                </MenuItem>
               </MenuList>
             </Menu>
           </DrawerBody>
@@ -1982,6 +2006,68 @@ const AdminPage = () => {
               </FormControl>
             </form>
           </Box>
+        </Box>
+      ) : (
+        ""
+      )}
+      {page == "allOrders" ? (
+        <Box p="0px 20px">
+          <Box
+            p="10px"
+            boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+            display="flex"
+            flexDirection={["column", "column", "column", "row"]}
+            justifyContent="space-evenly"
+            justifyItems="center"
+            alignItems="center"
+            fontSize="20px"
+            fontWeight="500"
+            bgGradient="linear(to-r, green.100, pink.300)"
+          >
+            <Text>Index</Text>
+            <Text>Product Image</Text>
+
+            <Text>Product Price</Text>
+            <Text> Total Quantity</Text>
+            <Text>UserId</Text>
+
+            <Text>Order Time</Text>
+
+            <Text>Remove Product</Text>
+          </Box>
+          <SimpleGrid columns={1} spacing="40px">
+            {data?.map((items, index) => {
+              console.log(items);
+              return (
+                <Box
+                  p="10px"
+                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                  key={index}
+                  display="flex"
+                  flexDirection={["column", "column", "column", "row"]}
+                  justifyContent="space-evenly"
+                  justifyItems="center"
+                  alignItems="center"
+                >
+                  <Text>{index + 1}</Text>
+                  <Img src={items.image} />
+                  <Text>{items.price}</Text>
+                  <Text> {items.quantity}</Text>
+                  <Text>{items.userId}</Text>
+
+                  <Text>{items.updatedAt}</Text>
+
+                  <Button
+                    mt="8px"
+                    // onClick={() => handelUserDelete(user._id)}
+                    ml="5px"
+                  >
+                    Remove
+                  </Button>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
         </Box>
       ) : (
         ""
