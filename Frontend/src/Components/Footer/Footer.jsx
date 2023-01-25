@@ -242,7 +242,7 @@ const Footer = () => {
 <hr/>
 
         <Box m={'10px'} w={'95%'}>
-            <Flex justifyContent={'space-between'}  p={'20px'}>
+            <Flex justifyContent={'space-between'}  p={'20px'} >
             <Flex>
                 <Text > Privacy Policy |</Text>
                 <Text >User Agreement |</Text>
@@ -252,7 +252,7 @@ const Footer = () => {
             </Flex>
             <Flex>
                 <Text>Copyright © 2011-2023 Clues Network Pvt. Ltd</Text>
-                <Image w={'120px'} src={ShopQ}></Image>
+                <Image w={{ base: '1px', sm: '1px', md: '120px' }} src={ShopQ}></Image>
             </Flex>
 
             </Flex>
