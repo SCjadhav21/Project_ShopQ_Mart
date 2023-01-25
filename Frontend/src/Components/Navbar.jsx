@@ -276,7 +276,7 @@ const Navbar = () => {
 
   return (
     <Box backgroundColor={"#ffffff"}>
-      <Box style={{display:'flex', width:'100%', justifyContent:'space-around'}}   mb="1%" >
+      <Box style={{display:'flex', width:'100%', justifyContent:'space-around',mt:'1%'}}    >
         <Box w={{ base:110, md: 150,lg:200 }} mt={'10px'} >
           <Image src={ShopQ}   />
         </Box>
@@ -366,8 +366,8 @@ const Navbar = () => {
           </Center>
         </Box>
       </Box>
-      {/* <Navlist /> */}
-      {/* <Box className="navbarpanel">
+      <Navlist />
+      <Box className="navbarpanel">
         <Box id="navbar">
           <Link href="" className="navbutton">
             Time sales
@@ -399,7 +399,7 @@ const Navbar = () => {
             Mobile Accessories
           </Link>
         </Box>
-      </Box> */}
+      </Box>
       {/* <Product/> */}
       {/* <Box w={"50%"} maxW="3xl" mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
           <Gallery images={images}/>
