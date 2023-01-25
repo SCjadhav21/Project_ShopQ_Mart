@@ -23,6 +23,9 @@ import {
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
+import Navbar from "../../Components/Navbar";
+import Footer from "../../Components/Footer/Footer";
+
 
 export default function SinglepageMachine() {
   const [data, setData] = useState([]);
@@ -48,6 +51,7 @@ export default function SinglepageMachine() {
   };
 
   return (
+    <>    <Navbar />
     <Container maxW={"7xl"}>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
@@ -203,5 +207,8 @@ export default function SinglepageMachine() {
         </Stack>
       </SimpleGrid>
     </Container>
+    <Footer />
+    </>
+
   );
 }

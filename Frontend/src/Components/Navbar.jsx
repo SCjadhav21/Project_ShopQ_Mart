@@ -148,8 +148,10 @@ const Navbar = () => {
           mt: "1%",
         }}
       >
-        <Box w={{ base: 110, md: 150, lg: 200 }} mt={"10px"}>
+        <Box  w={{ base: 110, md: 150, lg: 200 }} mt={"10px"}>
+          <Link to="/">
           <Image src={ShopQ} />
+          </Link>
         </Box>
 
         <Center
@@ -206,13 +208,16 @@ const Navbar = () => {
     :   <Popover isOpen={isOpen}>  
   <PopoverTrigger>
   <Link to="/cart" >
-  <HiShoppingCart color={"#24a3b5"} fontSize={25} onMouseEnter={onOpen}/>
+  {cart.length>0? <Center ml={"5px"} fontWeight={"bold"} borderRadius={"50%"} color={"white"} h={"20px"} w={"20px"} bg={"#ff645f"}>{cart.length}</Center>:""}
+     
+  <HiShoppingCart color={"#24a3b5"} fontSize={25} onMouseEnter={onOpen} />
+  
     </Link>
   </PopoverTrigger>
   <PopoverContent onMouseLeave={onClose}>
     <PopoverArrow />
     <PopoverHeader fontWeight={"bold"}>Your Shopping Cart ({cart.length} Item)</PopoverHeader>
-    <PopoverBody h="300px" overflow={"scroll"}>{cart.length>0 ? cart?.map((el,index)=>{
+    <PopoverBody maxH="300px" overflow={"scroll"}>{cart.length>0 ? cart?.map((el,index)=>{
       return <Box borderBottom={"2px solid #24a3b5"} p={"7px"} key={index}>
         <Flex >
           <Center gap={5}>
