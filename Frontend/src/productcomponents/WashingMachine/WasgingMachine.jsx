@@ -1,22 +1,48 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import "./machine.css"
+
+const  getData= (sortdata)=>{
+  
+  return axios.get(`https://splendid-bear-cap.cyclic.app/products/washingmachine`,sortdata)
+
+}
 
 const WasgingMachine = () => {
 
-    const navigate=useNavigate()
+  const navigate=useNavigate()
 
-    const[data,setData]=useState([])
+  const[data,setData]=useState([])
 
-      useEffect(()=>{
-        axios.get("https://splendid-bear-cap.cyclic.app/products/washingmachine").then((res)=>{
-            setData(res.data)
-           
-        })
-         
-           
-      },[])
+  const[searchParams]=useSearchParams()
+   const location=useLocation()
+
+ 
+  const sort=searchParams.get("sort")
+  useEffect(()=>{
+    let  company=searchParams.getAll("brand")
+    const getTVparams={
+          params:{
+            brand:company[company.length-1],
+            discount:searchParams.getAll("discount"),
+            sort:sort &&"price",
+            order:sort
+          }
+    }
+  
+  
+    getData(getTVparams).then((res)=>{
+      setData(res.data)
+     
+    })
+    
+   
+       
+  },[sort,location,searchParams])
+
+
+
   return (
    
     <div className='ProductCss'>

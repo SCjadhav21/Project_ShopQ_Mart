@@ -26,3 +26,35 @@
 .ratingcsss{
     color: orangered;
 }
+
+
+.productname{
+    font-size: 16px;
+    font-weight: 200px;
+    color: grey;
+}
+
+.inputbox{
+   padding-left:15px;
+   font-size: 18px;
+  
+  
+   color: white;
+   background-color: #24A6BA ;
+}
+.inputbox  input{
+  width: 10%;
+  color: gray;
+  
+}
+
+.filtercss{
+    width: 20%;
+    font-size: 16px;
+    background-color: #24A6BA ;
+   
+   
+ 
+  
+   
+}

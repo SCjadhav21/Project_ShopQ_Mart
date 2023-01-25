@@ -45,7 +45,8 @@ import {
 } from "@chakra-ui/icons";
 import axios from "axios";
 import { useState } from "react";
-import { useEffect } from "react";
+import ShopQ from "../Resources/ShopQ.jpeg";
+import { Link } from "react-router-dom";
 
 const AdminPage = () => {
   // userIntialState
@@ -151,6 +152,7 @@ const AdminPage = () => {
     sold_by: "",
     emi: "",
   });
+
   const [page, setPage] = useState("main");
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
@@ -158,6 +160,7 @@ const AdminPage = () => {
   const [userData, setuserData] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  // check  authorizetion
 
   // All get methods
 
@@ -701,25 +704,44 @@ const AdminPage = () => {
         border="2px solid #F7F7F7"
         boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
         display="flex"
+        justifyContent="space-between"
+        pr="30px"
         gap={5}
       >
-        <Img
-          w="100px"
-          h="60px"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLK1eb8FMEoD5ePIJx-i2OHToVzBWjL4H29Q&usqp=CAU"
-        ></Img>
-        <Box alignItems="center" display="flex" flexDirection="column">
-          <Text fontWeight="700" fontSize="24px" color="#3168E6">
-            Admin
-          </Text>
-          <Text fontSize="16px" color="#888888">
-            ShopQ_Mart
-          </Text>
+        <Box display="flex" gap={5}>
+          <Img
+            w="100px"
+            h="60px"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLK1eb8FMEoD5ePIJx-i2OHToVzBWjL4H29Q&usqp=CAU"
+          ></Img>
+          <Box alignItems="center" display="flex" flexDirection="column">
+            <Text
+              onClick={() => setPage("main")}
+              fontWeight="700"
+              fontSize="24px"
+              color="#3168E6"
+            >
+              Admin
+            </Text>
+            <Text fontSize="16px" color="#888888">
+              ShopQ_Mart
+            </Text>
+          </Box>
+        </Box>
+        <Box>
+          <Link to="/">
+            <Img w="200px" src={ShopQ} />
+          </Link>
         </Box>
       </Box>
-      <Button ref={btnRef} bgColor="#3EC" m="10px" w="200px" onClick={onOpen}>
-        Options
-      </Button>
+      <Box display={"flex"} gap={10}>
+        <Button ref={btnRef} bgColor="#3EC" m="10px" w="200px" onClick={onOpen}>
+          Options
+        </Button>
+        <Button bgColor="#3EC" m="10px" w="200px" onClick={onOpen}>
+          <Link to="/">Back Home</Link>
+        </Button>
+      </Box>
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -883,6 +905,17 @@ const AdminPage = () => {
           <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
+      {page == "main" ? (
+        <Box h="100vh" display="flex" mt="100px" justifyContent="center">
+          <Img
+            w="50vh"
+            h="50vh"
+            src="https://thumbs.dreamstime.com/b/admin-icon-trendy-design-style-isolated-white-background-vector-simple-modern-flat-symbol-web-site-mobile-logo-app-135742404.jpg"
+          ></Img>
+        </Box>
+      ) : (
+        ""
+      )}
 
       {page == "AllTvProducts" ? (
         <Box p="0px 20px">

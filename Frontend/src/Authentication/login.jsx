@@ -4,9 +4,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Button,
   useDisclosure,
   Box,
@@ -17,11 +14,16 @@ import {
   InputRightElement,
   InputGroup,
   Show,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+
+import Homepage from "../Components/Homepage";
+import { CloseIcon } from "@chakra-ui/icons";
 const Login = () => {
+  const toast = useToast();
   const [home, setHome] = useState(false);
   const [navigate, setNavigate] = useState(false);
   const [data, setData] = useState({
@@ -51,20 +53,44 @@ const Login = () => {
         },
       })
         .then((res) => {
-          console.log(res);
-          alert(res.data.msg);
-          if (res.data.msg == "Login Successfull") {
-            console.log("data", res.data.token);
+          if (res.data.msg === "Login Successfull") {
+            toast({
+              title: "Login Successfull",
+              description: "You've Logged In your account.",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
             localStorage.setItem("token", res.data.token);
             setNavigate(true);
+          } else {
+            toast({
+              title: "Wrong Credentials",
+              description: "Please Check your Email or Password.",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
           }
         })
         .catch((err) => {
-          console.log(err);
-          alert(err.message);
+          let message = err.message;
+          toast({
+            title: "Error",
+            description: { message },
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
         });
     } else {
-      alert("Please fill all the fields");
+      toast({
+        title: "Some filed are Empty",
+        description: "Please fill all the fields",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -79,6 +105,7 @@ const Login = () => {
   }
   return (
     <>
+      <Homepage />
       <Modal
         isCentered
         onClose={onClose}
@@ -200,18 +227,48 @@ const Login = () => {
             </Show>
 
             <Box w={["100%", "100%", "70%"]}>
-              <ModalCloseButton onClick={() => setHome(true)} />
-              <ModalHeader p="0px 20px 0px 20px" display="flex" gap="10%">
+              {/* <ModalCloseButton onClick={() => setHome(true)} /> */}
+              {/* <ModalHeader p="0px 20px 0px 20px" display="flex" gap="10%">
                 <Text
                   borderBottom="2px solid #24a3b5"
                   color="#24a3b5"
                   padding="0 8px 8px"
                 >
-                  Login
+                  <Link to="/login">Login</Link>
                 </Text>
                 <Text color="#24a3b5" padding="0 8px ">
                   <Link to="/signup">Signup</Link>
                 </Text>
+              </ModalHeader> */}
+              <ModalHeader
+                p="0px 20px 0px 20px"
+                display="flex"
+                gap="10%"
+                justifyContent="space-between"
+              >
+                <Box display="flex" gap="10%" w="80%">
+                  {" "}
+                  <Text
+                    color="#24a3b5"
+                    padding="0 8px "
+                    borderBottom="2px solid #24a3b5"
+                  >
+                    <Link to="/login">LOGIN</Link>
+                  </Text>
+                  <Text color="#24a3b5" padding="0 8px 8px">
+                    <Link to="/signup">REGISTER</Link>
+                  </Text>
+                </Box>
+                <Box fontSize={15} fontWeight="bold">
+                  <Button
+                    bgColor="#fff"
+                    border="1px solid #E8F0FE"
+                    onClick={() => setHome(true)}
+                  >
+                    {" "}
+                    <CloseIcon />
+                  </Button>
+                </Box>
               </ModalHeader>
 
               <Box p="20px 20px 0px 20px">

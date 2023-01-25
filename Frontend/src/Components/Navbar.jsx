@@ -1,27 +1,81 @@
-import React, { useState } from "react";
+import { FaUserCircle, FaRegHeart } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { FiShoppingCart } from "react-icons/fi";
+import { RiAdminLine } from "react-icons/ri";
+import { MdOutlineSwitchAccount } from "react-icons/md";
+// import {  } from "react-icons/ri";
+import React, { useState, useEffect } from "react";
 import "./Homepage.css";
-import { Box, Button, Flex, Input, Image, Text, Center, Tag } from "@chakra-ui/react";
-import ShopQ from "../Resources/ShopQ.jpeg";
-import { Link } from "react-router-dom";
-import { BellIcon } from "@chakra-ui/icons";
-import {MdLocationOn} from "react-icons/md"
-import {HiShoppingCart} from "react-icons/hi"
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  Image,
+  Text,
+  Center,
+  Tag,
 
+  Show,
+  Hide,
+
+  MenuButton,
+  MenuList,
+  MenuItem,
+  IconButton,
+  Menu,
+  Img,
+
+} from "@chakra-ui/react";
+import ShopQ from "../Resources/ShopQ.jpeg";
+import { Link, Navigate } from "react-router-dom";
+import {
+  AddIcon,
+  BellIcon,
+  EditIcon,
+  ExternalLinkIcon,
+  RepeatIcon,
+} from "@chakra-ui/icons";
+import { MdLocationOn } from "react-icons/md";
+import { HiShoppingCart } from "react-icons/hi";
 
 import Navlist from "./Trial/Navlist";
-import { useEffect } from "react";
+
 import axios from "axios";
-// import { Navigate } from "react-router-dom";
-// import Product from './Product/Product';
-// import UncontrolledExample from './Banner/Banner';
-// import {images} from "./components/_data"
-// import {Gallery} from "./components/Gallery"
-// import Product from './Product/Product';
-// import Ads from './Advertisement/Ads';
 
 const Navbar = () => {
   const [data, setData] = useState("");
+  const [add, setAdd] = useState(false);
   const [address, setAdress] = useState("");
+  const [data2, setData2] = useState(false);
+  const [goadmin, setGoadmin] = useState(false);
+  const checkAuth = () => {
+    axios(`https://splendid-bear-cap.cyclic.app/users/`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        if (res.data.msg == "Not Authorised") {
+          setData2(true);
+        }
+      })
+
+      .catch((err) => console.error(err));
+  };
+
+  const AuthorisedOrNot = () => {
+    let token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please Login First");
+    } else if (data2) {
+      alert("You are Not Authorized");
+    } else {
+      setGoadmin(true);
+    }
+  };
 
   const getuserdata = () => {
     axios(`https://splendid-bear-cap.cyclic.app/users/personalDetail`, {
@@ -38,9 +92,10 @@ const Navbar = () => {
       .catch((err) => console.error(err));
   };
 
+  const handleLogou = () => {};
   const handleLogin = () => {
     let token = localStorage.getItem("token");
-    // token ? setData("Logout") : setData("Sign In");
+
     token ? getuserdata() : setData("Sign In");
   };
 
@@ -49,30 +104,35 @@ const Navbar = () => {
     setData("Sign In");
   };
   useEffect(() => {
+    checkAuth();
     handleLogin();
-  }, []);
-
+  }, [add]);
+  if (goadmin) {
+    return <Navigate to="/adminpage" />;
+  }
   return (
     <Box backgroundColor={"#ffffff"}>
-      <Box display={"flex"} mt="1%" w={"100%"} mb="1%">
-        <Box w={"25%"}>
-          <Image src={ShopQ} w={"180px"} ml="50px" />
+      <Box style={{display:'flex', width:'100%', justifyContent:'space-around',mt:'1%'}}    >
+        <Box w={{ base:110, md: 150,lg:200 }} mt={'10px'} >
+          <Image src={ShopQ}   />
         </Box>
-        
+
         <Center
-          display={"flex"}
-          border={"1px solid grey"}
+          // border={'1px solid red'}
+          // border={"none"}
           borderRadius={"10px"}
-          w={"45%"}
-          mt={"13px"}
+          w={{ base: '30%', sm: '40%', md: '45%' }}
         >
           <Input
             w={"85%"}
-            style={{ border: "red", paddingLeft: "25px" }}
+            borderRadius={'0'}
+            bgColor={'#e9f6f7'}
+            border={'1px solid grey'}
             placeholder="What is on your mind today?"
           />
           <Button
-            w={"25%"}
+            w={"15%"}
+            
             style={{
               border: "none",
               background:
@@ -84,77 +144,38 @@ const Navbar = () => {
             Search
           </Button>
         </Center>
-      
-        {/* <Box display={"flex"} w="20%" margin="auto">
-          <Link
-            display={"flex"}
-            href=""
-            ml={"20px"}
-            textDecoration={"none"}
-            color={"teal"}
-          >
-            <Text mt={"12px"} fontSize={"13px"} fontWeight={"500"}>
-              Location
-            </Text>
-            <Image
-              w={"35px"}
-              h={"30px"}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaR-Pzqjuoro9Sg7bw-y7D7ldTWMAd304Ij1sk03YWrNvA5Y2Puo8h7jgk4BrIODMjJ0&usqp=CAU"
-            />
-          </Link>
-          <Link>
-            <Button border={"none"} backgroundColor="transparent">
-              <BellIcon color={"teal"} w={"40px"} h={"25px"} />
-            </Button>
-          </Link>
-          <Link to="/cart">
-            <Button border={"none"} backgroundColor={"transparent"}>
-              <Image
-                w={"22px"}
-                h={"20px"}
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmWILI-X5CIcJt1_73TP-c7j2bVHrMq94GDTh0DyAvYpGhkeNcD2WKPuGJdiZHc0iVmUE&usqp=CAU"
-              />
-            </Button>
-          </Link>
-          <Link to={data == "Sign In" ? "/login" : ""}>
-            <Button
-              onClick={data == "Sign In" ? handleLogin : handleLogout}
-              border={"none"}
-              backgroundColor={"transparent"}
-              fontWeight={"500"}
-            >
-              {data}
-            </Button>
-          </Link>
-        </Box> */}
-        <Box ml={45}  >
-          <Flex mt={"10px"} gap={10}  >
-            <Link href="" ml={"20px"} textDecoration={"none"} color={"teal"}>
+
+
+        
+        <Box  w={['0%','0%','20%']} marginTop={'10px'} >
+          <Center style={{justifyContent:'space-around'}}  >
+            <Link href=""  textDecoration={"none"} color={"teal"}>
               {/* <Text mt={'12px'} fontSize={'13px'} fontWeight={"500"}>Location</Text> */}
-              <Center>
-              <MdLocationOn fontSize={20} color={"#24a3b5"} />
+              <Center  >
+                <MdLocationOn fontSize={25} color={"#24a3b5"}  w={'20px'}  />
+
               </Center>
-                
+
               {/* <Image
                 w={"30px"}
                 h={"20px"}
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaR-Pzqjuoro9Sg7bw-y7D7ldTWMAd304Ij1sk03YWrNvA5Y2Puo8h7jgk4BrIODMjJ0&usqp=CAU"
               /> */}
-              <Text fontWeight={'500'} color={'#ff645f'}> {data !== "Sign In" ? address.toUpperCase() : ""}</Text>
-             
+              <Text fontWeight={"500"} color={"#ff645f"}>
+                {" "}
+                {data !== "Sign In" ? address.toUpperCase() : ""}
+              </Text>
             </Link>
             <Link>
-              <Center mt={"7px"}>
-              <BellIcon color={"#24a3b5"} fontSize={25} />
+              <Center >
+                <BellIcon color={"#24a3b5"} fontSize={25}  />
               </Center>
-             
-          
             </Link>
             <Link to="/cart">
-              <Center mt={"7px"}>
-              <HiShoppingCart color={"#24a3b5"}   fontSize={25}/>
+              <Center >
+                <HiShoppingCart color={"#24a3b5"} fontSize={25} />
               </Center>
-            
+
               {/* <Button border={"none"} backgroundColor={"transparent"}>
                 <Image
                   w={"22px"}
@@ -166,24 +187,92 @@ const Navbar = () => {
             </Link>
             <Link to={data == "Sign In" ? "/login" : ""}>
               <Center>
-              <Button
-                onClick={data == "Sign In" ? handleLogin : handleLogout}
-                border={"none"}
-                backgroundColor={"transparent"}
-                fontWeight={"500"}
-              >
-                <Center>
-                <Tag bg={"#ff645f"} color={"white"} h={10}>
-                {data.toUpperCase()}
-                </Tag>
-                </Center>
-                
-               
-              </Button>
+
+                <Menu>
+                  <MenuButton
+                    // handleLogout
+                    onClick={data == "Sign In" ? handleLogin : handleLogou()}
+                    border={"none"}
+                    backgroundColor={"transparent"}
+                    fontWeight={"500"}
+                    as={IconButton}
+                    aria-label="Options"
+                    icon={
+                      <Tag bg={"#ff645f"} color={"white"} h={10}>
+                        {data !== "SIGN IN" ? data.toUpperCase() : "Sign In"}
+                      </Tag>
+                    }
+                    variant="outline"
+                  />
+                  <MenuList
+                    p="0px"
+                    boxShadow="rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
+                  >
+                    <Box
+                      borderRadius="5px 5px 0% 0%"
+                      bgColor="#24A3B5"
+                      h="65px"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      gap={5}
+                    >
+                      <FaUserCircle fontSize="35px" color="#fff" />
+                      {/* <Img
+                        w="40px"
+                        h="40px"
+                        borderRadius="50%"
+                        src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+                        alt="error in url"
+                      /> */}
+                      <Text color="#fff" fontWeight="bold">
+                        {data.toUpperCase()}
+                      </Text>
+                    </Box>
+
+                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
+                      onClick={AuthorisedOrNot}
+                      icon={<RiAdminLine />}
+                    >
+                      Admin Page
+                    </MenuItem>
+                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
+                      icon={<FaRegHeart />}
+                    >
+                      WishList
+                    </MenuItem>
+                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
+                      icon={<MdOutlineSwitchAccount />}
+                    >
+                      My Profie
+                    </MenuItem>
+                    <MenuItem
+                      p="8px 15px"
+                      fontSize="18px"
+                      icon={<FiShoppingCart />}
+                    >
+                      <Link href="/cart">My Cart</Link>
+                    </MenuItem>
+                    <MenuItem
+                      p="8px 15px 15px 15px"
+                      onClick={() => handleLogout()}
+                      fontSize="18px"
+                      icon={<BiLogOut />}
+                    >
+                      Logout
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+
               </Center>
-              
             </Link>
-          </Flex>
+          </Center>
         </Box>
       </Box>
       <Navlist />

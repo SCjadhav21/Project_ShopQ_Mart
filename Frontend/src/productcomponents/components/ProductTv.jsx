@@ -1,68 +1,59 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 
-import { getShirt } from '../Redux/action';
+
 
 import "./produc.css"
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
+const  getData= (sortdata)=>{
+  
+  return axios.get(`https://splendid-bear-cap.cyclic.app/products/tv`,sortdata)
 
+}
 
 export default function ProductTv() {
-
-  const TV=useSelector(store=>store.TV)
-  const dispatch=useDispatch()
   const navigate=useNavigate()
-  const location=useLocation()
+
+  const[data,setData]=useState([])
+
   const[searchParams]=useSearchParams()
- 
-//  if(TV.length===0){
-     
-
-    //   // const sort=searchParams.get("sort")
-    //   // const getTVparams={
-    //   //       params:{
-    //   //         discount:searchParams.getAll("discount"),
-    //   //         sort:sort &&"price",
-    //   //         order:sort
-    //   //       }
-    //   // }
-
-
-    //   dispatch(getShirt())
-
-      
-    //  }
+   const location=useLocation()
 
  
-
+  const sort=searchParams.get("sort")
+  const rating=searchParams.get("rating")
     useEffect(()=>{
-      if(location||TV.length===0){
-       const sort=searchParams.get("sort")
-       let  company=searchParams.getAll("brand")
-      
-       
-     
-       const getTVparams={
-          
-          
- 
-             params:{
+      let  company=searchParams.getAll("brand")
+      const getTVparams={
+            params:{
+              brand:company[company.length-1],
+              discount:searchParams.getAll("discount"),
+              sort:sort &&"price",
+              order:sort,
+
               
-               discount:searchParams.getAll("discount"),
-               brand:company[company.length-1],
-             
-               sort:sort &&"price",
-               order:sort
-             }
-       }
- 
- 
-       dispatch(getShirt(getTVparams))
- 
- 
+
+
+            }
       }
-   },[dispatch,TV.length,location])
+    
+    
+      getData(getTVparams).then((res)=>{
+        setData(res.data)
+       
+      })
+      
+     
+         
+    },[sort,location,searchParams])
+
+
+
+
+ 
+
  
 
     
@@ -73,7 +64,7 @@ export default function ProductTv() {
     
    <div className='ProductCss'>
      {
-       TV.length>0 && TV.map((elem)=>(
+       data.length>0 && data.map((elem)=>(
          <div key={elem._id} className="onlycartcss">
 
          <div onClick={()=>navigate(`/tv/${elem._id}`)}>

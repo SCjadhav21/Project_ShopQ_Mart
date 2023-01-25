@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   Button,
   useDisclosure,
   Box,
@@ -17,9 +16,13 @@ import {
   InputRightElement,
   InputGroup,
   Show,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import Homepage from "../Components/Homepage";
+import { CloseIcon } from "@chakra-ui/icons";
 const Signup = () => {
+  const toast = useToast();
   const [data, setData] = useState({
     name: "",
     mobile: "",
@@ -41,8 +44,8 @@ const Signup = () => {
   const handleChange = (e) => {
     let { value, name } = e.target;
 
-    if (name == "pincode" || name == "city" || name == "state") {
-      if (name == "pincode") {
+    if (name === "pincode" || name === "city" || name === "state") {
+      if (name === "pincode") {
         value = +value;
       }
       setData({ ...data, address: { ...data.address, [name]: value } });
@@ -63,7 +66,7 @@ const Signup = () => {
     ) {
       if (data.password.length < 6) {
         alert("password is too stort");
-      } else if (data.mobile.length != 10) {
+      } else if (data.mobile.length !== 10) {
         alert("mobile number length should be 10");
       } else {
         axios("https://splendid-bear-cap.cyclic.app/users/register", {
@@ -74,19 +77,46 @@ const Signup = () => {
           },
         })
           .then((res) => {
-            console.log(res);
-            alert(res.data.msg);
-            if (res.data.msg == "user Registered") {
+            if (res.data.msg === "user Registered") {
+              toast({
+                title: "Account created.",
+                description: "We've created your account for you.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              });
               setNavigate(true);
+            } else {
+              toast({
+                title: "Acount has been Already Regestered.",
+                description: "Please Login to account or Create with new Email",
+                status: "error",
+                duration: 3000,
+
+                isClosable: true,
+              });
             }
           })
           .catch((err) => {
-            console.log(err);
-            alert(err.message);
+            let message = err.message;
+            toast({
+              title: { message },
+              description: err.description,
+              status: "error",
+              duration: 3000,
+
+              isClosable: true,
+            });
           });
       }
     } else {
-      alert("Please fill all the fields");
+      toast({
+        title: "Some filed are Empty",
+        description: "Please fill all the fields",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -101,15 +131,15 @@ const Signup = () => {
   }
   return (
     <>
+      <Homepage />
       <Modal
-        isCentered
+        mt="50px"
         onClose={onClose}
         isOpen={isOpen}
         motionPreset="slideInBottom"
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalCloseButton onClick={() => setHome(true)} />
           <Box w={["", "", "100vh"]} bgColor="#fff" p="10px" display="flex">
             <Show above="md">
               {" "}
@@ -119,6 +149,7 @@ const Signup = () => {
                 padding="95px 20px 0px 20px"
                 textAlign="center"
                 bgColor="#FBFBFB"
+                // bgGradient="linear(0deg,#ff934a 0%,#ff5e62 100%)"
               >
                 <Box
                   display="inline-block"
@@ -222,17 +253,35 @@ const Signup = () => {
               </Box>
             </Show>
             <Box w={["100%", "100%", "70%"]}>
-              <ModalHeader p="0px 20px 0px 20px" display="flex" gap="10%">
-                <Text color="#24a3b5" padding="0 8px ">
-                  login
-                </Text>
-                <Text
-                  borderBottom="2px solid #24a3b5"
-                  color="#24a3b5"
-                  padding="0 8px 8px"
-                >
-                  signup
-                </Text>
+              <ModalHeader
+                p="0px 20px 0px 20px"
+                display="flex"
+                gap="10%"
+                justifyContent="space-between"
+              >
+                <Box display="flex" gap="10%" w="80%">
+                  {" "}
+                  <Text color="#24a3b5" padding="0 8px ">
+                    <Link to="/login">LOGIN</Link>
+                  </Text>
+                  <Text
+                    borderBottom="2px solid #24a3b5"
+                    color="#24a3b5"
+                    padding="0 8px 8px"
+                  >
+                    <Link to="signup">REGISTER</Link>
+                  </Text>
+                </Box>
+                <Box fontSize={15} fontWeight="bold">
+                  <Button
+                    bgColor="#fff"
+                    border="1px solid #E8F0FE"
+                    onClick={() => setHome(true)}
+                  >
+                    {" "}
+                    <CloseIcon />
+                  </Button>
+                </Box>
               </ModalHeader>
 
               <Box p="20px 20px 0px 20px">

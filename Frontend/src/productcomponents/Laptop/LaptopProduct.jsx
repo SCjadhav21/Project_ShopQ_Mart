@@ -55,11 +55,11 @@ const LaptopProduct = () => {
        
          </div>
           
-         <h1>{elem.product_name} </h1>
-         <h1>{elem.brand}</h1>
-         <h1>MRP:{elem.mrp} </h1>
-         <h1 className='discountcss'>Discount:{elem.discount} </h1>
-         <h1>Price:{elem.price} </h1>
+         <h1 className='productname' >{elem.product_name} </h1>
+         <h1  className='ratingcsss'>{elem.brand}</h1>
+         <h1  className='ratingcsss'>MRP:{elem.mrp} </h1>
+         <h1  className='ratingcsss'>Discount:{elem.discount} </h1>
+         <h1  className='ratingcsss'> Price:{elem.price} </h1>
          <h1 className='ratingcsss'>{"Rating :"}{elem.rating}</h1>
         
          
