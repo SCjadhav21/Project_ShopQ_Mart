@@ -8,40 +8,7 @@ import axios from "axios";
 
 const Navlist = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState(false);
-  const [goadmin, setGoadmin] = useState(false);
-  const checkAuth = () => {
-    axios(`https://splendid-bear-cap.cyclic.app/users/`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-    })
-      .then((res) => {
-        if (res.data.msg == "Not Authorised") {
-          setData(true);
-        }
-      })
 
-      .catch((err) => console.error(err));
-  };
-  useEffect(() => {
-    checkAuth();
-  });
-  const AuthorisedOrNot = () => {
-    let token = localStorage.getItem("token");
-    if (!token) {
-      alert("Please Login First");
-    } else if (data) {
-      alert("You are Not Authorized");
-    } else {
-      setGoadmin(true);
-    }
-  };
-  if (goadmin) {
-    return <Navigate to="/adminpage" />;
-  }
   return (
     <div className="navlist">
       <Image
@@ -166,8 +133,8 @@ const Navlist = () => {
             <li>Season Essentials</li>
           </ul>
         </li>
-        <li onClick={AuthorisedOrNot}>
-          ADMIN PAGE
+        <li>
+          GLOBEL SHOPING
           <ul className="dropdown">
             {/* <li>Fine Jwellery </li>
             <li>Jwellery</li> */}
