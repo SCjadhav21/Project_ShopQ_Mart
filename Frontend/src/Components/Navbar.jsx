@@ -222,7 +222,7 @@ const Navbar = () => {
         </Flex>
        <Text fontWeight={"bold"}>Rs {el.price}</Text>
       </Box>
-    }):<Image mt={'40px'} src={Empty}></Image>}</PopoverBody>
+    }):<Image mt={'39px'} src={Empty}></Image>}</PopoverBody>
   </PopoverContent>
 </Popover>}
             
