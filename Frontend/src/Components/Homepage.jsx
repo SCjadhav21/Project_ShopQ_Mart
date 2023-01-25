@@ -7,7 +7,7 @@ import Footer from './Footer/Footer';
 const Homepage = () => {
   return (
     <div>
-        <Navbar/>
+        {/* <Navbar/> */}
   <Ads/>
        <Product/>
        {/* <Footer/> */}

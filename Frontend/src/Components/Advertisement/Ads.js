@@ -1,7 +1,7 @@
 import React from 'react'
 import useIterator from './Ads.type'
 import { motion } from 'framer-motion';
-import { Box,Flex,Button,Image } from '@chakra-ui/react';
+import { Box,Flex,Button,Image,Hide } from '@chakra-ui/react';
 
 const images = [
     {
@@ -48,14 +48,14 @@ const Ads = () => {
       const activeIndex = current - 1;
 
   return (
-    <Box display={'flex'} margin="20px"  border={'3px solid red'}>
+    <Box display={'flex'} margin="20px" >
       
         <Flex
       
         direction="column"
         // overflow="hidden"
-        border={'3px solid green'}
-        w="80%"
+        // border={'3px solid green'}
+        w={{ base: '100%', sm: '85%', md: '80%' }}
      boxShadow={"rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"}
       >
         <Flex   position="relative" >
@@ -85,8 +85,8 @@ const Ads = () => {
                 cursor="pointer"
                 // ml="2rem"
                 // rounded="4px"
-                size="25%"
-                height="65px"
+                // size="25%"
+                height="75px"
                 as="button"
                 border="none"
                 // borderBottom="5px solid"
@@ -100,6 +100,7 @@ const Ads = () => {
         
         </Flex>
       </Flex>
+      <Hide below='sm'>
     <Box  ml={10} m={'auto'} w={"15%"}  boxShadow={'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px'} >
         <Box m={'auto'} h={'30%'} _hover={{ border: "1px solid teal", color: " teal" }}>
             {/* <Button  > */}
@@ -118,6 +119,7 @@ const Ads = () => {
         </Box>
 
     </Box>
+    </Hide>
     </Box>
   )
 }

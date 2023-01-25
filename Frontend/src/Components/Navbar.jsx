@@ -277,15 +277,15 @@ const Navbar = () => {
   return (
     <Box backgroundColor={"#ffffff"}>
       <Box style={{display:'flex', width:'100%', justifyContent:'space-around'}}   mb="1%" >
-        <Box w={{ base:110, md: 150,lg:200 }} border={'1px solid red'} >
+        <Box w={{ base:110, md: 150,lg:200 }} mt={'10px'} >
           <Image src={ShopQ}   />
         </Box>
 
         <Center
-          border={'1px solid red'}
+          // border={'1px solid red'}
           // border={"none"}
           borderRadius={"10px"}
-          w={{ base: '30%', sm: '35%', md: '45%' }}
+          w={{ base: '30%', sm: '40%', md: '45%' }}
         >
           <Input
             w={"85%"}
