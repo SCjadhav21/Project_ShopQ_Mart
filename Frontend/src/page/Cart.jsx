@@ -45,7 +45,7 @@ const Cart = () => {
       });
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <Box h={"650px"} bg={"#eff7fa"}>

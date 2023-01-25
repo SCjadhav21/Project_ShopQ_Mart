@@ -3,7 +3,6 @@ import { BiLogOut } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import { RiAdminLine } from "react-icons/ri";
 import { MdOutlineSwitchAccount } from "react-icons/md";
-// import {  } from "react-icons/ri";
 import React, { useState, useEffect } from "react";
 import "./Homepage.css";
 import {
@@ -15,33 +14,56 @@ import {
   Text,
   Center,
   Tag,
-  Show,
-  Hide,
   MenuButton,
   MenuList,
   MenuItem,
   IconButton,
   Menu,
-  Img,
+  useDisclosure,
+  useToast
 } from "@chakra-ui/react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverArrow,
+} from '@chakra-ui/react'
+import Empty from "../Resources/empty.gif"
 import ShopQ from "../Resources/ShopQ.jpeg";
 import { Link, Navigate } from "react-router-dom";
 import {
-  AddIcon,
   BellIcon,
-  EditIcon,
-  ExternalLinkIcon,
-  RepeatIcon,
 } from "@chakra-ui/icons";
 import { MdLocationOn } from "react-icons/md";
 import { HiShoppingCart } from "react-icons/hi";
-
 import Navlist from "./Trial/Navlist";
-
 import axios from "axios";
+import { useSelector } from "react-redux";
+
 
 const Navbar = () => {
+  const toast = useToast()
+  const store = useSelector((store) => store.Cart.cart);
+  const [cart, setCart]=useState([])
+  const getData = () => {
+    axios.get("https://splendid-bear-cap.cyclic.app/cart", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then((el)=>{
+      setCart(el.data)
+    });
+  };
+// console.log(cart)
+  
+  
+ 
   const [data, setData] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [add, setAdd] = useState(false);
   const [address, setAdress] = useState("");
   const [data2, setData2] = useState(false);
@@ -101,12 +123,21 @@ const Navbar = () => {
     setData("Sign In");
   };
   useEffect(() => {
+    getData()
+   
+  }, [store]);
+  
+  
+
+  useEffect(() => {
     checkAuth();
     handleLogin();
   }, [add]);
   if (goadmin) {
     return <Navigate to="/adminpage" />;
   }
+  
+  console.log(cart)
   return (
     <Box backgroundColor={"#ffffff"}>
       <Box
@@ -122,8 +153,6 @@ const Navbar = () => {
         </Box>
 
         <Center
-          // border={'1px solid red'}
-          // border={"none"}
           borderRadius={"10px"}
           w={{ base: "30%", sm: "40%", md: "45%" }}
         >
@@ -151,16 +180,9 @@ const Navbar = () => {
         <Box w={["0%", "0%", "20%"]} marginTop={"10px"}>
           <Center style={{ justifyContent: "space-around" }}>
             <Link href="" textDecoration={"none"} color={"teal"}>
-              {/* <Text mt={'12px'} fontSize={'13px'} fontWeight={"500"}>Location</Text> */}
               <Center>
                 <MdLocationOn fontSize={25} color={"#24a3b5"} w={"20px"} />
               </Center>
-
-              {/* <Image
-                w={"30px"}
-                h={"20px"}
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaR-Pzqjuoro9Sg7bw-y7D7ldTWMAd304Ij1sk03YWrNvA5Y2Puo8h7jgk4BrIODMjJ0&usqp=CAU"
-              /> */}
               <Text fontWeight={"500"} color={"#ff645f"}>
                 {" "}
                 {data !== "Sign In" ? address.toUpperCase() : ""}
@@ -171,9 +193,39 @@ const Navbar = () => {
                 <BellIcon color={"#24a3b5"} fontSize={25} />
               </Center>
             </Link>
-            <Link to="/cart">
+            
               <Center>
-                <HiShoppingCart color={"#24a3b5"} fontSize={25} />
+                {data==="Sign In" ?  
+  <HiShoppingCart color={"#24a3b5"} fontSize={25} onMouseEnter={onOpen} onClick={()=>{toast({
+    title: "Please Log In",
+    description: "You're not Authorised to use this Functionality.",
+    status: "error",
+    duration: 3000,
+    isClosable: true,
+  });}}/>
+    :   <Popover isOpen={isOpen}>  
+  <PopoverTrigger>
+  <Link to="/cart" >
+  <HiShoppingCart color={"#24a3b5"} fontSize={25} onMouseEnter={onOpen}/>
+    </Link>
+  </PopoverTrigger>
+  <PopoverContent onMouseLeave={onClose}>
+    <PopoverArrow />
+    <PopoverHeader fontWeight={"bold"}>Your Shopping Cart ({cart.length} Item)</PopoverHeader>
+    <PopoverBody h="300px" overflow={"scroll"}>{cart.length>0 ? cart?.map((el,index)=>{
+      return <Box borderBottom={"2px solid #24a3b5"} p={"7px"} key={index}>
+        <Flex >
+          <Center gap={5}>
+        <Image h={"50px"} w={"60px"} src={el.image}></Image>
+        <Text>{el.product_name}</Text>
+        </Center>
+        </Flex>
+       <Text fontWeight={"bold"}>Rs {el.price}</Text>
+      </Box>
+    }):<Image mt={'40px'} src={Empty}></Image>}</PopoverBody>
+  </PopoverContent>
+</Popover>}
+            
               </Center>
 
               {/* <Button border={"none"} backgroundColor={"transparent"}>
@@ -184,7 +236,7 @@ const Navbar = () => {
                   // src="https://www.shutterstock.com/shutterstock/photos/1569447439/display_1500/stock-vector-empty-color-shopping-cart-flat-modern-design-colored-vector-icon-isolated-on-white-background-web-1569447439.jpg"
                 />
               </Button> */}
-            </Link>
+        
             <Link to={data == "Sign In" ? "/login" : ""}>
               <Center>
                 <Menu>
@@ -229,7 +281,7 @@ const Navbar = () => {
                       </Text>
                     </Box>
 
-                    {!data2 ? (
+                    
                       <MenuItem
                         p="8px 15px"
                         fontSize="18px"
@@ -238,9 +290,8 @@ const Navbar = () => {
                       >
                         Admin Page
                       </MenuItem>
-                    ) : (
-                      ""
-                    )}
+                    
+                    
                     <MenuItem
                       p="8px 15px"
                       fontSize="18px"
