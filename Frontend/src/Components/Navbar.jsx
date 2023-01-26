@@ -20,7 +20,8 @@ import {
   IconButton,
   Menu,
   useDisclosure,
-  useToast
+  useToast,
+  Hide
 } from "@chakra-ui/react";
 import {
   Popover,
@@ -148,12 +149,12 @@ const Navbar = () => {
           mt: "1%",
         }}
       >
-        <Box  w={{ base: 110, md: 150, lg: 200 }} mt={"10px"}>
+        <Box  w={{ base: 210, md: 150, lg: 200 }} mt={"10px"} >
           <Link to="/">
           <Image src={ShopQ} />
           </Link>
         </Box>
-
+      <Hide below="md">
         <Center
           borderRadius={"10px"}
           w={{ base: "30%", sm: "40%", md: "45%" }}
@@ -178,24 +179,29 @@ const Navbar = () => {
             Search
           </Button>
         </Center>
+        </Hide>
 
-        <Box w={["0%", "0%", "20%"]} marginTop={"10px"}>
+        <Box w={["50%", "40%", "22%"]} marginTop={{base:"25px",sm:"25px",md:"15px",lg:"10px"}} >
           <Center style={{ justifyContent: "space-around" }}>
             <Link href="" textDecoration={"none"} color={"teal"}>
+              <Hide below="md">
               <Center>
                 <MdLocationOn fontSize={25} color={"#24a3b5"} w={"20px"} />
               </Center>
+              
               <Text fontWeight={"500"} color={"#ff645f"}>
                 {" "}
                 {data !== "Sign In" ? address.toUpperCase() : ""}
               </Text>
+              </Hide>
             </Link>
+            <Hide below="md">
             <Link>
               <Center>
                 <BellIcon color={"#24a3b5"} fontSize={25} />
               </Center>
             </Link>
-            
+            </Hide>
               <Center>
                 {data==="Sign In" ?  
   <HiShoppingCart color={"#24a3b5"} fontSize={25} onMouseEnter={onOpen} onClick={()=>{toast({
@@ -333,7 +339,10 @@ const Navbar = () => {
           </Center>
         </Box>
       </Box>
+      <Hide below="md">
       <Navlist />
+      </Hide>
+      <Hide below="md">
       <Box className="navbarpanel">
         <Box id="navbar">
           <Link href="" className="navbutton">
@@ -367,6 +376,7 @@ const Navbar = () => {
           </Link>
         </Box>
       </Box>
+      </Hide>
       {/* <Product/> */}
       {/* <Box w={"50%"} maxW="3xl" mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
           <Gallery images={images}/>
