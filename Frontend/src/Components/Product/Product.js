@@ -171,13 +171,39 @@ const Product = () => {
                     <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }} >Venerate Headphone Stand</Text>
                   <Box display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$145</Text>
-                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$1999</Text>
-                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>87% off</Text>
+                    <Text   style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}>$1999</Text>
+                    <Text   style={{color:'teal',fontWeight:'500',ml:'15px'}}>87% off</Text>
+                  </Box>
+                </Box>
+              </a>
+            </div>
+            {/* https://cdn.shopclues.com/images1/thumbnails/113303/320/320/152033193-113303406-1614250554.jpg */}
+            <div class="slide">
+              <a href="/refrigerator">
+                <Center>
+                  <Box display={"flex"} className="multiimage">
+                    <Image
+                    width={{ base: '100%', sm: '50%', md: '85%' }}
+                      // width={{ base: '80%', sm: '50%', md: '85%',lg:'70%' }}
+                      // height={{base: '80%', sm: '50%', md: '85%',lg:'70%' }}
+                      src="https://cdn.shopclues.com/images/thumbnails/45541/200/200/92919327lggli302rpol400x400imaeh4ewge3gedxg146400637114640111731476432497.jpg"
+                    >
+                    </Image>
+                  </Box>
+                </Center>
+                <Box>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }} >Godrej 240Ltr Edge Pro </Text>
+                  <Box display={'flex'}>
+                    <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$14999</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}></Text>
+                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>Upto 25% off</Text>
                   </Box>
                 </Box>
               </a>
             </div>
 
+
+           
             <div class="slide">
               <a href="">
                 <Center>
@@ -199,6 +225,31 @@ const Product = () => {
                 </Box>
               </a>
             </div>
+
+            <div class="slide">
+              <a href="/tv">
+                <Center>
+                  <Box display={"flex"} className="multiimage">
+                    <Image
+                    mt={'10%'}
+                    width={{ base: '100%', sm: '50%', md: '95%' }}
+                      // width={{ base: '80%', sm: '50%', md: '85%',lg:'70%' }}
+                      // height={{base: '80%', sm: '50%', md: '85%',lg:'70%' }}
+                      src="https://cdn.shopclues.com/images1/thumbnails/112893/280/1/151865154-112893954-1610606300.jpg"
+                    >
+                    </Image>
+                  </Box>
+                </Center>
+                <Box mt={'6%'}>
+                    <Text fontSize={{ base: '14px', md: '20px', lg: '16px' }} >Samsung 138Cm (55Inches)</Text>
+                  <Box display={'flex'}>
+                    <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>$84999</Text>
+                    <Text  id='hide' style={{textDecoration:'line-through',color:"grey",marginRight:'5px' }}></Text>
+                    <Text  id='hide' style={{color:'teal',fontWeight:'500',ml:'15px'}}>Upto 20% off</Text>
+                  </Box>
+                </Box>
+              </a>
+            </div> 
 
             <div class="slide">
               <a href="">
@@ -505,18 +556,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"45%"}
+                      width={"65%"}
                       src="https://cdn.shopclues.com/images1/thumbnails/105589/280/1/149278210-105589660-1585251645.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Cooking Essentials</Text>
-                  <Box display={'flex'}>
+                    <Center mt={'5px'}>Cooking Essentials</Center>
+                  <Center display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>Starting at Rs.49</Text>
                   
-                  </Box>
+                  </Center>
                 </Box>
               </a>
             </div>
@@ -525,18 +576,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"36%"}
+                      width={{base:"35%",md:"45%",lg:"55%"}}
                       src="https://cdn.shopclues.com/images1/thumbnails/105589/320/1/149278289-105589933-1585251885.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
-                <Box>
-                    <Text >Skin, Hair & Body</Text>
-                  <Box display={'flex'}>
+                <Box mt={'10px'} >
+                    <Center >Skin, Hair & Body</Center>
+                  <Center display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>Starting at Rs.99</Text>
                  
-                  </Box>
+                  </Center>
                 </Box>
               </a>
             </div>
@@ -546,18 +597,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"50%"}
+                      width={"60%"}
                       src="https://cdn.shopclues.com/images1/thumbnails/104441/280/1/148788228-104441348-1578472379.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Kitchen Essentials</Text>
-                  <Box display={'flex'}>
+                    <Center mt={'10px'} >Kitchen Essentials</Center>
+                  <Center display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>Starting at Rs.49</Text>
                   
-                  </Box>
+                  </Center>
                 </Box>
               </a>
             </div>
@@ -567,18 +618,17 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"50%"}
+                      width={"60%"}
                       src="https://cdn.shopclues.com/images1/thumbnails/105520/280/1/149254102-105520442-1584863770.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Masks, Sanitizer & More</Text>
-                  <Box display={'flex'}>
+                    <Center mt={'10px'} >Masks, Sanitizer & More</Center>
+                  <Center display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>Starting at Rs.49</Text>
-
-                  </Box>
+                  </Center>
                 </Box>
               </a>
             </div>
@@ -588,18 +638,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"50%"}
+                      width={"60%"}
                       src="https://cdn.shopclues.com/images/thumbnails/42332/280/1/966030079473255231PUTPaCZnL146606056314665883171470319810.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Cleaning & Dusting Supplies</Text>
-                  <Box display={'flex'}>
+                    <Center mt={'10px'} >Cleaning & Dusting Supplies</Center>
+                  <Center display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>Starting at Rs.109</Text>
                   
-                  </Box>
+                  </Center>
                 </Box>
               </a>
             </div>
@@ -609,18 +659,18 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"50%"}
+                      width={"60%"}
                       src="https://cdn.shopclues.com/images1/thumbnails/105577/320/320/149274414-105577366-1585235325.jpg"
                     >
                     </Image>
                   </Box>
                 </Center>
                 <Box>
-                    <Text >Laundry Detergents</Text>
-                  <Box display={'flex'}>
+                    <Center mt={'10px'} >Laundry Detergents</Center>
+                  <Center display={'flex'}>
                     <Text style={{fontWeight:'500',color:"black",marginRight:'5px' }}>Starting at Rs.49</Text>
                    
-                  </Box>
+                  </Center>
                 </Box>
               </a>
             </div>
@@ -777,7 +827,7 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"56%"}
+                      width={"66%"}
                       src="https://cdn.shopclues.com/images/thumbnails/34620/280/1/902417708981309282209372miltonwaterbottleset1434449243144186494711454507692145672090914577949341459228900.jpg"
                     >
                     </Image>
@@ -840,7 +890,7 @@ const Product = () => {
                 <Center>
                   <Box display={"flex"} className="multiimage">
                     <Image
-                      width={"50%"}
+                      width={"60%"}
                       src="https://cdn.shopclues.com/images1/thumbnails/105577/320/320/149274414-105577366-1585235325.jpg"
                     >
                     </Image>
