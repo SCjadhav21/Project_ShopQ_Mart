@@ -30,6 +30,7 @@ import {
   FormLabel,
   FormControl,
   FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
 
 import {
@@ -152,7 +153,7 @@ const AdminPage = () => {
     sold_by: "",
     emi: "",
   });
-
+  const toast = useToast();
   const [page, setPage] = useState("main");
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
@@ -174,7 +175,15 @@ const AdminPage = () => {
     })
       .then((res) => setuserData(res.data.data))
 
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
 
   const getTvData = () => {
@@ -186,7 +195,15 @@ const AdminPage = () => {
       },
     })
       .then((res) => setData(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
 
   const getRefrigeratorData = () => {
@@ -198,7 +215,15 @@ const AdminPage = () => {
       },
     })
       .then((res) => setData(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const getWashingmachineData = () => {
     axios(`https://splendid-bear-cap.cyclic.app/products/washingmachine`, {
@@ -209,7 +234,15 @@ const AdminPage = () => {
       },
     })
       .then((res) => setData(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
 
   const getLaptopData = () => {
@@ -221,7 +254,15 @@ const AdminPage = () => {
       },
     })
       .then((res) => setData(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
 
   const getOrders = () => {
@@ -233,7 +274,15 @@ const AdminPage = () => {
       },
     })
       .then((res) => setData(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   // All handel page change methods
 
@@ -272,7 +321,15 @@ const AdminPage = () => {
         alert(res.data);
         getRefrigeratorData();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelWashingmachineEdit = (id) => {
     let edit = { [editKey]: editValue };
@@ -292,7 +349,15 @@ const AdminPage = () => {
         alert(res.data);
         getWashingmachineData();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelLaptopEdit = (id) => {
     let edit = { [editKey]: editValue };
@@ -309,7 +374,15 @@ const AdminPage = () => {
         alert(res.data);
         getLaptopData();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelTvEdit = (id) => {
     let edit = { [editKey]: editValue };
@@ -326,7 +399,15 @@ const AdminPage = () => {
         alert(res.data);
         getTvData();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
 
   const handelUserEdit = (id) => {
@@ -347,7 +428,15 @@ const AdminPage = () => {
           alert(res.data.alert);
           getuserdata();
         })
-        .catch((err) => console.error(err));
+        .catch((err) =>
+          toast({
+            title: "Error Occured",
+            description: `${err.message}`,
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          })
+        );
     }
   };
 
@@ -362,10 +451,24 @@ const AdminPage = () => {
       },
     })
       .then((res) => {
-        alert(res.data);
+        toast({
+          title: "TV Deleted Successfully",
+          description: `You've Removed TV with id ${id} from Database.`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         getuserdata();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelLaptopDelete = (id) => {
     axios(`https://splendid-bear-cap.cyclic.app/products/laptop/${id}`, {
@@ -377,10 +480,24 @@ const AdminPage = () => {
       },
     })
       .then((res) => {
-        alert(res.data);
+        toast({
+          title: "Laptop Deleted Successfully",
+          description: `You've Removed laptop with id ${id} from Database.`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         getuserdata();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelRefrigeratorDelete = (id) => {
     axios(`https://splendid-bear-cap.cyclic.app/products/refigerator/${id}`, {
@@ -392,10 +509,24 @@ const AdminPage = () => {
       },
     })
       .then((res) => {
-        alert(res.data);
+        toast({
+          title: "Refrigerator Deleted Successfully",
+          description: `You've Removed Refrigerator with id ${id} from Database.`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         getRefrigeratorData();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelWashingmachineDelete = (id) => {
     axios(
@@ -410,10 +541,24 @@ const AdminPage = () => {
       }
     )
       .then((res) => {
-        alert(res.data);
+        toast({
+          title: "Washingmachine Deleted Successfully",
+          description: `You've Removed Washingmachine with id ${id} from Database.`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         getuserdata();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelUserDelete = (id) => {
     axios(`https://splendid-bear-cap.cyclic.app/users/${id}`, {
@@ -425,10 +570,53 @@ const AdminPage = () => {
       },
     })
       .then((res) => {
-        alert(res.data.alert);
+        toast({
+          title: "User Deleted Successfully",
+          description: `You've Removed user with id ${id} from Database.`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         getuserdata();
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
+  };
+  const handelCartItemDelete = (id) => {
+    axios(`https://splendid-bear-cap.cyclic.app/cart/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        toast({
+          title: "Cart Deleted Successfully",
+          description: `You've Deleted cart with id ${id}.`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        getOrders();
+      })
+      .catch((err) =>
+        toast({
+          title: "Error Occured ",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
 
   // All ChangeData functions
@@ -658,12 +846,23 @@ const AdminPage = () => {
       },
     })
       .then((res) => {
-        alert(res.data);
+        toast({
+          title: "Product Added Successfully",
+          description: `${res.data}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
       })
-      .catch((err) => {
-        console.log(err);
-        alert(err.message);
-      });
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelRefrigeratorAddSubmit = (e) => {
     e.preventDefault();
@@ -677,12 +876,23 @@ const AdminPage = () => {
       },
     })
       .then((res) => {
-        alert(res.data);
+        toast({
+          title: "Product Added Successfully",
+          description: `${res.data}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
       })
-      .catch((err) => {
-        console.log(err);
-        alert(err.message);
-      });
+      .catch((err) =>
+        toast({
+          title: "Error Occured",
+          description: `${err.message}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   const handelUserAddSubmit = (e) => {
     e.preventDefault();
@@ -701,13 +911,23 @@ const AdminPage = () => {
         },
       })
         .then((res) => {
-          console.log(res);
-          alert(res.data.msg);
+          toast({
+            title: "Product Added Successfully",
+            description: `${res.data.msg}`,
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
         })
-        .catch((err) => {
-          console.log(err);
-          alert(err.message);
-        });
+        .catch((err) =>
+          toast({
+            title: "Error Occured",
+            description: `${err.message}`,
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          })
+        );
     }
   };
 
@@ -2037,7 +2257,6 @@ const AdminPage = () => {
           </Box>
           <SimpleGrid columns={1} spacing="40px">
             {data?.map((items, index) => {
-              console.log(items);
               return (
                 <Box
                   p="10px"
@@ -2059,7 +2278,7 @@ const AdminPage = () => {
 
                   <Button
                     mt="8px"
-                    // onClick={() => handelUserDelete(user._id)}
+                    onClick={() => handelCartItemDelete(items._id)}
                     ml="5px"
                   >
                     Remove
