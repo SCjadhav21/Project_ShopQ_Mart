@@ -58,6 +58,8 @@ Technologies used in the project:
 **Front-end deployed URL:**
 
 https://shopqmart.vercel.app/
+<br/>
+https://singular-sundae-186837.netlify.app/
 
 **Back-end deployed URL:**
 
