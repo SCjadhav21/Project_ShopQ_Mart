@@ -58,6 +58,8 @@ Technologies used in the project:
 **Front-end deployed URL:**
 
 https://shopqmart.vercel.app/
+<br/>
+https://singular-sundae-186837.netlify.app/
 
 **Back-end deployed URL:**
 
@@ -123,7 +125,7 @@ $ npm run server        // run it locally
 ## ✍ Authors 
 
 - [@Harshank11](https://github.com/Harshank11)
-- [@18Kailash](https://github.com/18Kailash)
+- [@Gurjazz18](https://github.com/gurjazz18)
 - [@sbj1198](https://github.com/sbj1198)
 - [@SCjadhav21](https://www.github.com/SCjadhav21)
 - [@CodexPuneet](https://www.github.com/CodexPuneet)

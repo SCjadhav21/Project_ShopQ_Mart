@@ -48,14 +48,14 @@ const Ads = () => {
       const activeIndex = current - 1;
 
   return (
-    <Box display={'flex'} margin="20px" >
+    <Box display={'flex'} margin="16px"  >
       
         <Flex
       
         direction="column"
         // overflow="hidden"
         // border={'3px solid green'}
-        w={{ base: '100%', sm: '85%', md: '80%' }}
+        w={{ base: '100%', sm: '100%', md: '100%',lg:'80%' }}
      boxShadow={"rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"}
       >
         <Flex   position="relative" >
@@ -100,19 +100,19 @@ const Ads = () => {
         
         </Flex>
       </Flex>
-      <Hide below='sm'>
-    <Box  ml={10} m={'auto'} w={"15%"}  boxShadow={'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px'} >
-        <Box m={'auto'} h={'30%'} _hover={{ border: "1px solid teal", color: " teal" }}>
+      <Hide below='lg'>
+    <Box   m={'auto'} w={"15%"}  boxShadow={'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px'} >
+        <Box m={'auto'} h={'33%'} _hover={{ border: "1px solid teal", color: " teal" }}>
             {/* <Button  > */}
             <Image w={'100%'}    src='https://cdn.shopclues.com/images/banners/2022/dec/06/Platinum1_SYM_06Dec22.jpg'></Image>
             {/* </Button> */}
         </Box>
-        <Box  border={''}  h={'30%'} _hover={{ border: "1px solid teal", color: " teal" }}>
+        <Box  border={''}  h={'33%'} _hover={{ border: "1px solid teal", color: " teal" }}>
             {/* <Button border={'none'} > */}
             <Image w={'100%'}   src='https://cdn.shopclues.com/images/banners/2022/dec/06/Platinum2_SYM_06Dec22.jpg'></Image>
             {/* </Button> */}
         </Box>
-        <Box  border={''}  h={'30%'} _hover={{ border: "1px solid teal", color: " teal" }}>
+        <Box  border={''}  h={'33%'} _hover={{ border: "1px solid teal", color: " teal" }}>
             {/* <Button border={'none'} > */}
         <Image w={'100%'}  src='https://cdn.shopclues.com/images/banners/2022/dec/02/Platinum3_Esha_2ndDec22.jpg'></Image>
            {/* </Button> */}

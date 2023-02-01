@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getcartSuccess, getcartError, getcartRequest } from "../REDUX/action";
+import { Link } from "react-router-dom";
 // import {getData} from '../Cart_REDUX/action'
 
 const getData = () => {
@@ -46,11 +47,12 @@ const Cart = () => {
       });
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <Box h={"650px"} bg={"#eff7fa"}>
       <Box height={"80px"} bg={"#ffffff"}>
+        <Link to="/">
         <Image
           ml={{ sm: "100px", lg: "100px" }}
           mt={"7px"}
@@ -58,6 +60,7 @@ const Cart = () => {
           w={{ sm: "150", lg: "250px" }}
           src={logo}
         ></Image>
+        </Link>
       </Box>
 
       <Box height={"auto"} w={"90%"} margin={"auto"} mt={"30px"} bg={"#ffffff"}>
