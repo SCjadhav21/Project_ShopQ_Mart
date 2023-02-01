@@ -65,9 +65,26 @@ const Signup = () => {
       data.address
     ) {
       if (data.password.length < 6) {
-        alert("password is too stort");
+        // alert("");
+        toast({
+          title: "Password is too stort.",
+          description: "Please create a strong password for secure account",
+          status: "error",
+          duration: 3000,
+
+          isClosable: true,
+        });
+        
       } else if (data.mobile.length !== 10) {
-        alert("mobile number length should be 10");
+        // alert("");
+        toast({
+          title: "Invalid Phone Number.",
+          description: "Mobile number length should be 10",
+          status: "error",
+          duration: 3000,
+
+          isClosable: true,
+        });
       } else {
         axios("https://splendid-bear-cap.cyclic.app/users/register", {
           method: "POST",
