@@ -31,6 +31,14 @@ import {
   FormControl,
   FormHelperText,
   useToast,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  TableContainer,
+  Center,
 } from "@chakra-ui/react";
 
 import {
@@ -983,7 +991,7 @@ const AdminPage = () => {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bgColor="#F7D100">
           <DrawerCloseButton />
           <DrawerHeader>View Details</DrawerHeader>
 
@@ -1163,74 +1171,125 @@ const AdminPage = () => {
 
       {page == "AllTvProducts" ? (
         <Box p="0px 20px">
-          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {data?.map((tv, index) => {
-              return (
-                <Box
-                  p="10px"
-                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                  key={index}
-                >
-                  <Img src={tv.image}></Img>
-                  <Text>product_name : {tv.product_name}</Text>
-                  <Text>brand : {tv.brand}</Text>
-                  <Text>delivery : {tv.delivery}</Text>
-                  <Text>discount : {tv.discount}</Text>
-                  <Text>emi : {tv.emi}</Text>
-                  <Text>image : {tv.image}</Text>
-                  <Text>mrp : {tv.mrp}</Text>
-                  <Text>items_left : {tv.items_left}</Text>
-                  <Text>price : {tv.price}</Text>
-                  <Text>prod_type : {tv.prod_type}</Text>
+          <TableContainer>
+            <Table variant="striped" colorScheme="teal">
+              <Thead>
+                <Tr>
+                  <Th>Sr No.</Th>
+                  <Th>product_Img</Th>
+                  <Th>product_name</Th>
+                  <Th>brand</Th>
+                  <Th>delivery</Th>
+                  <Th>discount</Th>
+                  <Th>emi</Th>
+                  <Th>image</Th>
+                  <Th>mrp</Th>
+                  <Th>items_left</Th>
+                  <Th>price</Th>
+                  <Th>prod_type</Th>
+                  <Th>Edit</Th>
+                  <Th>Delete</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {data?.map((tv, index) => {
+                  return (
+                    <Tr
+                      p="10px"
+                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      key={index}
+                    >
+                      <Td>{index + 1}</Td>
+                      <Td>
+                        <Img src={tv.image}></Img>
+                      </Td>
+                      <Td>
+                        <Text>{tv.product_name}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.brand}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.delivery}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.discount}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.emi}</Text>
+                      </Td>
+                      <Td>
+                        {" "}
+                        <Text>{tv.image}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.mrp}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.items_left}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.price}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{tv.prod_type}</Text>
+                      </Td>
 
-                  <Popover>
-                    <PopoverTrigger>
-                      <Button mt="8px">Edit</Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverHeader>Confirmation!</PopoverHeader>
-                      <PopoverBody>
-                        <form
-                          onSubmit={(e) => {
-                            e.preventDefault();
-                            handelTvEdit(tv._id);
-                          }}
+                      <Td>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Button mt="8px">Edit</Button>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader>Confirmation!</PopoverHeader>
+                            <PopoverBody>
+                              <form
+                                onSubmit={(e) => {
+                                  e.preventDefault();
+                                  handelTvEdit(tv._id);
+                                }}
+                              >
+                                <FormLabel>updation key</FormLabel>
+                                <Input
+                                  type="text"
+                                  onChange={(e) => setEditKey(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel>updated value</FormLabel>
+                                <Input
+                                  type={editKey == "email" ? "email" : "text"}
+                                  onChange={(e) => setEditValue(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel></FormLabel>
+
+                                <Input
+                                  mt="5px"
+                                  type="submit"
+                                  bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                                />
+                              </form>
+                            </PopoverBody>
+                          </PopoverContent>
+                        </Popover>
+                      </Td>
+                      <Td>
+                        <Button
+                          mt="8px"
+                          onClick={() => handelTvDelete(tv._id)}
+                          ml="5px"
                         >
-                          <FormLabel>updation key</FormLabel>
-                          <Input
-                            type="text"
-                            onChange={(e) => setEditKey(e.target.value)}
-                            isRequired
-                          />
-                          <FormLabel>updated value</FormLabel>
-                          <Input
-                            type={editKey == "email" ? "email" : "text"}
-                            onChange={(e) => setEditValue(e.target.value)}
-                            isRequired
-                          />
-                          <Input
-                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
-                            w="50%"
-                            mt="5px"
-                            type="submit"
-                          />
-                        </form>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                  <Button
-                    mt="8px"
-                    onClick={() => handelTvDelete(tv._id)}
-                    ml="5px"
-                  >
-                    Remove
-                  </Button>
-                </Box>
-              );
-            })}
-          </SimpleGrid>
+                          Remove
+                        </Button>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
         </Box>
       ) : (
         ""
@@ -1238,74 +1297,134 @@ const AdminPage = () => {
 
       {page == "AllRefrigeratorProducts" ? (
         <Box p="0px 20px">
-          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {data?.map((refrigerator, index) => {
-              return (
-                <Box
-                  p="10px"
-                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                  key={index}
-                >
-                  <Img src={refrigerator.image}></Img>
-                  <Text>product_name : {refrigerator.product_name}</Text>
-                  <Text>brand : {refrigerator.brand}</Text>
-                  <Text>delivery : {refrigerator.delivery}</Text>
-                  <Text>discount : {refrigerator.discount}</Text>
-                  <Text>emi : {refrigerator.emi}</Text>
-                  <Text>image : {refrigerator.image}</Text>
-                  <Text>mrp : {refrigerator.mrp}</Text>
-                  <Text>items_left : {refrigerator.items_left}</Text>
-                  <Text>price : {refrigerator.price}</Text>
-                  <Text>prod_type : {refrigerator.prod_type}</Text>
+          <TableContainer>
+            <Table variant="striped" colorScheme="teal">
+              <Thead>
+                <Tr>
+                  <Th>Sr No.</Th>
+                  <Th>product_Img</Th>
+                  <Th>product_name</Th>
+                  <Th>brand</Th>
+                  <Th>delivery</Th>
+                  <Th>discount</Th>
+                  <Th>emi</Th>
+                  <Th>image</Th>
+                  <Th>mrp</Th>
+                  <Th>items_left</Th>
+                  <Th>price</Th>
+                  <Th>prod_type</Th>
+                  <Th>Edit</Th>
+                  <Th>Delete</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {data?.map((refrigerator, index) => {
+                  return (
+                    <Tr
+                      p="10px"
+                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      key={index}
+                    >
+                      <Td>{index + 1}</Td>
+                      <Td>
+                        <Img src={refrigerator.image}></Img>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.product_name}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.brand}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.delivery}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.discount}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.emi}</Text>
+                      </Td>
+                      <Td>
+                        {" "}
+                        <Text>{refrigerator.image}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.mrp}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.items_left}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.price}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{refrigerator.prod_type}</Text>
+                      </Td>
 
-                  <Popover>
-                    <PopoverTrigger>
-                      <Button mt="8px">Edit</Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverHeader>Confirmation!</PopoverHeader>
-                      <PopoverBody>
-                        <form
-                          onSubmit={(e) => {
-                            e.preventDefault();
-                            handelRefrigeratorEdit(refrigerator._id);
-                          }}
+                      <Td>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Button mt="8px">Edit</Button>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader>Confirmation!</PopoverHeader>
+                            <PopoverBody
+                              display={"flex"}
+                              flexDirection="column"
+                              justifyContent={"space-evenly"}
+                              justifyItems="center"
+                            >
+                              <form
+                                onSubmit={(e) => {
+                                  e.preventDefault();
+                                  handelRefrigeratorEdit(refrigerator._id);
+                                }}
+                              >
+                                <FormLabel>updation key</FormLabel>
+                                <Input
+                                  type="text"
+                                  onChange={(e) => setEditKey(e.target.value)}
+                                  isRequired
+                                />
+
+                                <FormLabel>updated value</FormLabel>
+                                <Input
+                                  type={editKey == "price" ? "number" : "text"}
+                                  onChange={(e) => setEditValue(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel></FormLabel>
+                                <Center>
+                                  <Input
+                                    mt="5px"
+                                    type="submit"
+                                    bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                                  />
+                                </Center>
+                              </form>
+                            </PopoverBody>
+                          </PopoverContent>
+                        </Popover>
+                      </Td>
+                      <Td>
+                        <Button
+                          mt="8px"
+                          onClick={() =>
+                            handelRefrigeratorDelete(refrigerator._id)
+                          }
+                          ml="5px"
                         >
-                          <FormLabel>updation key</FormLabel>
-                          <Input
-                            type="text"
-                            onChange={(e) => setEditKey(e.target.value)}
-                            isRequired
-                          />
-                          <FormLabel>updated value</FormLabel>
-                          <Input
-                            type={editKey == "price" ? "number" : "text"}
-                            onChange={(e) => setEditValue(e.target.value)}
-                            isRequired
-                          />
-                          <Input
-                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
-                            w="50%"
-                            mt="5px"
-                            type="submit"
-                          />
-                        </form>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                  <Button
-                    mt="8px"
-                    onClick={() => handelRefrigeratorDelete(refrigerator._id)}
-                    ml="5px"
-                  >
-                    Remove
-                  </Button>
-                </Box>
-              );
-            })}
-          </SimpleGrid>
+                          Remove
+                        </Button>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
         </Box>
       ) : (
         ""
@@ -1313,160 +1432,355 @@ const AdminPage = () => {
 
       {page == "AllWashingmachineProducts" ? (
         <Box p="0px 20px">
-          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {data?.map((washingmachine, index) => {
-              return (
-                <Box
-                  p="10px"
-                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                  key={index}
-                >
-                  <Img src={washingmachine.image}></Img>
-                  <Text>product_name : {washingmachine.product_name}</Text>
-                  <Text>brand : {washingmachine.brand}</Text>
-                  <Text>delivery : {washingmachine.delivery}</Text>
-                  <Text>discount : {washingmachine.discount}</Text>
-                  <Text>emi : {washingmachine.emi}</Text>
-                  <Text>image : {washingmachine.image}</Text>
-                  <Text>mrp : {washingmachine.mrp}</Text>
-                  <Text>items_left : {washingmachine.items_left}</Text>
-                  <Text>price : {washingmachine.price}</Text>
-                  <Text>prod_type : {washingmachine.prod_type}</Text>
+          <TableContainer>
+            <Table variant="striped" colorScheme="teal">
+              <Thead>
+                <Tr>
+                  <Th>Sr No.</Th>
+                  <Th>product_Img</Th>
+                  <Th>product_name</Th>
+                  <Th>brand</Th>
+                  <Th>delivery</Th>
+                  <Th>discount</Th>
+                  <Th>emi</Th>
+                  <Th>image</Th>
+                  <Th>mrp</Th>
+                  <Th>items_left</Th>
+                  <Th>price</Th>
+                  <Th>prod_type</Th>
+                  <Th>Edit</Th>
+                  <Th>Delete</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {data?.map((washingmachine, index) => {
+                  return (
+                    <Tr
+                      p="10px"
+                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      key={index}
+                    >
+                      <Td>{index + 1}</Td>
+                      <Td>
+                        <Img src={washingmachine.image}></Img>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.product_name}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.brand}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.delivery}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.discount}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.emi}</Text>
+                      </Td>
+                      <Td>
+                        {" "}
+                        <Text>{washingmachine.image}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.mrp}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.items_left}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.price}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{washingmachine.prod_type}</Text>
+                      </Td>
 
-                  <Popover>
-                    <PopoverTrigger>
-                      <Button mt="8px">Edit</Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverHeader>Confirmation!</PopoverHeader>
-                      <PopoverBody>
-                        <form
-                          onSubmit={(e) => {
-                            e.preventDefault();
+                      <Td>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Button mt="8px">Edit</Button>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader>Confirmation!</PopoverHeader>
+                            <PopoverBody>
+                              <form
+                                onSubmit={(e) => {
+                                  e.preventDefault();
 
-                            handelWashingmachineEdit(washingmachine._id);
-                          }}
+                                  handelWashingmachineEdit(washingmachine._id);
+                                }}
+                              >
+                                <FormLabel>updation key</FormLabel>
+                                <Input
+                                  type="text"
+                                  onChange={(e) => setEditKey(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel>updated value</FormLabel>
+                                <Input
+                                  type={editKey == "price" ? "number" : "text"}
+                                  onChange={(e) => setEditValue(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel></FormLabel>
+                                <Input
+                                  bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                                  mt="5px"
+                                  type="submit"
+                                />
+                              </form>
+                            </PopoverBody>
+                          </PopoverContent>
+                        </Popover>
+                      </Td>
+                      <Td>
+                        <Button
+                          mt="8px"
+                          onClick={() =>
+                            handelWashingmachineDelete(washingmachine._id)
+                          }
+                          ml="5px"
                         >
-                          <FormLabel>updation key</FormLabel>
-                          <Input
-                            type="text"
-                            onChange={(e) => setEditKey(e.target.value)}
-                            isRequired
-                          />
-                          <FormLabel>updated value</FormLabel>
-                          <Input
-                            type={editKey == "price" ? "number" : "text"}
-                            onChange={(e) => setEditValue(e.target.value)}
-                            isRequired
-                          />
-                          <Input
-                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
-                            w="50%"
-                            mt="5px"
-                            type="submit"
-                          />
-                        </form>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                  <Button
-                    mt="8px"
-                    onClick={() =>
-                      handelWashingmachineDelete(washingmachine._id)
-                    }
-                    ml="5px"
-                  >
-                    Remove
-                  </Button>
-                </Box>
-              );
-            })}
-          </SimpleGrid>
+                          Remove
+                        </Button>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
         </Box>
       ) : (
         ""
       )}
       {page == "AllLaptopProducts" ? (
         <Box p="0px 20px">
-          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {data?.map((laptop, index) => {
-              return (
-                <Box
-                  p="10px"
-                  boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                  key={index}
-                >
-                  <Img src={laptop.image}></Img>
-                  <Text>product_name : {laptop.product_name}</Text>
-                  <Text>brand : {laptop.brand}</Text>
-                  <Text>delivery : {laptop.delivery}</Text>
-                  <Text>discount : {laptop.discount}</Text>
-                  <Text>emi : {laptop.emi}</Text>
-                  <Text>image : {laptop.image}</Text>
-                  <Text>mrp : {laptop.mrp}</Text>
-                  <Text>items_left : {laptop.items_left}</Text>
-                  <Text>price : {laptop.price}</Text>
-                  <Text>prod_type : {laptop.prod_type}</Text>
+          <TableContainer>
+            <Table variant="striped" colorScheme="teal">
+              <Thead>
+                <Tr>
+                  <Th>Sr No.</Th>
+                  <Th>product_Img</Th>
+                  <Th>product_name</Th>
+                  <Th>brand</Th>
+                  <Th>delivery</Th>
+                  <Th>discount</Th>
+                  <Th>emi</Th>
+                  <Th>image</Th>
+                  <Th>mrp</Th>
+                  <Th>items_left</Th>
+                  <Th>price</Th>
+                  <Th>prod_type</Th>
+                  <Th>Edit</Th>
+                  <Th>Delete</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {data?.map((laptop, index) => {
+                  return (
+                    <Tr
+                      p="10px"
+                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      key={index}
+                    >
+                      <Td>{index + 1}</Td>
+                      <Td>
+                        <Img src={laptop.image}></Img>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.product_name}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.brand}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.delivery}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.discount}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.emi}</Text>
+                      </Td>
+                      <Td>
+                        {" "}
+                        <Text>{laptop.image}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.mrp}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.items_left}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.price}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{laptop.prod_type}</Text>
+                      </Td>
 
-                  <Popover>
-                    <PopoverTrigger>
-                      <Button mt="8px">Edit</Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverHeader>Confirmation!</PopoverHeader>
-                      <PopoverBody>
-                        <form
-                          onSubmit={(e) => {
-                            e.preventDefault();
+                      <Td>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Button mt="8px">Edit</Button>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader>Confirmation!</PopoverHeader>
+                            <PopoverBody>
+                              <form
+                                onSubmit={(e) => {
+                                  e.preventDefault();
 
-                            handelLaptopEdit(laptop._id);
-                          }}
+                                  handelLaptopEdit(laptop._id);
+                                }}
+                              >
+                                <FormLabel>updation key</FormLabel>
+                                <Input
+                                  type="text"
+                                  onChange={(e) => setEditKey(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel>updated value</FormLabel>
+                                <Input
+                                  type={editKey == "price" ? "number" : "text"}
+                                  onChange={(e) => setEditValue(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel></FormLabel>
+                                <Input
+                                  bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                                  mt="5px"
+                                  type="submit"
+                                />
+                              </form>
+                            </PopoverBody>
+                          </PopoverContent>
+                        </Popover>
+                      </Td>
+                      <Td>
+                        <Button
+                          mt="8px"
+                          onClick={() => handelLaptopDelete(laptop._id)}
+                          ml="5px"
                         >
-                          <FormLabel>updation key</FormLabel>
-                          <Input
-                            type="text"
-                            onChange={(e) => setEditKey(e.target.value)}
-                            isRequired
-                          />
-                          <FormLabel>updated value</FormLabel>
-                          <Input
-                            type={editKey == "price" ? "number" : "text"}
-                            onChange={(e) => setEditValue(e.target.value)}
-                            isRequired
-                          />
-                          <Input
-                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
-                            w="50%"
-                            mt="5px"
-                            type="submit"
-                          />
-                        </form>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                  <Button
-                    mt="8px"
-                    onClick={() => handelLaptopDelete(laptop._id)}
-                    ml="5px"
-                  >
-                    Remove
-                  </Button>
-                </Box>
-              );
-            })}
-          </SimpleGrid>
+                          Remove
+                        </Button>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
         </Box>
       ) : (
         ""
       )}
       {page == "allUsers" ? (
         <Box p="0px 20px">
-          <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-            {userData?.map((user, index) => {
+          <TableContainer>
+            <Table variant="striped" colorScheme="teal">
+              <Thead>
+                <Tr>
+                  <Th>Sr No.</Th>
+                  <Th>name</Th>
+                  <Th>mobile</Th>
+                  <Th>email</Th>
+                  <Th>city</Th>
+                  <Th>pincode</Th>
+                  <Th>state</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {userData?.map((user, index) => {
+                  return (
+                    <Tr
+                      p="10px"
+                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      key={index}
+                    >
+                      <Td>{index + 1}</Td>
+                      <Td>
+                        <Text>{user.name}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{user.mobile}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{user.email}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{user.address.city}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{user.address.pincode}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{user.address.state}</Text>
+                      </Td>
+
+                      <Td>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Button mt="8px">Edit</Button>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader>Confirmation!</PopoverHeader>
+                            <PopoverBody>
+                              <form
+                                onSubmit={(e) => {
+                                  e.preventDefault();
+                                  handelUserEdit(user._id);
+                                }}
+                              >
+                                <FormLabel>updation key</FormLabel>
+                                <Input
+                                  type="text"
+                                  onChange={(e) => setEditKey(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel>updated value</FormLabel>
+                                <Input
+                                  type={editKey == "email" ? "email" : "text"}
+                                  onChange={(e) => setEditValue(e.target.value)}
+                                  isRequired
+                                />
+                                <FormLabel></FormLabel>
+                                <Input
+                                  bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+                                  mt="5px"
+                                  type="submit"
+                                />
+                              </form>
+                            </PopoverBody>
+                          </PopoverContent>
+                        </Popover>
+                      </Td>
+                      <Td>
+                        <Button
+                          mt="8px"
+                          onClick={() => handelUserDelete(user._id)}
+                          ml="5px"
+                        >
+                          Remove
+                        </Button>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
+          {/* <SimpleGrid columns={[1, 2, 3]} spacing="40px">
+            {userData?.map((, index) => {
               return (
                 <Box
                   p="10px"
@@ -1480,54 +1794,12 @@ const AdminPage = () => {
                   <Text>pincode : {user.address.pincode}</Text>
                   <Text>state : {user.address.state}</Text>
 
-                  <Popover>
-                    <PopoverTrigger>
-                      <Button mt="8px">Edit</Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverHeader>Confirmation!</PopoverHeader>
-                      <PopoverBody>
-                        <form
-                          onSubmit={(e) => {
-                            e.preventDefault();
-                            handelUserEdit(user._id);
-                          }}
-                        >
-                          <FormLabel>updation key</FormLabel>
-                          <Input
-                            type="text"
-                            onChange={(e) => setEditKey(e.target.value)}
-                            isRequired
-                          />
-                          <FormLabel>updated value</FormLabel>
-                          <Input
-                            type={editKey == "email" ? "email" : "text"}
-                            onChange={(e) => setEditValue(e.target.value)}
-                            isRequired
-                          />
-                          <Input
-                            bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
-                            w="50%"
-                            mt="5px"
-                            type="submit"
-                          />
-                        </form>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                  <Button
-                    mt="8px"
-                    onClick={() => handelUserDelete(user._id)}
-                    ml="5px"
-                  >
-                    Remove
-                  </Button>
+                 
+                 
                 </Box>
               );
             })}
-          </SimpleGrid>
+          </SimpleGrid> */}
         </Box>
       ) : (
         ""
@@ -1535,7 +1807,12 @@ const AdminPage = () => {
 
       {page == "AddTvProduct" ? (
         <Box display="flex" justifyContent="center">
-          <Box w={["100%", "70%", "50%"]} p="10%" border="2px solid red">
+          <Box
+            bgColor={"#F7F7F7"}
+            w={["100%", "70%", "50%"]}
+            p="10%"
+            border="2px solid red"
+          >
             <form onSubmit={handelTvAddSubmit}>
               <FormControl
                 display="flex"
@@ -1818,7 +2095,12 @@ const AdminPage = () => {
       )}
       {page == "AddRefrigeratorProduct" ? (
         <Box display="flex" justifyContent="center">
-          <Box w={["100%", "70%", "50%"]} p="10%" border="2px solid red">
+          <Box
+            bgColor={"#F7F7F7"}
+            w={["100%", "70%", "50%"]}
+            p="10%"
+            border="2px solid red"
+          >
             <form onSubmit={handelRefrigeratorAddSubmit}>
               <FormControl
                 display="flex"
@@ -2144,7 +2426,12 @@ const AdminPage = () => {
       )}
       {page == "addlUsers" ? (
         <Box display="flex" justifyContent="center">
-          <Box w={["100%", "70%", "50%"]} p="10%" border="2px solid red">
+          <Box
+            bgColor={"#F7F7F7"}
+            w={["100%", "70%", "50%"]}
+            p="10%"
+            border="2px solid red"
+          >
             <form onSubmit={handelUserAddSubmit}>
               <FormControl
                 display="flex"
